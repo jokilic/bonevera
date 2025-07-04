@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:latlong2/latlong.dart';
 
 import '../constants/enums.dart';
+import '../models/response_weather.dart';
 import '../util/isolates.dart';
 import 'logger_service.dart';
 
@@ -24,7 +25,7 @@ class APIService {
   /// `/weather`
   ///
 
-  Future<void> getWeather({
+  Future<({ResponseWeather? weather, String? error})> getWeather({
     required String language,
     required LatLng coordinates,
     required String countryCode,
@@ -53,18 +54,29 @@ class APIService {
         case 200:
           final data = response.data;
           final parsedResponse = await computeWeather(data);
+          return (weather: parsedResponse, error: null);
 
         /// `Bad Request` - The server is unable to process the request due to an invalid parameter value
         case 400:
+          const error = '`Bad Request` - The server is unable to process the request due to an invalid parameter value';
+          logger.e('APIService -> getWeather() -> $error');
+          return (weather: null, error: error);
 
         /// `Unauthorized` - The request isn’t authorized or doesn’t include the correct authentication information
         case 401:
+          const error = "`Unauthorized` - The request isn't authorized or doesn't include the correct authentication information";
+          logger.e('APIService -> getWeather() -> $error');
+          return (weather: null, error: error);
 
         /// This shouldn't happen since it's not mentioned in the documentation
         default:
+          const error = "This shouldn't happen since it's not mentioned in the documentation";
+          logger.e('APIService -> getWeather() -> $error');
+          return (weather: null, error: error);
       }
     } catch (e) {
       logger.e('APIService -> getWeather() -> $e');
+      return (weather: null, error: '$e');
     }
   }
 
@@ -72,7 +84,7 @@ class APIService {
   /// `/availability`
   ///
 
-  Future<void> getAvailability({
+  Future<({List<DataSet>? dataSets, String? error})> getAvailability({
     required LatLng coordinates,
     required String country,
     required String jwt,
@@ -100,18 +112,29 @@ class APIService {
                 (item) => DataSet.values.firstWhere((dataSet) => dataSet.name == item),
               )
               .toList();
+          return (dataSets: parsedResponse, error: null);
 
         /// `Bad Request` - The server is unable to process the request due to an invalid parameter value
         case 400:
+          const error = '`Bad Request` - The server is unable to process the request due to an invalid parameter value';
+          logger.e('APIService -> getAvailability() -> $error');
+          return (dataSets: null, error: error);
 
         /// `Unauthorized` - The request isn’t authorized or doesn’t include the correct authentication information
         case 401:
+          const error = "`Unauthorized` - The request isn't authorized or doesn't include the correct authentication information";
+          logger.e('APIService -> getAvailability() -> $error');
+          return (dataSets: null, error: error);
 
         /// This shouldn't happen since it's not mentioned in the documentation
         default:
+          const error = "This shouldn't happen since it's not mentioned in the documentation";
+          logger.e('APIService -> getAvailability() -> $error');
+          return (dataSets: null, error: error);
       }
     } catch (e) {
       logger.e('APIService -> getAvailability() -> $e');
+      return (dataSets: null, error: '$e');
     }
   }
 }

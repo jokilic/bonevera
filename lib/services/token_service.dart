@@ -41,7 +41,7 @@ class TokenService {
       if (cachedToken != null) {
         /// Check if cached `token` is still valid
         if (now.isBefore(cachedToken.expiry.subtract(Durations.tokenBuffer))) {
-          logger.f('JWTService -> getToken() -> Using cached token');
+          logger.f('TokenService -> getToken() -> Using cached token');
           return cachedToken;
         }
       }
@@ -65,16 +65,16 @@ class TokenService {
         /// Store new `token` in [Hive] and cached variables
         await hive.writeToken(newToken: newToken);
 
-        logger.f('JWTService -> getToken() -> Using new token');
+        logger.f('TokenService -> getToken() -> Using new token');
         return newToken;
       }
       /// New `token` value hasn't been generated
       else {
-        logger.e("JWTService -> getToken() -> New `token` value hasn't been generated");
+        logger.e("TokenService -> getToken() -> New `token` value hasn't been generated");
         return null;
       }
     } catch (e) {
-      logger.e('JWTService -> getToken() -> $e');
+      logger.e('TokenService -> getToken() -> $e');
       return null;
     }
   }
@@ -121,7 +121,7 @@ class TokenService {
 
       return token;
     } catch (e) {
-      logger.e('JWTService -> generateJWT() -> $e');
+      logger.e('TokenService -> generateJWT() -> $e');
       return null;
     }
   }

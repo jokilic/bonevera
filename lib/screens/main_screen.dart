@@ -3,6 +3,8 @@ import 'package:latlong2/latlong.dart';
 
 import '../constants/enums.dart';
 import '../services/api_service.dart';
+import '../services/location_service.dart';
+import '../services/permission_service.dart';
 import '../services/timezone_service.dart';
 import '../services/token_service.dart';
 import '../util/dependencies.dart';
@@ -16,25 +18,37 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     super.initState();
+    init();
+  }
 
-    () async {
-      final token = await getIt.get<TokenService>().getToken();
+  Future<void> init() async {
+    final permissionStatus = await getIt.get<PermissionService>().handleLocationPermission();
 
-      final timezone = await getIt.get<TimezoneService>().getDeviceTimezone();
+    if (permissionStatus) {
+      final location = await getIt.get<LocationService>().getDeviceLocation();
 
-      if (token != null) {
-        await getIt.get<APIService>().getWeather(
-          language: 'hr',
-          countryCode: 'hr',
-          coordinates: const LatLng(34.0549, 118.2426),
-          timezone: timezone,
-          tokenValue: token.value,
-          dataSets: [
-            DataSet.currentWeather,
-          ],
-        );
+      if (location != null) {
+        final token = await getIt.get<TokenService>().getToken();
+
+        final timezone = await getIt.get<TimezoneService>().getDeviceTimezone();
+
+        if (token != null) {
+          await getIt.get<APIService>().getWeather(
+            language: 'hr',
+            countryCode: 'hr',
+            coordinates: LatLng(
+              location.latitude,
+              location.longitude,
+            ),
+            timezone: timezone,
+            tokenValue: token.value,
+            dataSets: [
+              DataSet.currentWeather,
+            ],
+          );
+        }
       }
-    }();
+    }
   }
 
   @override

@@ -25,7 +25,7 @@ class TimezoneService {
     }
     /// Fallback if it fails
     catch (e) {
-      logger.e('getDeviceTimezone() -> $e');
+      logger.e('TimezoneService -> getDeviceTimezone() -> $e');
       return 'UTC';
     }
   }

@@ -3,7 +3,9 @@ import 'package:get_it/get_it.dart';
 import '../services/api_service.dart';
 import '../services/dio_service.dart';
 import '../services/hive_service.dart';
+import '../services/location_service.dart';
 import '../services/logger_service.dart';
+import '../services/permission_service.dart';
 import '../services/timezone_service.dart';
 import '../services/token_service.dart';
 
@@ -59,6 +61,18 @@ void initializeServices() {
     )
     ..registerSingletonAsync(
       () async => TimezoneService(
+        logger: getIt.get<LoggerService>(),
+      ),
+      dependsOn: [LoggerService],
+    )
+    ..registerSingletonAsync(
+      () async => PermissionService(
+        logger: getIt.get<LoggerService>(),
+      ),
+      dependsOn: [LoggerService],
+    )
+    ..registerSingletonAsync(
+      () async => LocationService(
         logger: getIt.get<LoggerService>(),
       ),
       dependsOn: [LoggerService],

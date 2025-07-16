@@ -9,7 +9,7 @@ class CurrentWeather {
   final double cloudCoverLowAltPct;
   final double cloudCoverMidAltPct;
   final double cloudCoverHighAltPct;
-  final String conditionCode;
+  final ConditionCode conditionCode;
   final bool daylight;
   final double humidity;
   final double precipitationIntensity;
@@ -56,7 +56,7 @@ class CurrentWeather {
     cloudCoverLowAltPct: map['cloudCoverLowAltPct'] as double,
     cloudCoverMidAltPct: map['cloudCoverMidAltPct'] as double,
     cloudCoverHighAltPct: map['cloudCoverHighAltPct'] as double,
-    conditionCode: map['conditionCode'] as String,
+    conditionCode: ConditionCode.values.byName(map['conditionCode'] as String),
     daylight: map['daylight'] as bool,
     humidity: map['humidity'] as double,
     precipitationIntensity: map['precipitationIntensity'] as double,

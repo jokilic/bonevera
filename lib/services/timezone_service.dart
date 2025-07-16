@@ -14,19 +14,24 @@ class TimezoneService {
   });
 
   ///
+  /// VARIABLES
+  ///
+
+  late String timezone;
+
+  ///
   /// METHODS
   ///
 
   /// Gets the device's current IANA timezone (e.g. `Europe/Zagreb`)
   Future<String> getDeviceTimezone() async {
     try {
-      final timezone = await FlutterTimezone.getLocalTimezone();
-      return timezone;
+      return timezone = await FlutterTimezone.getLocalTimezone();
     }
     /// Fallback if it fails
     catch (e) {
       logger.e('TimezoneService -> getDeviceTimezone() -> $e');
-      return 'UTC';
+      return timezone = 'UTC';
     }
   }
 }

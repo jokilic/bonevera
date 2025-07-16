@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 enum DataSet {
   /// The current weather for the requested location.
   currentWeather,
@@ -72,4 +74,108 @@ enum PressureTrend {
 
   /// The sea level air pressure is remaining about the same.
   steady,
+}
+
+enum ConditionCode {
+  /// Blowing dust or sandstorm
+  BlowingDust,
+
+  /// Clear
+  Clear,
+
+  /// Cloudy, overcast conditions
+  Cloudy,
+
+  /// Fog
+  Foggy,
+
+  /// Haze
+  Haze,
+
+  /// Mostly clear
+  MostlyClear,
+
+  /// Mostly cloudy
+  MostlyCloudy,
+
+  /// Partly cloudy
+  PartlyCloudy,
+
+  /// Smoky
+  Smoky,
+
+  /// Breezy, light wind
+  Breezy,
+
+  /// Windy
+  Windy,
+
+  /// Drizzle or light rain
+  Drizzle,
+
+  /// Heavy rain
+  HeavyRain,
+
+  /// Thunderstorms covering less than 1/8 of the forecast area
+  IsolatedThunderstorms,
+
+  /// Rain
+  Rain,
+
+  /// Rain with visible sun
+  SunShowers,
+
+  /// Numerous thunderstorms spread across up to 50% of the forecast area
+  ScatteredThunderstorms,
+
+  /// Notably strong thunderstorms
+  StrongStorms,
+
+  /// Thunderstorms
+  Thunderstorms,
+
+  /// Frigid conditions, low temperatures, or ice crystals
+  Frigid,
+
+  /// Hail
+  Hail,
+
+  /// High temperatures
+  Hot,
+
+  /// Flurries or light snow
+  Flurries,
+
+  /// Sleet
+  Sleet,
+
+  /// Snow
+  Snow,
+
+  /// Snow flurries with visible sun
+  SunFlurries,
+
+  /// Wintry mix
+  WintryMix,
+
+  /// Blizzard
+  Blizzard,
+
+  /// Blowing or drifting snow
+  BlowingSnow,
+
+  /// Freezing drizzle or light rain
+  FreezingDrizzle,
+
+  /// Freezing rain
+  FreezingRain,
+
+  /// Heavy snow
+  HeavySnow,
+
+  /// Hurricane
+  Hurricane,
+
+  /// Tropical storm
+  TropicalStorm,
 }

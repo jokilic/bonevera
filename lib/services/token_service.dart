@@ -21,10 +21,6 @@ class TokenService {
   });
 
   ///
-  /// VARIABLES
-  ///
-
-  ///
   /// METHODS
   ///
 

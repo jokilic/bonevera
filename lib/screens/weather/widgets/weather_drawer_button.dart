@@ -1,0 +1,36 @@
+import 'package:flutter/material.dart';
+
+import '../../../theme/icons.dart';
+import '../../../theme/theme.dart';
+
+class WeatherDrawerButton extends StatelessWidget {
+  final bool isHidden;
+
+  const WeatherDrawerButton({
+    this.isHidden = false,
+  });
+
+  @override
+  Widget build(BuildContext context) => IgnorePointer(
+    ignoring: isHidden,
+    child: Opacity(
+      opacity: isHidden ? 0 : 1,
+      child: IconButton.filledTonal(
+        onPressed: () {},
+        padding: const EdgeInsets.all(18),
+        style: IconButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          backgroundColor: context.colors.white.withValues(alpha: 0.3),
+        ),
+        icon: Image.asset(
+          CJVnkIcons.drawer,
+          height: 20,
+          width: 20,
+          color: context.colors.black,
+        ),
+      ),
+    ),
+  );
+}

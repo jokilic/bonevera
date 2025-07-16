@@ -2,7 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'screens/main_screen.dart';
+import 'screens/main/main_screen.dart';
+import 'theme/theme.dart';
 import 'util/dependencies.dart';
 
 Future<void> main() async {
@@ -19,22 +20,15 @@ Future<void> main() async {
   /// Wait for initialization to finish
   await getIt.allReady();
 
-  runApp(CaJeVankaApp());
+  runApp(CJVnkApp());
 }
 
-class CaJeVankaApp extends StatelessWidget {
+class CJVnkApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
     debugShowCheckedModeBanner: false,
     home: MainScreen(),
-    theme:
-        ThemeData.dark(
-          useMaterial3: true,
-        )..copyWith(
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.indigo,
-          ),
-        ),
+    theme: CJVnkTheme.light,
     builder: (_, child) {
       final appWidget =
           child ??
@@ -44,7 +38,7 @@ class CaJeVankaApp extends StatelessWidget {
 
       return kDebugMode
           ? Banner(
-              message: 'Ča je vanka?',
+              message: 'ČJVnk?',
               color: Colors.indigo,
               location: BannerLocation.topEnd,
               layoutDirection: TextDirection.ltr,

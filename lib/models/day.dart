@@ -4,7 +4,7 @@ import 'forecast.dart';
 class Day {
   final DateTime forecastStart;
   final DateTime forecastEnd;
-  final String conditionCode;
+  final ConditionCode conditionCode;
   final int maxUvIndex;
   final MoonPhase moonPhase;
   final DateTime moonrise;
@@ -75,7 +75,7 @@ class Day {
   factory Day.fromMap(Map<String, dynamic> map) => Day(
     forecastStart: DateTime.parse(map['forecastStart'] as String),
     forecastEnd: DateTime.parse(map['forecastEnd'] as String),
-    conditionCode: map['conditionCode'] as String,
+    conditionCode: ConditionCode.values.byName(map['conditionCode'] as String),
     maxUvIndex: map['maxUvIndex'] as int,
     moonPhase: getMoonPhase(map['moonPhase'] as String),
     moonrise: DateTime.parse(map['moonrise'] as String),

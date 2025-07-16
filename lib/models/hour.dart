@@ -3,7 +3,7 @@ import '../constants/enums.dart';
 class Hour {
   final DateTime forecastStart;
   final double cloudCover;
-  final String conditionCode;
+  final ConditionCode conditionCode;
   final bool daylight;
   final double humidity;
   final double precipitationAmount;
@@ -50,7 +50,7 @@ class Hour {
   factory Hour.fromMap(Map<String, dynamic> map) => Hour(
     forecastStart: DateTime.parse(map['forecastStart'] as String),
     cloudCover: map['cloudCover'] as double,
-    conditionCode: map['conditionCode'] as String,
+    conditionCode: ConditionCode.values.byName(map['conditionCode'] as String),
     daylight: map['daylight'] as bool,
     humidity: map['humidity'] as double,
     precipitationAmount: map['precipitationAmount'] as double,

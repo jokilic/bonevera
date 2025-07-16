@@ -60,9 +60,13 @@ void initializeServices() {
       dependsOn: [LoggerService, HiveService],
     )
     ..registerSingletonAsync(
-      () async => TimezoneService(
-        logger: getIt.get<LoggerService>(),
-      ),
+      () async {
+        final timezone = TimezoneService(
+          logger: getIt.get<LoggerService>(),
+        );
+        await timezone.getDeviceTimezone();
+        return timezone;
+      },
       dependsOn: [LoggerService],
     )
     ..registerSingletonAsync(

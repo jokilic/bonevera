@@ -52,4 +52,13 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/drawer.png
     - assets/key.pem
+
+  fonts:
+    - family: ProductSans
+      fonts:
+        - asset: assets/ProductSans/ProductSansRegular.ttf
+          weight: 500
+        - asset: assets/ProductSans/ProductSansBold.ttf
+          weight: 700

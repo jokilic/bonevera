@@ -4,7 +4,7 @@ class Forecast {
   final DateTime forecastStart;
   final DateTime forecastEnd;
   final double cloudCover;
-  final String conditionCode;
+  final ConditionCode conditionCode;
   final double humidity;
   final double precipitationAmount;
   final double precipitationChance;
@@ -39,7 +39,7 @@ class Forecast {
     forecastStart: DateTime.parse(map['forecastStart'] as String),
     forecastEnd: DateTime.parse(map['forecastEnd'] as String),
     cloudCover: map['cloudCover'] as double,
-    conditionCode: map['conditionCode'] as String,
+    conditionCode: ConditionCode.values.byName(map['conditionCode'] as String),
     humidity: map['humidity'] as double,
     precipitationAmount: map['precipitationAmount'] as double,
     precipitationChance: map['precipitationChance'] as double,

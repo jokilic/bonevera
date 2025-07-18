@@ -7,12 +7,11 @@ import '../../services/api_service.dart';
 import '../../services/logger_service.dart';
 import '../../services/timezone_service.dart';
 import '../../services/token_service.dart';
-import '../../theme/theme.dart';
 import '../../util/dependencies.dart';
 import 'weather_controller.dart';
-import 'widgets/weather_app_bar.dart';
+import 'widgets/weather_content.dart';
 
-class WeatherScreen extends StatefulWidget {
+class WeatherScreen extends WatchingStatefulWidget {
   final String instanceName;
 
   const WeatherScreen({
@@ -59,6 +58,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
     return Scaffold(
       body: SafeArea(
         child: Animate(
+          key: ValueKey(weatherState),
           effects: const [
             FadeEffect(
               curve: Curves.easeIn,
@@ -70,82 +70,8 @@ class _WeatherScreenState extends State<WeatherScreen> {
               horizontal: 8,
               vertical: 16,
             ),
-            child: Column(
-              children: [
-                ///
-                /// APP BAR
-                ///
-                WeatherAppBar(),
-
-                ///
-                /// WEATHER ICON
-                ///
-                const Placeholder(),
-
-                ///
-                /// TEMPERATURE & CONDITION
-                ///
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    ///
-                    /// TEMPERATURE
-                    ///
-                    Text(
-                      '32°',
-                      textAlign: TextAlign.center,
-                      style: context.textStyles.currentTemperature,
-                    ),
-
-                    ///
-                    /// CONDITION & HIGH / LOW TEMPERATURES
-                    ///
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          ///
-                          /// CONDITION
-                          ///
-                          Text(
-                            'Mostly cloudy',
-                            style: context.textStyles.currentCondition,
-                          ),
-
-                          const SizedBox(height: 2),
-
-                          ///
-                          /// HIGH / LOW TEMPERATURES
-                          ///
-                          Text.rich(
-                            TextSpan(
-                              text: 'H: ',
-                              children: [
-                                TextSpan(
-                                  text: '33°',
-                                  style: context.textStyles.currentHighLowTemperature.copyWith(
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
-                                const TextSpan(
-                                  text: ' | L: ',
-                                ),
-                                TextSpan(
-                                  text: '23°',
-                                  style: context.textStyles.currentHighLowTemperature.copyWith(
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            style: context.textStyles.currentHighLowTemperature,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+            child: WeatherContent(
+              weatherState: weatherState,
             ),
           ),
         ),

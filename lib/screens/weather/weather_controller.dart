@@ -49,7 +49,7 @@ class WeatherController extends ValueNotifier<CJVnkState<ResponseWeather>> {
         timezone: timezone.timezone,
         tokenValue: tokenValue.value,
         dataSets: [
-          DataSet.currentWeather,
+          DataSet.forecastDaily,
         ],
       );
 

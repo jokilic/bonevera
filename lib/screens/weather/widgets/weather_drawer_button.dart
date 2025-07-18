@@ -4,9 +4,11 @@ import '../../../theme/icons.dart';
 import '../../../theme/theme.dart';
 
 class WeatherDrawerButton extends StatelessWidget {
+  final Function() onPressed;
   final bool isHidden;
 
   const WeatherDrawerButton({
+    required this.onPressed,
     this.isHidden = false,
   });
 
@@ -16,7 +18,7 @@ class WeatherDrawerButton extends StatelessWidget {
     child: Opacity(
       opacity: isHidden ? 0 : 1,
       child: IconButton.filledTonal(
-        onPressed: () {},
+        onPressed: onPressed,
         padding: const EdgeInsets.all(18),
         style: IconButton.styleFrom(
           shape: RoundedRectangleBorder(

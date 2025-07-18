@@ -3,8 +3,8 @@ import '../constants/enums.dart';
 class Forecast {
   final DateTime forecastStart;
   final DateTime forecastEnd;
-  final double cloudCover;
-  final ConditionCode conditionCode;
+  final double? cloudCover;
+  final ConditionCode? conditionCode;
   final double humidity;
   final double precipitationAmount;
   final double precipitationChance;
@@ -12,10 +12,8 @@ class Forecast {
   final double snowfallAmount;
   final double temperatureMax;
   final double temperatureMin;
-  final int windDirection;
-  final double windGustSpeedMax;
+  final int? windDirection;
   final double windSpeed;
-  final double windSpeedMax;
 
   Forecast({
     required this.forecastStart,
@@ -30,9 +28,7 @@ class Forecast {
     required this.temperatureMax,
     required this.temperatureMin,
     required this.windDirection,
-    required this.windGustSpeedMax,
     required this.windSpeed,
-    required this.windSpeedMax,
   });
 
   factory Forecast.fromMap(Map<String, dynamic> map) => Forecast(
@@ -47,15 +43,13 @@ class Forecast {
     snowfallAmount: map['snowfallAmount'] as double,
     temperatureMax: map['temperatureMax'] as double,
     temperatureMin: map['temperatureMin'] as double,
-    windDirection: map['windDirection'] as int,
-    windGustSpeedMax: map['windGustSpeedMax'] as double,
+    windDirection: map['windDirection'] != null ? map['windDirection'] as int : null,
     windSpeed: map['windSpeed'] as double,
-    windSpeedMax: map['windSpeedMax'] as double,
   );
 
   @override
   String toString() =>
-      'Forecast(forecastStart: $forecastStart, forecastEnd: $forecastEnd, cloudCover: $cloudCover, conditionCode: $conditionCode, humidity: $humidity, precipitationAmount: $precipitationAmount, precipitationChance: $precipitationChance, precipitationType: $precipitationType, snowfallAmount: $snowfallAmount, temperatureMax: $temperatureMax, temperatureMin: $temperatureMin, windDirection: $windDirection, windGustSpeedMax: $windGustSpeedMax, windSpeed: $windSpeed, windSpeedMax: $windSpeedMax)';
+      'Forecast(forecastStart: $forecastStart, forecastEnd: $forecastEnd, cloudCover: $cloudCover, conditionCode: $conditionCode, humidity: $humidity, precipitationAmount: $precipitationAmount, precipitationChance: $precipitationChance, precipitationType: $precipitationType, snowfallAmount: $snowfallAmount, temperatureMax: $temperatureMax, temperatureMin: $temperatureMin, windDirection: $windDirection, windSpeed: $windSpeed)';
 
   @override
   bool operator ==(covariant Forecast other) {
@@ -75,9 +69,7 @@ class Forecast {
         other.temperatureMax == temperatureMax &&
         other.temperatureMin == temperatureMin &&
         other.windDirection == windDirection &&
-        other.windGustSpeedMax == windGustSpeedMax &&
-        other.windSpeed == windSpeed &&
-        other.windSpeedMax == windSpeedMax;
+        other.windSpeed == windSpeed;
   }
 
   @override
@@ -94,7 +86,5 @@ class Forecast {
       temperatureMax.hashCode ^
       temperatureMin.hashCode ^
       windDirection.hashCode ^
-      windGustSpeedMax.hashCode ^
-      windSpeed.hashCode ^
-      windSpeedMax.hashCode;
+      windSpeed.hashCode;
 }

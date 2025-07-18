@@ -4,6 +4,14 @@ import '../../../theme/theme.dart';
 import 'weather_drawer_button.dart';
 
 class WeatherAppBar extends StatelessWidget {
+  final Function() onDrawerPressed;
+  final String locationName;
+
+  const WeatherAppBar({
+    required this.onDrawerPressed,
+    required this.locationName,
+  });
+
   @override
   Widget build(BuildContext context) => Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -11,7 +19,9 @@ class WeatherAppBar extends StatelessWidget {
       ///
       /// LOCATIONS BUTTON
       ///
-      const WeatherDrawerButton(),
+      WeatherDrawerButton(
+        onPressed: onDrawerPressed,
+      ),
       const SizedBox(width: 16),
 
       ///
@@ -19,7 +29,7 @@ class WeatherAppBar extends StatelessWidget {
       ///
       Expanded(
         child: Text(
-          'Zagreb',
+          locationName,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
           textAlign: TextAlign.center,
@@ -31,7 +41,8 @@ class WeatherAppBar extends StatelessWidget {
       /// EMPTY SPACE
       ///
       const SizedBox(width: 16),
-      const WeatherDrawerButton(
+      WeatherDrawerButton(
+        onPressed: () {},
         isHidden: true,
       ),
     ],

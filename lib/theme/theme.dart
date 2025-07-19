@@ -39,6 +39,15 @@ class CJVnkTheme {
     currentHighLowTemperature: CJVnkTextStyles.currentHighLowTemperature.copyWith(
       color: lightAppColors.black,
     ),
+    todayTitle: CJVnkTextStyles.todayTitle.copyWith(
+      color: lightAppColors.white,
+    ),
+    todayHighLowTemperature: CJVnkTextStyles.todayHighLowTemperature.copyWith(
+      color: lightAppColors.white,
+    ),
+    todayCondition: CJVnkTextStyles.todayCondition.copyWith(
+      color: lightAppColors.white.withValues(alpha: 0.6),
+    ),
   );
 }
 

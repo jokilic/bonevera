@@ -65,14 +65,8 @@ class _WeatherScreenState extends State<WeatherScreen> {
               duration: CJVnkDurations.fadeAnimation,
             ),
           ],
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 8,
-              vertical: 16,
-            ),
-            child: WeatherContent(
-              weatherState: weatherState,
-            ),
+          child: WeatherContent(
+            weatherState: weatherState,
           ),
         ),
       ),

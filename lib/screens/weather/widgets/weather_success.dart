@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../../models/response_weather.dart';
-import '../../../theme/theme.dart';
-import '../../../util/string.dart';
+import '../../../util/parse.dart';
 import 'weather_app_bar.dart';
+import 'weather_current_temperature_condition.dart';
+import 'weather_day.dart';
 
 class WeatherSuccess extends StatelessWidget {
   final ResponseWeather weather;
@@ -17,92 +18,117 @@ class WeatherSuccess extends StatelessWidget {
     final currentTemperature = getTemperatureString(
       weather.currentWeather?.temperature,
     );
-    final currentHighTemperature = getTemperatureString(
-      weather.forecastDaily?.days.firstOrNull?.temperatureMax,
-    );
-    final currentLowTemperature = getTemperatureString(
-      weather.forecastDaily?.days.firstOrNull?.temperatureMin,
+    final currentConditionImage = getConditionImage(
+      passedConditionCode: weather.currentWeather?.conditionCode,
+      daylight: weather.currentWeather?.daylight ?? true,
     );
 
-    return Column(
-      children: [
-        ///
-        /// APP BAR
-        ///
-        WeatherAppBar(
-          onDrawerPressed: () {},
-          locationName: 'Zagreb',
-        ),
+    final today = getCurrentDay(
+      weather.forecastDaily?.days,
+    );
 
-        ///
-        /// WEATHER ICON
-        ///
-        const Placeholder(),
+    final todayConditionImage = getConditionImage(
+      passedConditionCode: today?.conditionCode,
+      daylight: true,
+    );
+    final todayHighTemperature = getTemperatureString(
+      today?.temperatureMax,
+    );
+    final todayLowTemperature = getTemperatureString(
+      today?.temperatureMin,
+    );
 
-        ///
-        /// TEMPERATURE & CONDITION
-        ///
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            ///
-            /// TEMPERATURE
-            ///
-            Text(
-              currentTemperature,
-              textAlign: TextAlign.center,
-              style: context.textStyles.currentTemperature,
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        children: [
+          ///
+          /// APP BAR
+          ///
+          WeatherAppBar(
+            onDrawerPressed: () {},
+            locationName: 'Some location',
+          ),
+
+          ///
+          /// WEATHER ICON
+          ///
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40),
+              child: Image.asset(currentConditionImage),
             ),
+          ),
 
-            ///
-            /// CONDITION & HIGH / LOW TEMPERATURES
-            ///
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ///
-                  /// CONDITION
-                  ///
-                  Text(
-                    'Mostly cloudy',
-                    style: context.textStyles.currentCondition,
-                  ),
+          ///
+          /// CONTENT
+          ///
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ///
+                /// CURRENT TEMPERATURE & CONDITION
+                ///
+                WeatherCurrentTemperatureCondition(
+                  currentTemperature: currentTemperature,
+                  currentHighTemperature: todayHighTemperature,
+                  currentLowTemperature: todayLowTemperature,
+                ),
 
-                  const SizedBox(height: 2),
+                const SizedBox(height: 40),
 
-                  ///
-                  /// HIGH / LOW TEMPERATURES
-                  ///
-                  Text.rich(
-                    TextSpan(
-                      text: 'H: ',
-                      children: [
-                        TextSpan(
-                          text: currentHighTemperature,
-                          style: context.textStyles.currentHighLowTemperature.copyWith(
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                        const TextSpan(
-                          text: ' | L: ',
-                        ),
-                        TextSpan(
-                          text: currentLowTemperature,
-                          style: context.textStyles.currentHighLowTemperature.copyWith(
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ],
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ///
+                    /// TODAY
+                    ///
+                    WeatherDay(
+                      conditionImage: todayConditionImage,
+                      lowTemperature: todayLowTemperature,
+                      highTemperature: todayHighTemperature,
                     ),
-                    style: context.textStyles.currentHighLowTemperature,
-                  ),
-                ],
-              ),
+                    const SizedBox(width: 16),
+
+                    Expanded(
+                      child: SizedBox(
+                        height: 152,
+                        child: ListView.separated(
+                          physics: const BouncingScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          itemCount: weather.forecastDaily?.days.length ?? 0,
+                          itemBuilder: (_, index) {
+                            final day = weather.forecastDaily!.days[index];
+
+                            final conditionImage = getConditionImage(
+                              passedConditionCode: day.conditionCode,
+                              daylight: true,
+                            );
+                            final highTemperature = getTemperatureString(
+                              day.temperatureMax,
+                            );
+                            final lowTemperature = getTemperatureString(
+                              day.temperatureMin,
+                            );
+
+                            return WeatherDay(
+                              conditionImage: conditionImage,
+                              lowTemperature: lowTemperature,
+                              highTemperature: highTemperature,
+                            );
+                          },
+                          separatorBuilder: (_, __) => const SizedBox(width: 8),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
-          ],
-        ),
-      ],
+          ),
+        ],
+      ),
     );
   }
 }

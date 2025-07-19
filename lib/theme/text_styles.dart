@@ -17,7 +17,7 @@ abstract class CJVnkTextStyles {
   static const currentCondition = TextStyle(
     fontFamily: 'ProductSans',
     fontSize: 14,
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w700,
     height: 1.25,
   );
 
@@ -27,6 +27,24 @@ abstract class CJVnkTextStyles {
     fontWeight: FontWeight.w500,
     height: 1.25,
   );
+
+  static const todayTitle = TextStyle(
+    fontFamily: 'ProductSans',
+    fontSize: 14,
+    fontWeight: FontWeight.w700,
+  );
+
+  static const todayHighLowTemperature = TextStyle(
+    fontFamily: 'ProductSans',
+    fontSize: 16,
+    fontWeight: FontWeight.w700,
+  );
+
+  static const todayCondition = TextStyle(
+    fontFamily: 'ProductSans',
+    fontSize: 10,
+    fontWeight: FontWeight.w700,
+  );
 }
 
 class CJVnkTextThemesExtension extends ThemeExtension<CJVnkTextThemesExtension> {
@@ -34,12 +52,18 @@ class CJVnkTextThemesExtension extends ThemeExtension<CJVnkTextThemesExtension> 
   final TextStyle currentTemperature;
   final TextStyle currentCondition;
   final TextStyle currentHighLowTemperature;
+  final TextStyle todayTitle;
+  final TextStyle todayHighLowTemperature;
+  final TextStyle todayCondition;
 
   const CJVnkTextThemesExtension({
     required this.currentLocation,
     required this.currentTemperature,
     required this.currentCondition,
     required this.currentHighLowTemperature,
+    required this.todayTitle,
+    required this.todayHighLowTemperature,
+    required this.todayCondition,
   });
 
   @override
@@ -48,11 +72,17 @@ class CJVnkTextThemesExtension extends ThemeExtension<CJVnkTextThemesExtension> 
     TextStyle? currentTemperature,
     TextStyle? currentCondition,
     TextStyle? currentHighLowTemperature,
+    TextStyle? todayTitle,
+    TextStyle? todayHighLowTemperature,
+    TextStyle? todayCondition,
   }) => CJVnkTextThemesExtension(
     currentLocation: currentLocation ?? this.currentLocation,
     currentTemperature: currentTemperature ?? this.currentTemperature,
     currentCondition: currentCondition ?? this.currentCondition,
     currentHighLowTemperature: currentHighLowTemperature ?? this.currentHighLowTemperature,
+    todayTitle: todayTitle ?? this.todayTitle,
+    todayHighLowTemperature: todayHighLowTemperature ?? this.todayHighLowTemperature,
+    todayCondition: todayCondition ?? this.todayCondition,
   );
 
   @override
@@ -69,6 +99,9 @@ class CJVnkTextThemesExtension extends ThemeExtension<CJVnkTextThemesExtension> 
       currentTemperature: TextStyle.lerp(currentTemperature, other.currentTemperature, t)!,
       currentCondition: TextStyle.lerp(currentCondition, other.currentCondition, t)!,
       currentHighLowTemperature: TextStyle.lerp(currentHighLowTemperature, other.currentHighLowTemperature, t)!,
+      todayTitle: TextStyle.lerp(todayTitle, other.todayTitle, t)!,
+      todayHighLowTemperature: TextStyle.lerp(todayHighLowTemperature, other.todayHighLowTemperature, t)!,
+      todayCondition: TextStyle.lerp(todayCondition, other.todayCondition, t)!,
     );
   }
 }

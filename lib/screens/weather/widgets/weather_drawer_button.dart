@@ -17,14 +17,16 @@ class WeatherDrawerButton extends StatelessWidget {
     ignoring: isHidden,
     child: Opacity(
       opacity: isHidden ? 0 : 1,
-      child: IconButton.filledTonal(
+      child: IconButton(
         onPressed: onPressed,
         padding: const EdgeInsets.all(18),
         style: IconButton.styleFrom(
+          elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
           backgroundColor: context.colors.white.withValues(alpha: 0.3),
+          overlayColor: context.colors.white,
         ),
         icon: Image.asset(
           CJVnkIcons.drawer,

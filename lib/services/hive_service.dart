@@ -2,6 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
 
 import '../hive_registrar.g.dart';
+import '../models/location/location.dart';
 import '../models/token/token.dart';
 import '../util/path.dart';
 import 'logger_service.dart';
@@ -18,6 +19,7 @@ class HiveService implements Disposable {
   ///
 
   late final Box<Token> tokens;
+  late final Box<Location> locations;
 
   ///
   /// INIT
@@ -31,6 +33,7 @@ class HiveService implements Disposable {
       ..registerAdapters();
 
     tokens = await Hive.openBox<Token>('tokensBox');
+    locations = await Hive.openBox<Location>('locationsBox');
   }
 
   ///
@@ -40,6 +43,7 @@ class HiveService implements Disposable {
   @override
   Future<void> onDispose() async {
     await tokens.close();
+    await locations.close();
     await Hive.close();
   }
 
@@ -52,4 +56,10 @@ class HiveService implements Disposable {
 
   /// Stores a new `token` in [Hive]
   Future<void> writeToken({required Token newToken}) async => tokens.put(0, newToken);
+
+  /// Called to get `locations` from [Hive]
+  List<Location> getLocations() => locations.values.toList();
+
+  /// Stores a new `location` in [Hive]
+  Future<void> writeLocation({required Location newLocation}) async => locations.add(newLocation);
 }

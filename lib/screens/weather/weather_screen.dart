@@ -3,6 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:watch_it/watch_it.dart';
 
 import '../../constants/durations.dart';
+import '../../models/location/location.dart';
 import '../../services/api_service.dart';
 import '../../services/logger_service.dart';
 import '../../services/timezone_service.dart';
@@ -12,10 +13,10 @@ import 'weather_controller.dart';
 import 'widgets/weather_content.dart';
 
 class WeatherScreen extends WatchingStatefulWidget {
-  final String instanceName;
+  final Location location;
 
   const WeatherScreen({
-    required this.instanceName,
+    required this.location,
     required super.key,
   });
 
@@ -35,7 +36,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
         timezone: getIt.get<TimezoneService>(),
         token: getIt.get<TokenService>(),
       ),
-      instanceName: widget.instanceName,
+      instanceName: widget.location.toString(),
       afterRegister: (controller) => controller.getWeather(),
     );
   }
@@ -43,7 +44,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
   @override
   void dispose() {
     getIt.unregister<WeatherController>(
-      instanceName: widget.instanceName,
+      instanceName: widget.location.toString(),
     );
 
     super.dispose();
@@ -52,7 +53,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
   @override
   Widget build(BuildContext context) {
     final weatherState = watchIt<WeatherController>(
-      instanceName: widget.instanceName,
+      instanceName: widget.location.toString(),
     ).value;
 
     return Scaffold(
@@ -66,6 +67,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
             ),
           ],
           child: WeatherContent(
+            location: widget.location,
             weatherState: weatherState,
           ),
         ),

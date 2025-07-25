@@ -33,6 +33,7 @@ dependencies:
   envied: 1.1.1
   flutter_animate: 4.5.2
   flutter_timezone: 4.1.1
+  geocoding: 4.0.0
   geolocator: 14.0.2
   get_it: 8.0.3
   hive_ce: 2.11.3

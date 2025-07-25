@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 
+import '../../../models/location/location.dart';
 import '../../../models/response_weather.dart';
 import '../../../util/state.dart';
 import 'weather_success.dart';
 
 class WeatherContent extends StatelessWidget {
+  final Location location;
   final CJVnkState<ResponseWeather> weatherState;
 
   const WeatherContent({
+    required this.location,
     required this.weatherState,
   });
 
@@ -34,6 +37,7 @@ class WeatherContent extends StatelessWidget {
       color: Colors.red,
     ),
     Success<ResponseWeather>() => WeatherSuccess(
+      location: location,
       weather: (weatherState as Success).data,
     ),
   };

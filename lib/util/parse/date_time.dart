@@ -28,7 +28,7 @@ String getFormattedDate({
 /// Returns properly formatted time, e.g. `12:00`
 String getFormattedTime(DateTime dateTime) => DateFormat.Hm().format(dateTime);
 
-/// Returns current [Day] from a [List<Day>]
+/// Returns current [Day] from [List<Day>]
 Day? getCurrentDay(List<Day>? days) {
   final now = DateTime.now().toUtc();
 
@@ -37,6 +37,25 @@ Day? getCurrentDay(List<Day>? days) {
       (day) => now.isAfter(day.forecastStart) && now.isBefore(day.forecastEnd),
     );
   } catch (_) {
+    return null;
+  }
+}
+
+/// Returns all [Days] from [List<Day>] except the current `day`
+List<Day>? getDaysExceptToday(List<Day>? days) {
+  final now = DateTime.now().toUtc();
+
+  if (days == null) {
+    return [];
+  }
+
+  try {
+    return days
+        .where(
+          (day) => now.isBefore(day.forecastStart) || now.isAfter(day.forecastEnd),
+        )
+        .toList();
+  } catch (e) {
     return null;
   }
 }

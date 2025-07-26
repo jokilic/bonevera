@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
+import '../../../constants/durations.dart';
 import '../../../models/hour.dart';
 import '../../../theme/theme.dart';
 import '../../../util/parse/chart.dart';
@@ -57,12 +58,12 @@ class WeatherHourTemperatureChart extends StatelessWidget {
       isCurved: true,
       color: context.colors.accent,
       barWidth: 4,
-      dotData: const FlDotData(
-        show: false,
-      ),
+      showingIndicators: highlightedIndexes,
+      dotData: const FlDotData(show: false),
     );
 
     return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16),
       padding: const EdgeInsets.symmetric(
         horizontal: 16,
         vertical: 12,
@@ -78,39 +79,48 @@ class WeatherHourTemperatureChart extends StatelessWidget {
             title.toUpperCase(),
             style: context.textStyles.currentHourChartTitle,
           ),
-          const SizedBox(height: 24),
+          const SizedBox(height: 28),
           Expanded(
-            child: LineChart(
-              LineChartData(
-                gridData: const FlGridData(show: false),
-                titlesData: const FlTitlesData(show: false),
-                borderData: FlBorderData(show: false),
-                minY: minTemp - 2,
-                maxY: maxTemp + 2,
-                showingTooltipIndicators: highlightedIndexes
-                    .map(
-                      (i) => ShowingTooltipIndicators(
-                        [LineBarSpot(lineBar, 0, spots[i])],
-                      ),
-                    )
-                    .toList(),
-                lineBarsData: [lineBar],
-                lineTouchData: LineTouchData(
-                  enabled: false,
-                  touchTooltipData: LineTouchTooltipData(
-                    tooltipPadding: EdgeInsets.zero,
-                    tooltipMargin: 6,
-                    getTooltipColor: (_) => Colors.transparent,
-                    getTooltipItems: (touchedSpots) => touchedSpots
-                        .map(
-                          (spot) => LineTooltipItem(
-                            '${spot.y.round()}°',
-                            context.textStyles.currentHourChartTemperature,
-                          ),
-                        )
-                        .toList(),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 12,
+                vertical: 8,
+              ),
+              child: LineChart(
+                LineChartData(
+                  gridData: const FlGridData(show: false),
+                  titlesData: const FlTitlesData(show: false),
+                  borderData: FlBorderData(show: false),
+                  minY: minTemp - 2,
+                  maxY: maxTemp + 2,
+                  showingTooltipIndicators: highlightedIndexes
+                      .map(
+                        (i) => ShowingTooltipIndicators(
+                          [LineBarSpot(lineBar, 0, spots[i])],
+                        ),
+                      )
+                      .toList(),
+                  lineBarsData: [lineBar],
+                  lineTouchData: LineTouchData(
+                    enabled: false,
+                    getTouchLineEnd: (barData, spotIndex) => 0,
+                    touchTooltipData: LineTouchTooltipData(
+                      tooltipPadding: EdgeInsets.zero,
+                      tooltipMargin: 12,
+                      getTooltipColor: (_) => Colors.transparent,
+                      getTooltipItems: (touchedSpots) => touchedSpots
+                          .map(
+                            (spot) => LineTooltipItem(
+                              '${spot.y.round()}°',
+                              context.textStyles.currentHourChartTemperature,
+                            ),
+                          )
+                          .toList(),
+                    ),
                   ),
                 ),
+                duration: CJVnkDurations.fadeAnimation,
+                curve: Curves.easeIn,
               ),
             ),
           ),

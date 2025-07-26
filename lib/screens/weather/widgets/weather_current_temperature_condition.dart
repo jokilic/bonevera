@@ -17,7 +17,7 @@ class WeatherCurrentTemperatureCondition extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 16),
+    padding: const EdgeInsets.symmetric(horizontal: 32),
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [

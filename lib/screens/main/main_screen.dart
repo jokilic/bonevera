@@ -45,7 +45,8 @@ class _MainScreenState extends State<MainScreen> {
     final location =
         mainState.firstOrNull ??
         Location(
-          name: 'Rab',
+          locality: 'Rab',
+          country: 'Croatia',
           latitude: 44.7569,
           longitude: 14.7600,
         );

@@ -5,20 +5,24 @@ part 'location.g.dart';
 @HiveType(typeId: 1)
 class Location extends HiveObject {
   @HiveField(1)
-  final String name;
+  final String locality;
 
   @HiveField(2)
-  final double latitude;
+  final String country;
 
   @HiveField(3)
+  final double latitude;
+
+  @HiveField(4)
   final double longitude;
 
   Location({
-    required this.name,
+    required this.locality,
+    required this.country,
     required this.latitude,
     required this.longitude,
   });
 
   @override
-  String toString() => 'Location(name: $name, latitude: $latitude, longitude: $longitude)';
+  String toString() => 'Location(locality: $locality, country: $country, latitude: $latitude, longitude: $longitude)';
 }

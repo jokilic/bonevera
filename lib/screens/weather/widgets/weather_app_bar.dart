@@ -13,38 +13,44 @@ class WeatherAppBar extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      ///
-      /// LOCATIONS BUTTON
-      ///
-      WeatherDrawerButton(
-        onPressed: onDrawerPressed,
-      ),
-      const SizedBox(width: 16),
-
-      ///
-      /// CURRENT LOCATION NAME
-      ///
-      Expanded(
-        child: Text(
-          locationName,
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-          textAlign: TextAlign.center,
-          style: context.textStyles.currentLocation,
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.symmetric(
+      horizontal: 16,
+      vertical: 8,
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        ///
+        /// LOCATIONS BUTTON
+        ///
+        WeatherDrawerButton(
+          onPressed: onDrawerPressed,
         ),
-      ),
+        const SizedBox(width: 16),
 
-      ///
-      /// EMPTY SPACE
-      ///
-      const SizedBox(width: 16),
-      WeatherDrawerButton(
-        onPressed: () {},
-        isHidden: true,
-      ),
-    ],
+        ///
+        /// CURRENT LOCATION NAME
+        ///
+        Expanded(
+          child: Text(
+            locationName,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.center,
+            style: context.textStyles.currentLocation,
+          ),
+        ),
+
+        ///
+        /// EMPTY SPACE
+        ///
+        const SizedBox(width: 16),
+        WeatherDrawerButton(
+          onPressed: () {},
+          isHidden: true,
+        ),
+      ],
+    ),
   );
 }

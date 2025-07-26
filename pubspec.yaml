@@ -31,6 +31,7 @@ dependencies:
   dart_jsonwebtoken: 3.2.0
   dio: 5.8.0+1
   envied: 1.1.1
+  fl_chart: 1.0.0
   flutter_animate: 4.5.2
   flutter_timezone: 4.1.1
   geocoding: 4.0.0
@@ -38,6 +39,7 @@ dependencies:
   get_it: 8.0.3
   hive_ce: 2.11.3
   hive_ce_flutter: 2.3.1
+  intl: 0.20.2
   latlong2: 0.9.1
   logger: 2.5.0
   permission_handler: 12.0.1

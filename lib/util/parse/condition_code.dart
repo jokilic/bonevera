@@ -1,15 +1,5 @@
-import '../constants/enums.dart';
-import '../models/day.dart';
-import '../theme/icons.dart';
-
-/// Returns `temperature` in proper format
-String getTemperatureString(double? passedTemperature) {
-  if (passedTemperature != null) {
-    final temperature = passedTemperature.toStringAsFixed(0);
-    return '$temperature°';
-  }
-  return '--';
-}
+import '../../constants/enums.dart';
+import '../../theme/icons.dart';
 
 /// Returns proper image, depending on [ConditionCode] and `daylight` boolean
 String getConditionImage({
@@ -55,17 +45,4 @@ String getConditionImage({
     };
   }
   return CJVnkIcons.tornado;
-}
-
-/// Returns current [Day] from a [List<Day>]
-Day? getCurrentDay(List<Day>? days) {
-  final now = DateTime.now().toUtc();
-
-  try {
-    return days?.firstWhere(
-      (day) => now.isAfter(day.forecastStart) && now.isBefore(day.forecastEnd),
-    );
-  } catch (_) {
-    return null;
-  }
 }

@@ -28,21 +28,33 @@ abstract class CJVnkTextStyles {
     height: 1.25,
   );
 
-  static const todayTitle = TextStyle(
+  static const currentDayTitle = TextStyle(
     fontFamily: 'ProductSans',
     fontSize: 14,
     fontWeight: FontWeight.w700,
   );
 
-  static const todayHighLowTemperature = TextStyle(
+  static const currentDayHighLowTemperature = TextStyle(
     fontFamily: 'ProductSans',
     fontSize: 16,
     fontWeight: FontWeight.w700,
   );
 
-  static const todayCondition = TextStyle(
+  static const currentDayCondition = TextStyle(
     fontFamily: 'ProductSans',
     fontSize: 10,
+    fontWeight: FontWeight.w700,
+  );
+
+  static const currentHourChartTitle = TextStyle(
+    fontFamily: 'ProductSans',
+    fontSize: 14,
+    fontWeight: FontWeight.w700,
+  );
+
+  static const currentHourChartTemperature = TextStyle(
+    fontFamily: 'ProductSans',
+    fontSize: 16,
     fontWeight: FontWeight.w700,
   );
 }
@@ -52,18 +64,22 @@ class CJVnkTextThemesExtension extends ThemeExtension<CJVnkTextThemesExtension> 
   final TextStyle currentTemperature;
   final TextStyle currentCondition;
   final TextStyle currentHighLowTemperature;
-  final TextStyle todayTitle;
-  final TextStyle todayHighLowTemperature;
-  final TextStyle todayCondition;
+  final TextStyle currentDayTitle;
+  final TextStyle currentDayHighLowTemperature;
+  final TextStyle currentDayCondition;
+  final TextStyle currentHourChartTitle;
+  final TextStyle currentHourChartTemperature;
 
   const CJVnkTextThemesExtension({
     required this.currentLocation,
     required this.currentTemperature,
     required this.currentCondition,
     required this.currentHighLowTemperature,
-    required this.todayTitle,
-    required this.todayHighLowTemperature,
-    required this.todayCondition,
+    required this.currentDayTitle,
+    required this.currentDayHighLowTemperature,
+    required this.currentDayCondition,
+    required this.currentHourChartTitle,
+    required this.currentHourChartTemperature,
   });
 
   @override
@@ -72,17 +88,21 @@ class CJVnkTextThemesExtension extends ThemeExtension<CJVnkTextThemesExtension> 
     TextStyle? currentTemperature,
     TextStyle? currentCondition,
     TextStyle? currentHighLowTemperature,
-    TextStyle? todayTitle,
-    TextStyle? todayHighLowTemperature,
-    TextStyle? todayCondition,
+    TextStyle? currentDayTitle,
+    TextStyle? currentDayHighLowTemperature,
+    TextStyle? currentDayCondition,
+    TextStyle? currentHourChartTitle,
+    TextStyle? currentHourChartTemperature,
   }) => CJVnkTextThemesExtension(
     currentLocation: currentLocation ?? this.currentLocation,
     currentTemperature: currentTemperature ?? this.currentTemperature,
     currentCondition: currentCondition ?? this.currentCondition,
     currentHighLowTemperature: currentHighLowTemperature ?? this.currentHighLowTemperature,
-    todayTitle: todayTitle ?? this.todayTitle,
-    todayHighLowTemperature: todayHighLowTemperature ?? this.todayHighLowTemperature,
-    todayCondition: todayCondition ?? this.todayCondition,
+    currentDayTitle: currentDayTitle ?? this.currentDayTitle,
+    currentDayHighLowTemperature: currentDayHighLowTemperature ?? this.currentDayHighLowTemperature,
+    currentDayCondition: currentDayCondition ?? this.currentDayCondition,
+    currentHourChartTitle: currentHourChartTitle ?? this.currentHourChartTitle,
+    currentHourChartTemperature: currentHourChartTemperature ?? this.currentHourChartTemperature,
   );
 
   @override
@@ -99,9 +119,11 @@ class CJVnkTextThemesExtension extends ThemeExtension<CJVnkTextThemesExtension> 
       currentTemperature: TextStyle.lerp(currentTemperature, other.currentTemperature, t)!,
       currentCondition: TextStyle.lerp(currentCondition, other.currentCondition, t)!,
       currentHighLowTemperature: TextStyle.lerp(currentHighLowTemperature, other.currentHighLowTemperature, t)!,
-      todayTitle: TextStyle.lerp(todayTitle, other.todayTitle, t)!,
-      todayHighLowTemperature: TextStyle.lerp(todayHighLowTemperature, other.todayHighLowTemperature, t)!,
-      todayCondition: TextStyle.lerp(todayCondition, other.todayCondition, t)!,
+      currentDayTitle: TextStyle.lerp(currentDayTitle, other.currentDayTitle, t)!,
+      currentDayHighLowTemperature: TextStyle.lerp(currentDayHighLowTemperature, other.currentDayHighLowTemperature, t)!,
+      currentDayCondition: TextStyle.lerp(currentDayCondition, other.currentDayCondition, t)!,
+      currentHourChartTitle: TextStyle.lerp(currentHourChartTitle, other.currentHourChartTitle, t)!,
+      currentHourChartTemperature: TextStyle.lerp(currentHourChartTemperature, other.currentHourChartTemperature, t)!,
     );
   }
 }

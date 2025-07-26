@@ -3,21 +3,25 @@ import 'package:flutter/material.dart';
 import '../../../theme/theme.dart';
 
 class WeatherDay extends StatelessWidget {
+  final String title;
   final String conditionImage;
   final String lowTemperature;
   final String highTemperature;
+  final String conditionText;
 
   const WeatherDay({
+    required this.title,
     required this.conditionImage,
     required this.lowTemperature,
     required this.highTemperature,
+    required this.conditionText,
   });
 
   @override
   Widget build(BuildContext context) => TextButton(
     onPressed: () {},
     style: TextButton.styleFrom(
-      fixedSize: const Size(104, 152),
+      minimumSize: const Size(104, 152),
       elevation: 0,
       padding: const EdgeInsets.symmetric(
         horizontal: 4,
@@ -26,8 +30,8 @@ class WeatherDay extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),
-      backgroundColor: context.colors.white.withValues(alpha: 0.3),
-      overlayColor: context.colors.white,
+      backgroundColor: context.colors.background.withValues(alpha: 0.3),
+      overlayColor: context.colors.background,
     ),
     child: Column(
       mainAxisSize: MainAxisSize.min,
@@ -36,8 +40,8 @@ class WeatherDay extends StatelessWidget {
         /// TITLE
         ///
         Text(
-          'Today'.toUpperCase(),
-          style: context.textStyles.todayTitle,
+          title.toUpperCase(),
+          style: context.textStyles.currentDayTitle,
           textAlign: TextAlign.center,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
@@ -58,7 +62,7 @@ class WeatherDay extends StatelessWidget {
         ///
         Text(
           '$lowTemperature / $highTemperature',
-          style: context.textStyles.todayHighLowTemperature,
+          style: context.textStyles.currentDayHighLowTemperature,
           textAlign: TextAlign.center,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
@@ -68,8 +72,8 @@ class WeatherDay extends StatelessWidget {
         /// CONDITION
         ///
         Text(
-          'Mostly cloudy'.toUpperCase(),
-          style: context.textStyles.todayCondition,
+          conditionText.toUpperCase(),
+          style: context.textStyles.currentDayCondition,
           textAlign: TextAlign.center,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,

@@ -7,25 +7,25 @@ abstract class CJVnkColors {
 }
 
 class CJVnkColorsExtension extends ThemeExtension<CJVnkColorsExtension> {
-  final Color white;
-  final Color black;
-  final Color blue;
+  final Color background;
+  final Color primary;
+  final Color accent;
 
   CJVnkColorsExtension({
-    required this.white,
-    required this.black,
-    required this.blue,
+    required this.background,
+    required this.primary,
+    required this.accent,
   });
 
   @override
   ThemeExtension<CJVnkColorsExtension> copyWith({
-    Color? white,
-    Color? black,
-    Color? blue,
+    Color? background,
+    Color? primary,
+    Color? accent,
   }) => CJVnkColorsExtension(
-    white: white ?? this.white,
-    black: black ?? this.black,
-    blue: blue ?? this.blue,
+    background: background ?? this.background,
+    primary: primary ?? this.primary,
+    accent: accent ?? this.accent,
   );
 
   @override
@@ -38,9 +38,9 @@ class CJVnkColorsExtension extends ThemeExtension<CJVnkColorsExtension> {
     }
 
     return CJVnkColorsExtension(
-      white: Color.lerp(white, other.white, t)!,
-      black: Color.lerp(black, other.black, t)!,
-      blue: Color.lerp(blue, other.blue, t)!,
+      background: Color.lerp(background, other.background, t)!,
+      primary: Color.lerp(primary, other.primary, t)!,
+      accent: Color.lerp(accent, other.accent, t)!,
     );
   }
 }

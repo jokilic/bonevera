@@ -12,7 +12,7 @@ class CJVnkTheme {
     final defaultTheme = ThemeData.light();
 
     return defaultTheme.copyWith(
-      scaffoldBackgroundColor: lightAppColors.blue,
+      scaffoldBackgroundColor: lightAppColors.accent,
       extensions: [
         lightAppColors,
         lightTextTheme,
@@ -21,32 +21,38 @@ class CJVnkTheme {
   }
 
   static final lightAppColors = CJVnkColorsExtension(
-    white: CJVnkColors.white,
-    black: CJVnkColors.black,
-    blue: CJVnkColors.blue,
+    background: CJVnkColors.white,
+    primary: CJVnkColors.black,
+    accent: CJVnkColors.blue,
   );
 
   static final lightTextTheme = CJVnkTextThemesExtension(
     currentLocation: CJVnkTextStyles.currentLocation.copyWith(
-      color: lightAppColors.black,
+      color: lightAppColors.primary,
     ),
     currentTemperature: CJVnkTextStyles.currentTemperature.copyWith(
-      color: lightAppColors.black,
+      color: lightAppColors.primary,
     ),
     currentCondition: CJVnkTextStyles.currentCondition.copyWith(
-      color: lightAppColors.black,
+      color: lightAppColors.primary,
     ),
     currentHighLowTemperature: CJVnkTextStyles.currentHighLowTemperature.copyWith(
-      color: lightAppColors.black,
+      color: lightAppColors.primary,
     ),
-    todayTitle: CJVnkTextStyles.todayTitle.copyWith(
-      color: lightAppColors.white,
+    currentDayTitle: CJVnkTextStyles.currentDayTitle.copyWith(
+      color: lightAppColors.background,
     ),
-    todayHighLowTemperature: CJVnkTextStyles.todayHighLowTemperature.copyWith(
-      color: lightAppColors.white,
+    currentDayHighLowTemperature: CJVnkTextStyles.currentDayHighLowTemperature.copyWith(
+      color: lightAppColors.background,
     ),
-    todayCondition: CJVnkTextStyles.todayCondition.copyWith(
-      color: lightAppColors.white.withValues(alpha: 0.6),
+    currentDayCondition: CJVnkTextStyles.currentDayCondition.copyWith(
+      color: lightAppColors.background.withValues(alpha: 0.6),
+    ),
+    currentHourChartTitle: CJVnkTextStyles.currentHourChartTitle.copyWith(
+      color: lightAppColors.background,
+    ),
+    currentHourChartTemperature: CJVnkTextStyles.currentHourChartTemperature.copyWith(
+      color: lightAppColors.background,
     ),
   );
 }

@@ -3,11 +3,14 @@ import 'package:flutter/material.dart';
 import '../../../models/location/location.dart';
 import '../../../models/response_weather.dart';
 import '../../../util/dependencies.dart';
-import '../../../util/parse.dart';
+import '../../../util/parse/condition_code.dart';
+import '../../../util/parse/date_time.dart';
+import '../../../util/parse/temperature.dart';
 import '../../main/main_controller.dart';
 import 'weather_app_bar.dart';
 import 'weather_current_temperature_condition.dart';
 import 'weather_day.dart';
+import 'weather_hour_temperature_chart.dart';
 
 class WeatherSuccess extends StatelessWidget {
   final Location location;
@@ -23,6 +26,7 @@ class WeatherSuccess extends StatelessWidget {
     final currentTemperature = getTemperatureString(
       weather.currentWeather?.temperature,
     );
+    final currentConditionText = weather.currentWeather?.conditionCode.name ?? 'no';
     final currentConditionImage = getConditionImage(
       passedConditionCode: weather.currentWeather?.conditionCode,
       daylight: weather.currentWeather?.daylight ?? true,
@@ -31,11 +35,6 @@ class WeatherSuccess extends StatelessWidget {
     final today = getCurrentDay(
       weather.forecastDaily?.days,
     );
-
-    final todayConditionImage = getConditionImage(
-      passedConditionCode: today?.conditionCode,
-      daylight: true,
-    );
     final todayHighTemperature = getTemperatureString(
       today?.temperatureMax,
     );
@@ -43,8 +42,15 @@ class WeatherSuccess extends StatelessWidget {
       today?.temperatureMin,
     );
 
+    final todayHours = getNext24Hours(
+      allHours: weather.forecastHourly?.hours,
+    );
+
     return Padding(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.symmetric(
+        horizontal: 16,
+        vertical: 8,
+      ),
       child: Column(
         children: [
           ///
@@ -72,6 +78,7 @@ class WeatherSuccess extends StatelessWidget {
           /// WEATHER ICON
           ///
           Expanded(
+            flex: 2,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: Image.asset(
@@ -85,6 +92,7 @@ class WeatherSuccess extends StatelessWidget {
           /// CONTENT
           ///
           Expanded(
+            flex: 3,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -93,28 +101,29 @@ class WeatherSuccess extends StatelessWidget {
                 ///
                 WeatherCurrentTemperatureCondition(
                   currentTemperature: currentTemperature,
+                  conditionText: currentConditionText,
                   currentHighTemperature: todayHighTemperature,
                   currentLowTemperature: todayLowTemperature,
                 ),
 
                 const SizedBox(height: 40),
 
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    ///
-                    /// TODAY
-                    ///
-                    WeatherDay(
-                      conditionImage: todayConditionImage,
-                      lowTemperature: todayLowTemperature,
-                      highTemperature: todayHighTemperature,
-                    ),
-                    const SizedBox(width: 16),
+                ///
+                /// DAILY WEATHER
+                ///
+                Expanded(
+                  flex: 3,
+                  child: Row(
+                    children: [
+                      ///
+                      /// TODAY
+                      ///
+                      // TODO: Put only `Today` here
 
-                    Expanded(
-                      child: SizedBox(
-                        height: 152,
+                      ///
+                      /// OTHER DAYS
+                      ///
+                      Expanded(
                         child: ListView.separated(
                           physics: const BouncingScrollPhysics(),
                           scrollDirection: Axis.horizontal,
@@ -122,6 +131,10 @@ class WeatherSuccess extends StatelessWidget {
                           itemBuilder: (_, index) {
                             final day = weather.forecastDaily!.days[index];
 
+                            final forecastTitle = getFormattedDate(
+                              forecastStart: day.forecastStart,
+                              forecastEnd: day.forecastEnd,
+                            );
                             final conditionImage = getConditionImage(
                               passedConditionCode: day.conditionCode,
                               daylight: true,
@@ -132,18 +145,34 @@ class WeatherSuccess extends StatelessWidget {
                             final lowTemperature = getTemperatureString(
                               day.temperatureMin,
                             );
+                            final conditionText = day.conditionCode.name;
 
                             return WeatherDay(
+                              title: forecastTitle,
                               conditionImage: conditionImage,
                               lowTemperature: lowTemperature,
                               highTemperature: highTemperature,
+                              conditionText: conditionText,
                             );
                           },
                           separatorBuilder: (_, __) => const SizedBox(width: 8),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 16),
+
+                ///
+                /// HOURLY CHART
+                ///
+                Expanded(
+                  flex: 2,
+                  child: WeatherHourTemperatureChart(
+                    title: '24-hour forecast',
+                    hours: todayHours,
+                  ),
                 ),
               ],
             ),

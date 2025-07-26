@@ -25,14 +25,14 @@ class WeatherDrawerButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
-          backgroundColor: context.colors.white.withValues(alpha: 0.3),
-          overlayColor: context.colors.white,
+          backgroundColor: context.colors.background.withValues(alpha: 0.3),
+          overlayColor: context.colors.background,
         ),
         icon: Image.asset(
           CJVnkIcons.drawer,
           height: 20,
           width: 20,
-          color: context.colors.black,
+          color: context.colors.primary,
         ),
       ),
     ),

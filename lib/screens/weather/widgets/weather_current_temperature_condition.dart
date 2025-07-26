@@ -4,11 +4,13 @@ import '../../../theme/theme.dart';
 
 class WeatherCurrentTemperatureCondition extends StatelessWidget {
   final String currentTemperature;
+  final String conditionText;
   final String currentHighTemperature;
   final String currentLowTemperature;
 
   const WeatherCurrentTemperatureCondition({
     required this.currentTemperature,
+    required this.conditionText,
     required this.currentHighTemperature,
     required this.currentLowTemperature,
   });
@@ -41,7 +43,7 @@ class WeatherCurrentTemperatureCondition extends StatelessWidget {
               /// CONDITION
               ///
               Text(
-                'Some condition',
+                conditionText,
                 style: context.textStyles.currentCondition,
               ),
 

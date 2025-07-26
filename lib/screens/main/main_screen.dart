@@ -54,7 +54,7 @@ class _MainScreenState extends State<MainScreen> {
       body: WeatherScreen(
         location: location,
         // key: ValueKey(location),
-        key: ValueKey('yo'),
+        key: const ValueKey('yo'),
       ),
     );
   }

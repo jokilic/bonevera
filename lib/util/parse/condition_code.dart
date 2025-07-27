@@ -1,6 +1,52 @@
 import '../../constants/enums.dart';
 import '../../theme/icons.dart';
 
+/// Returns proper text, depending on [ConditionCode] and `daylight` boolean
+String getConditionString({
+  required ConditionCode? passedConditionCode,
+  required bool daylight,
+}) {
+  if (passedConditionCode != null) {
+    return switch (passedConditionCode) {
+      ConditionCode.BlowingDust => 'Blowing dust',
+      ConditionCode.Clear => 'Clear',
+      ConditionCode.Cloudy => 'Cloudy',
+      ConditionCode.Foggy => 'Foggy',
+      ConditionCode.Haze => 'Hazy',
+      ConditionCode.MostlyClear => 'Mostly clear',
+      ConditionCode.MostlyCloudy => 'Mostly cloudy',
+      ConditionCode.PartlyCloudy => 'Partly cloudy',
+      ConditionCode.Smoky => 'Smoky',
+      ConditionCode.Breezy => 'Breezy',
+      ConditionCode.Windy => 'Windy',
+      ConditionCode.Drizzle => 'Drizzle',
+      ConditionCode.HeavyRain => 'Heavy rain',
+      ConditionCode.IsolatedThunderstorms => 'Isolated thunderstorms',
+      ConditionCode.Rain => 'Rain',
+      ConditionCode.SunShowers => 'Sun showers',
+      ConditionCode.ScatteredThunderstorms => 'Scattered thunderstorms',
+      ConditionCode.StrongStorms => 'Strong storms',
+      ConditionCode.Thunderstorms => 'Thunderstorms',
+      ConditionCode.Frigid => 'Frigid',
+      ConditionCode.Hail => 'Hail',
+      ConditionCode.Hot => 'Hot',
+      ConditionCode.Flurries => 'Flurries',
+      ConditionCode.Sleet => 'Sleet',
+      ConditionCode.Snow => 'Snow',
+      ConditionCode.SunFlurries => 'Sun flurries',
+      ConditionCode.WintryMix => 'Wintry mix',
+      ConditionCode.Blizzard => 'Blizzard',
+      ConditionCode.BlowingSnow => 'Blowing snow',
+      ConditionCode.FreezingDrizzle => 'Freezing drizzle',
+      ConditionCode.FreezingRain => 'Freezing rain',
+      ConditionCode.HeavySnow => 'Heavy snow',
+      ConditionCode.Hurricane => 'Hurricane',
+      ConditionCode.TropicalStorm => 'Tropical storm',
+    };
+  }
+  return '--';
+}
+
 /// Returns proper image, depending on [ConditionCode] and `daylight` boolean
 String getConditionImage({
   required ConditionCode? passedConditionCode,

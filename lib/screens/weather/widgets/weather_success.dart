@@ -21,31 +21,12 @@ class WeatherSuccess extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currentTemperature = getTemperatureString(
-      weather.currentWeather?.temperature,
-    );
-    final currentConditionText = weather.currentWeather?.conditionCode.name ?? 'no';
-    final currentConditionImage = getConditionImage(
-      passedConditionCode: weather.currentWeather?.conditionCode,
-      daylight: weather.currentWeather?.daylight ?? true,
-    );
-
     final today = getCurrentDay(
       weather.forecastDaily?.days,
-    );
-    final todayHighTemperature = getTemperatureString(
-      today?.temperatureMax,
-    );
-    final todayLowTemperature = getTemperatureString(
-      today?.temperatureMin,
     );
 
     final daysExceptToday = getDaysExceptToday(
       weather.forecastDaily?.days,
-    );
-
-    final todayHours = getNext24Hours(
-      allHours: weather.forecastHourly?.hours,
     );
 
     return Column(
@@ -65,7 +46,10 @@ class WeatherSuccess extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 56),
             child: Image.asset(
-              currentConditionImage,
+              getConditionImage(
+                passedConditionCode: weather.currentWeather?.conditionCode,
+                daylight: weather.currentWeather?.daylight ?? true,
+              ),
               alignment: Alignment.topCenter,
             ),
           ),
@@ -80,10 +64,19 @@ class WeatherSuccess extends StatelessWidget {
               /// CURRENT TEMPERATURE & CONDITION
               ///
               WeatherCurrentTemperatureCondition(
-                currentTemperature: currentTemperature,
-                conditionText: currentConditionText,
-                currentHighTemperature: todayHighTemperature,
-                currentLowTemperature: todayLowTemperature,
+                currentTemperature: getTemperatureString(
+                  weather.currentWeather?.temperature,
+                ),
+                conditionText: getConditionString(
+                  passedConditionCode: weather.currentWeather?.conditionCode,
+                  daylight: weather.currentWeather?.daylight ?? true,
+                ),
+                currentHighTemperature: getTemperatureString(
+                  today?.temperatureMax,
+                ),
+                currentLowTemperature: getTemperatureString(
+                  today?.temperatureMin,
+                ),
               ),
 
               const SizedBox(height: 32),
@@ -116,7 +109,10 @@ class WeatherSuccess extends StatelessWidget {
                           highTemperature: getTemperatureString(
                             today.temperatureMax,
                           ),
-                          conditionText: today.conditionCode.name,
+                          conditionText: getConditionString(
+                            passedConditionCode: today.conditionCode,
+                            daylight: true,
+                          ),
                         ),
                       ),
                       const SizedBox(width: 16),
@@ -150,7 +146,10 @@ class WeatherSuccess extends StatelessWidget {
                               highTemperature: getTemperatureString(
                                 day.temperatureMax,
                               ),
-                              conditionText: day.conditionCode.name,
+                              conditionText: getConditionString(
+                                passedConditionCode: day.conditionCode,
+                                daylight: true,
+                              ),
                             );
                           },
                           separatorBuilder: (_, __) => const SizedBox(width: 16),
@@ -169,7 +168,9 @@ class WeatherSuccess extends StatelessWidget {
                 flex: 4,
                 child: WeatherHourTemperatureChart(
                   title: '24-hour forecast',
-                  hours: todayHours,
+                  hours: getNext24Hours(
+                    allHours: weather.forecastHourly?.hours,
+                  ),
                 ),
               ),
             ],

@@ -21,7 +21,7 @@ class WeatherDay extends StatelessWidget {
   Widget build(BuildContext context) => TextButton(
     onPressed: () {},
     style: TextButton.styleFrom(
-      minimumSize: const Size(104, 152),
+      fixedSize: const Size(104, 152),
       elevation: 0,
       padding: const EdgeInsets.symmetric(
         horizontal: 4,

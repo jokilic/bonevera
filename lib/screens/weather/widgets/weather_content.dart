@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
 import '../../../models/location/location.dart';
-import '../../../models/response_weather.dart';
 import '../../../util/state.dart';
 import 'weather_success.dart';
 
 class WeatherContent extends StatelessWidget {
   final Location location;
-  final CJVnkState<ResponseWeather> weatherState;
+  final CJVnkState weatherState;
 
   const WeatherContent({
     required this.location,
@@ -16,27 +15,27 @@ class WeatherContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => switch (weatherState) {
-    Initial<ResponseWeather>() => Container(
+    Initial() => Container(
       height: 100,
       width: 100,
       color: Colors.blue,
     ),
-    Loading<ResponseWeather>() => Container(
+    Loading() => Container(
       height: 100,
       width: 100,
       color: Colors.yellowAccent,
     ),
-    Empty<ResponseWeather>() => Container(
+    Empty() => Container(
       height: 100,
       width: 100,
       color: Colors.grey,
     ),
-    Error<ResponseWeather>() => Container(
+    Error() => Container(
       height: 100,
       width: 100,
       color: Colors.red,
     ),
-    Success<ResponseWeather>() => WeatherSuccess(
+    Success() => WeatherSuccess(
       location: location,
       weather: (weatherState as Success).data,
     ),

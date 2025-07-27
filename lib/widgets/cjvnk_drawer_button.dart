@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 
-import '../../../theme/icons.dart';
-import '../../../theme/theme.dart';
+import '../theme/icons.dart';
+import '../theme/theme.dart';
 
-class WeatherDrawerButton extends StatelessWidget {
+class CJVnkDrawerButton extends StatelessWidget {
   final Function() onPressed;
+  final String icon;
+  final Color? iconColor;
   final bool isHidden;
 
-  const WeatherDrawerButton({
+  const CJVnkDrawerButton({
     required this.onPressed,
+    this.icon = CJVnkIcons.drawer,
     this.isHidden = false,
+    this.iconColor,
   });
 
   @override
@@ -29,10 +33,10 @@ class WeatherDrawerButton extends StatelessWidget {
           overlayColor: context.colors.background,
         ),
         icon: Image.asset(
-          CJVnkIcons.drawer,
+          icon,
           height: 20,
           width: 20,
-          color: context.colors.primary,
+          color: iconColor ?? context.colors.primary,
         ),
       ),
     ),

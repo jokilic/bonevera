@@ -61,7 +61,7 @@ class WeatherDay extends StatelessWidget {
         /// LOW / HIGH TEMPERATURES
         ///
         Text(
-          '$lowTemperature / $highTemperature',
+          '$highTemperature / $lowTemperature',
           style: context.textStyles.currentDayHighLowTemperature,
           textAlign: TextAlign.center,
           maxLines: 2,

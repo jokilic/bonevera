@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../../../models/location/location.dart';
 import '../../../models/response_weather.dart';
-import '../../../util/dependencies.dart';
 import '../../../util/parse/condition_code.dart';
 import '../../../util/parse/date_time.dart';
 import '../../../util/parse/temperature.dart';
-import '../../main/main_controller.dart';
 import 'weather_app_bar.dart';
 import 'weather_current_temperature_condition.dart';
 import 'weather_day.dart';
@@ -56,20 +54,6 @@ class WeatherSuccess extends StatelessWidget {
         /// APP BAR
         ///
         WeatherAppBar(
-          onDrawerPressed: () async {
-            final location = await getIt
-                .get<MainController>(instanceName: 'main')
-                .getLocationFromAddress(
-                  address: 'Siget 18B, Zagreb',
-                );
-
-            await getIt
-                .get<MainController>(instanceName: 'main')
-                .getAddressFromLocation(
-                  latitude: location.latitude,
-                  longitude: location.longitude,
-                );
-          },
           locationName: location.locality,
         ),
 

@@ -81,47 +81,41 @@ class WeatherHourTemperatureChart extends StatelessWidget {
           ),
           const SizedBox(height: 28),
           Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 12,
-                vertical: 8,
-              ),
-              child: LineChart(
-                LineChartData(
-                  gridData: const FlGridData(show: false),
-                  titlesData: const FlTitlesData(show: false),
-                  borderData: FlBorderData(show: false),
-                  minY: minTemp - 2,
-                  maxY: maxTemp + 2,
-                  showingTooltipIndicators: highlightedIndexes
-                      .map(
-                        (i) => ShowingTooltipIndicators(
-                          [LineBarSpot(lineBar, 0, spots[i])],
-                        ),
-                      )
-                      .toList(),
-                  lineBarsData: [lineBar],
-                  lineTouchData: LineTouchData(
-                    enabled: false,
-                    getTouchLineEnd: (barData, spotIndex) => 0,
-                    touchTooltipData: LineTouchTooltipData(
-                      tooltipPadding: EdgeInsets.zero,
-                      tooltipMargin: 12,
-                      getTooltipColor: (_) => Colors.transparent,
-                      getTooltipItems: (touchedSpots) => touchedSpots
-                          .map(
-                            (spot) => LineTooltipItem(
-                              '${spot.y.round()}°',
-                              context.textStyles.currentHourChartTemperature,
-                            ),
-                          )
-                          .toList(),
-                    ),
+            child: LineChart(
+              LineChartData(
+                gridData: const FlGridData(show: false),
+                titlesData: const FlTitlesData(show: false),
+                borderData: FlBorderData(show: false),
+                minY: minTemp - 2,
+                maxY: maxTemp + 2,
+                showingTooltipIndicators: highlightedIndexes
+                    .map(
+                      (i) => ShowingTooltipIndicators(
+                        [LineBarSpot(lineBar, 0, spots[i])],
+                      ),
+                    )
+                    .toList(),
+                lineBarsData: [lineBar],
+                lineTouchData: LineTouchData(
+                  enabled: false,
+                  getTouchLineEnd: (barData, spotIndex) => 0,
+                  touchTooltipData: LineTouchTooltipData(
+                    tooltipPadding: EdgeInsets.zero,
+                    tooltipMargin: 12,
+                    getTooltipColor: (_) => Colors.transparent,
+                    getTooltipItems: (touchedSpots) => touchedSpots
+                        .map(
+                          (spot) => LineTooltipItem(
+                            '${spot.y.round()}°',
+                            context.textStyles.currentHourChartTemperature,
+                          ),
+                        )
+                        .toList(),
                   ),
                 ),
-                duration: CJVnkDurations.fadeAnimation,
-                curve: Curves.easeIn,
               ),
+              duration: CJVnkDurations.fadeAnimation,
+              curve: Curves.easeIn,
             ),
           ),
         ],

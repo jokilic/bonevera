@@ -57,6 +57,18 @@ abstract class CJVnkTextStyles {
     fontSize: 16,
     fontWeight: FontWeight.w700,
   );
+
+  static const locationsAppName = TextStyle(
+    fontFamily: 'ProductSans',
+    fontSize: 16,
+    fontWeight: FontWeight.w700,
+  );
+
+  static const locationsAppVersion = TextStyle(
+    fontFamily: 'ProductSans',
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+  );
 }
 
 class CJVnkTextThemesExtension extends ThemeExtension<CJVnkTextThemesExtension> {
@@ -69,6 +81,8 @@ class CJVnkTextThemesExtension extends ThemeExtension<CJVnkTextThemesExtension> 
   final TextStyle currentDayCondition;
   final TextStyle currentHourChartTitle;
   final TextStyle currentHourChartTemperature;
+  final TextStyle locationsAppName;
+  final TextStyle locationsAppVersion;
 
   const CJVnkTextThemesExtension({
     required this.currentLocation,
@@ -80,6 +94,8 @@ class CJVnkTextThemesExtension extends ThemeExtension<CJVnkTextThemesExtension> 
     required this.currentDayCondition,
     required this.currentHourChartTitle,
     required this.currentHourChartTemperature,
+    required this.locationsAppName,
+    required this.locationsAppVersion,
   });
 
   @override
@@ -93,6 +109,8 @@ class CJVnkTextThemesExtension extends ThemeExtension<CJVnkTextThemesExtension> 
     TextStyle? currentDayCondition,
     TextStyle? currentHourChartTitle,
     TextStyle? currentHourChartTemperature,
+    TextStyle? locationsAppName,
+    TextStyle? locationsAppVersion,
   }) => CJVnkTextThemesExtension(
     currentLocation: currentLocation ?? this.currentLocation,
     currentTemperature: currentTemperature ?? this.currentTemperature,
@@ -103,6 +121,8 @@ class CJVnkTextThemesExtension extends ThemeExtension<CJVnkTextThemesExtension> 
     currentDayCondition: currentDayCondition ?? this.currentDayCondition,
     currentHourChartTitle: currentHourChartTitle ?? this.currentHourChartTitle,
     currentHourChartTemperature: currentHourChartTemperature ?? this.currentHourChartTemperature,
+    locationsAppName: locationsAppName ?? this.locationsAppName,
+    locationsAppVersion: locationsAppVersion ?? this.locationsAppVersion,
   );
 
   @override
@@ -124,6 +144,8 @@ class CJVnkTextThemesExtension extends ThemeExtension<CJVnkTextThemesExtension> 
       currentDayCondition: TextStyle.lerp(currentDayCondition, other.currentDayCondition, t)!,
       currentHourChartTitle: TextStyle.lerp(currentHourChartTitle, other.currentHourChartTitle, t)!,
       currentHourChartTemperature: TextStyle.lerp(currentHourChartTemperature, other.currentHourChartTemperature, t)!,
+      locationsAppName: TextStyle.lerp(locationsAppName, other.locationsAppName, t)!,
+      locationsAppVersion: TextStyle.lerp(locationsAppVersion, other.locationsAppVersion, t)!,
     );
   }
 }

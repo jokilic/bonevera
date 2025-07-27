@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../theme/icons.dart';
 import '../theme/theme.dart';
+import 'cjvnk_button.dart';
 
 class CJVnkDrawerButton extends StatelessWidget {
   final Function() onPressed;
@@ -21,22 +22,26 @@ class CJVnkDrawerButton extends StatelessWidget {
     ignoring: isHidden,
     child: Opacity(
       opacity: isHidden ? 0 : 1,
-      child: IconButton(
+      child: CJVnkButton(
         onPressed: onPressed,
-        padding: const EdgeInsets.all(18),
-        style: IconButton.styleFrom(
-          elevation: 0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+        child: IconButton(
+          onPressed: null,
+          padding: const EdgeInsets.all(18),
+          style: IconButton.styleFrom(
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+            backgroundColor: context.colors.background.withValues(alpha: 0.3),
+            disabledBackgroundColor: context.colors.background.withValues(alpha: 0.3),
+            overlayColor: context.colors.background,
           ),
-          backgroundColor: context.colors.background.withValues(alpha: 0.3),
-          overlayColor: context.colors.background,
-        ),
-        icon: Image.asset(
-          icon,
-          height: 20,
-          width: 20,
-          color: iconColor ?? context.colors.primary,
+          icon: Image.asset(
+            icon,
+            height: 20,
+            width: 20,
+            color: iconColor ?? context.colors.primary,
+          ),
         ),
       ),
     ),

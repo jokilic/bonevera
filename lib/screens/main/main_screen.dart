@@ -99,6 +99,7 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
             child: LocationsScreen(
               locations: locationsState,
               backgroundColor: context.colors.primary,
+              width: 288,
             ),
           ),
 

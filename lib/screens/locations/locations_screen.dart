@@ -4,17 +4,22 @@ import 'package:watch_it/watch_it.dart';
 
 import '../../models/location/location.dart' as cjvnk_location;
 import '../../services/logger_service.dart';
+import '../../theme/theme.dart';
 import '../../util/dependencies.dart';
 import '../../util/state.dart';
+import '../../widgets/cjvnk_version_logo.dart';
 import 'locations_controller.dart';
+import 'widgets/locations_success.dart';
 
 class LocationsScreen extends WatchingStatefulWidget {
   final List<cjvnk_location.Location> locations;
   final Color backgroundColor;
+  final double width;
 
   const LocationsScreen({
     required this.locations,
     required this.backgroundColor,
+    required this.width,
   });
 
   @override
@@ -52,7 +57,9 @@ class _LocationsScreenState extends State<LocationsScreen> {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
+          width: widget.width - 14,
+          height: MediaQuery.sizeOf(context).height - 80,
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           color: widget.backgroundColor,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,6 +70,19 @@ class _LocationsScreenState extends State<LocationsScreen> {
               /// SEARCH
               ///
               TextField(
+                keyboardType: TextInputType.streetAddress,
+                decoration: InputDecoration(
+                  hintText: 'Enter location...',
+                  filled: true,
+                  fillColor: context.colors.background,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                ),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
                 onSubmitted: (address) => getIt
                     .get<LocationsController>(
                       instanceName: 'locations',
@@ -95,12 +115,8 @@ class _LocationsScreenState extends State<LocationsScreen> {
                   width: 100,
                   color: Colors.red,
                 ),
-                Success() => Text(
-                  ((locationsState as Success).data as List<Placemark>).first.locality ?? 'no',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
-                  ),
+                Success() => LocationsSuccess(
+                  locations: (locationsState as Success).data,
                 ),
               },
 
@@ -142,6 +158,11 @@ class _LocationsScreenState extends State<LocationsScreen> {
                         ),
                       ),
               ),
+
+              ///
+              /// ČJVNK LOGO & VERSION
+              ///
+              CJVnKVersionLogo(),
             ],
           ),
         ),

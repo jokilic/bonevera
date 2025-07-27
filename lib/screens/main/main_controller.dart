@@ -20,4 +20,8 @@ class MainController extends ValueNotifier<List<cjvnk_location.Location>> {
   ///
   /// METHODS
   ///
+
+  void addLocationToHive({required cjvnk_location.Location location}) {
+    hive.writeLocation(newLocation: location);
+  }
 }

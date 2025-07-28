@@ -54,6 +54,18 @@ class CJVnkTheme {
     currentHourChartTemperature: CJVnkTextStyles.currentHourChartTemperature.copyWith(
       color: lightAppColors.background,
     ),
+    locationsTextField: CJVnkTextStyles.locationsTextField.copyWith(
+      color: lightAppColors.background,
+    ),
+    locationsTitle: CJVnkTextStyles.locationsTitle.copyWith(
+      color: lightAppColors.background,
+    ),
+    locationsName: CJVnkTextStyles.locationsName.copyWith(
+      color: lightAppColors.background,
+    ),
+    locationsCountry: CJVnkTextStyles.locationsCountry.copyWith(
+      color: lightAppColors.background,
+    ),
     locationsAppName: CJVnkTextStyles.locationsAppName.copyWith(
       color: lightAppColors.background,
     ),

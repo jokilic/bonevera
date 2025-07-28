@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:geocoding/geocoding.dart';
 import 'package:watch_it/watch_it.dart';
 
 import '../../models/location/location.dart' as cjvnk_location;
@@ -8,18 +7,24 @@ import '../../theme/theme.dart';
 import '../../util/dependencies.dart';
 import '../../util/state.dart';
 import '../../widgets/cjvnk_version_logo.dart';
+import '../main/main_controller.dart';
 import 'locations_controller.dart';
+import 'widgets/locations_list.dart';
+import 'widgets/locations_search_field.dart';
 import 'widgets/locations_success.dart';
 
 class LocationsScreen extends WatchingStatefulWidget {
+  final Function() drawerButtonPressed;
   final List<cjvnk_location.Location> locations;
   final Color backgroundColor;
-  final double width;
+  final bool weatherActive;
 
   const LocationsScreen({
+    required this.drawerButtonPressed,
     required this.locations,
     required this.backgroundColor,
-    required this.width,
+    required this.weatherActive,
+    required super.key,
   });
 
   @override
@@ -55,51 +60,46 @@ class _LocationsScreenState extends State<LocationsScreen> {
     ).value;
 
     return Scaffold(
+      backgroundColor: context.colors.primary,
       body: SafeArea(
         child: Container(
-          width: widget.width - 14,
+          width: (widget.weatherActive ? 288 : double.infinity) - 14,
           height: MediaQuery.sizeOf(context).height - 80,
           padding: const EdgeInsets.symmetric(horizontal: 16),
           color: widget.backgroundColor,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 80),
+              const SizedBox(height: 10),
 
               ///
               /// SEARCH
               ///
-              TextField(
-                keyboardType: TextInputType.streetAddress,
-                decoration: InputDecoration(
-                  hintText: 'Enter location...',
-                  filled: true,
-                  fillColor: context.colors.background,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16),
+              Row(
+                children: [
+                  Expanded(
+                    child: LocationsSearchField(
+                      textEditingController: getIt
+                          .get<LocationsController>(
+                            instanceName: 'locations',
+                          )
+                          .textEditingController,
+                      onSubmitted: (address) => getIt
+                          .get<LocationsController>(
+                            instanceName: 'locations',
+                          )
+                          .onLocationSearch(address: address.trim()),
+                    ),
                   ),
-                ),
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                ),
-                onSubmitted: (address) => getIt
-                    .get<LocationsController>(
-                      instanceName: 'locations',
-                    )
-                    .onLocationSearch(address: address.trim()),
+                  if (widget.weatherActive) const SizedBox(width: 72),
+                ],
               ),
-              const SizedBox(height: 24),
 
               ///
               /// SEARCH RESULTS
               ///
               switch (locationsState) {
-                Initial() => Container(
-                  height: 100,
-                  width: 100,
-                  color: Colors.blue,
-                ),
+                Initial() => const SizedBox(height: 24),
                 Loading() => Container(
                   height: 100,
                   width: 100,
@@ -117,6 +117,11 @@ class _LocationsScreenState extends State<LocationsScreen> {
                 ),
                 Success() => LocationsSuccess(
                   locations: (locationsState as Success).data,
+                  onPressLocation: getIt
+                      .get<LocationsController>(
+                        instanceName: 'locations',
+                      )
+                      .locationPressed,
                 ),
               },
 
@@ -125,30 +130,19 @@ class _LocationsScreenState extends State<LocationsScreen> {
               ///
               Expanded(
                 child: widget.locations.isNotEmpty
-                    ? ListView.separated(
-                        physics: const BouncingScrollPhysics(),
-                        itemCount: widget.locations.length,
-                        itemBuilder: (_, index) {
-                          final location = widget.locations[index];
+                    ? LocationsList(
+                        locations: widget.locations,
+                        locationPressed: (location) {
+                          getIt
+                              .get<MainController>(
+                                instanceName: 'main',
+                              )
+                              .updateCurrentLocation(
+                                newCurrentLocation: location,
+                              );
 
-                          return ListTile(
-                            title: Text(
-                              location.locality,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 24,
-                              ),
-                            ),
-                            subtitle: Text(
-                              location.country,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                              ),
-                            ),
-                          );
+                          // widget.drawerButtonPressed();
                         },
-                        separatorBuilder: (_, __) => const SizedBox(height: 24),
                       )
                     : const Text(
                         'No locations',
@@ -158,11 +152,13 @@ class _LocationsScreenState extends State<LocationsScreen> {
                         ),
                       ),
               ),
+              const SizedBox(height: 16),
 
               ///
               /// ČJVNK LOGO & VERSION
               ///
               CJVnKVersionLogo(),
+              const SizedBox(height: 16),
             ],
           ),
         ),

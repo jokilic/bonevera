@@ -35,6 +35,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
         api: getIt.get<APIService>(),
         timezone: getIt.get<TimezoneService>(),
         token: getIt.get<TokenService>(),
+        location: widget.location,
       ),
       instanceName: widget.location.toString(),
       afterRegister: (controller) => controller.getWeather(),
@@ -43,9 +44,9 @@ class _WeatherScreenState extends State<WeatherScreen> {
 
   @override
   void dispose() {
-    getIt.unregister<WeatherController>(
-      instanceName: widget.location.toString(),
-    );
+    // getIt.unregister<WeatherController>(
+    //   instanceName: widget.location.toString(),
+    // );
 
     super.dispose();
   }

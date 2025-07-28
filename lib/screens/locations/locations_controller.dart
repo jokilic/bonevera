@@ -1,10 +1,14 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:get_it/get_it.dart';
 
+import '../../models/location/location.dart' as cjvnk_location;
 import '../../services/logger_service.dart';
+import '../../util/dependencies.dart';
 import '../../util/state.dart';
+import '../main/main_controller.dart';
 
-class LocationsController extends ValueNotifier<CJVnkState<List<Placemark>>> {
+class LocationsController extends ValueNotifier<CJVnkState<List<cjvnk_location.Location>>> implements Disposable {
   ///
   /// CONSTRUCTOR
   ///
@@ -13,44 +17,101 @@ class LocationsController extends ValueNotifier<CJVnkState<List<Placemark>>> {
 
   LocationsController({
     required this.logger,
-  }) : super(Initial());
+  }) : super(Initial()) {
+    textEditingController = TextEditingController();
+  }
+
+  ///
+  /// VARIABLES
+  ///
+
+  late final TextEditingController textEditingController;
+
+  ///
+  /// DISPOSE
+  ///
+
+  @override
+  void onDispose() {
+    textEditingController.dispose();
+  }
 
   ///
   /// METHODS
   ///
 
+  /// Triggered when user presses location
+  void locationPressed(cjvnk_location.Location location) {
+    /// Add new location to [Hive]
+    final locationAdded = getIt
+        .get<MainController>(
+          instanceName: 'main',
+        )
+        .addLocationToHive(passedLocation: location);
+
+    /// Location successfully added, clear the [TextField] & update `state`
+    if (locationAdded) {
+      getIt
+          .get<LocationsController>(
+            instanceName: 'locations',
+          )
+          .textEditingController
+          .clear();
+
+      value = Initial();
+    }
+  }
+
   /// Triggered when the user searches for a `location`
   Future<void> onLocationSearch({required String address}) async {
-    value = Loading();
+    try {
+      value = Loading();
 
-    final locations = await getLocationsFromAddress(address: address);
+      final locations = await getLocationsFromAddress(address: address);
 
-    /// At least one [Location] is found
-    if (locations.isNotEmpty) {
-      final location = locations.first;
+      /// At least one [Location] is found
+      if (locations.isNotEmpty) {
+        final location = locations.first;
 
-      final placemarks = await getAddressesFromLocation(
-        latitude: location.latitude,
-        longitude: location.longitude,
-      );
-
-      /// At least one [Placemark] is found
-      if (placemarks.isNotEmpty) {
-        value = Success(
-          data: placemarks,
+        final placemarks = await getAddressesFromLocation(
+          latitude: location.latitude,
+          longitude: location.longitude,
         );
+
+        /// At least one [Placemark] is found
+        if (placemarks.isNotEmpty) {
+          /// Generate `List<cjvnk_location.Location>` from `placemarks`
+          final locations = placemarks
+              .map(
+                (placemark) => cjvnk_location.Location(
+                  locality: placemark.locality ?? '--',
+                  country: placemark.country ?? '--',
+                  latitude: location.latitude,
+                  longitude: location.longitude,
+                ),
+              )
+              .toList();
+
+          value = Success(
+            data: locations,
+          );
+        }
+        /// No [Placemarks] found
+        else {
+          value = Empty(
+            text: 'No placemarks found',
+          );
+        }
       }
-      /// No [Placemarks] found
+      /// No [Locations] found
       else {
-        value = Error(
-          error: 'No placemarks found',
+        value = Empty(
+          text: 'No locations found',
         );
       }
-    }
-    /// No [Locations] found
-    else {
+    } catch (e) {
       value = Error(
-        error: 'No locations found',
+        error: '$e',
       );
     }
   }

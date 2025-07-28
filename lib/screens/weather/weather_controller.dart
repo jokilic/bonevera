@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:latlong2/latlong.dart';
 
 import '../../constants/enums.dart';
+import '../../models/location/location.dart';
 import '../../models/response_weather.dart';
 import '../../services/api_service.dart';
 import '../../services/logger_service.dart';
@@ -18,12 +19,14 @@ class WeatherController extends ValueNotifier<CJVnkState<ResponseWeather>> {
   final APIService api;
   final TimezoneService timezone;
   final TokenService token;
+  final Location location;
 
   WeatherController({
     required this.logger,
     required this.api,
     required this.timezone,
     required this.token,
+    required this.location,
   }) : super(Initial());
 
   ///
@@ -42,9 +45,9 @@ class WeatherController extends ValueNotifier<CJVnkState<ResponseWeather>> {
       final response = await api.getWeather(
         language: 'hr',
         countryCode: 'hr',
-        coordinates: const LatLng(
-          45.8150,
-          15.9819,
+        coordinates: LatLng(
+          location.latitude,
+          location.longitude,
         ),
         timezone: timezone.timezone,
         tokenValue: tokenValue.value,

@@ -62,4 +62,10 @@ class HiveService implements Disposable {
 
   /// Stores a new `location` in [Hive]
   Future<void> writeLocation({required Location newLocation}) async => locations.add(newLocation);
+
+  /// Clears old values & stores a new `List<Location>` in [Hive]
+  Future<void> writeLocationList({required List<Location> newLocations}) async {
+    await locations.clear();
+    await locations.addAll(newLocations);
+  }
 }

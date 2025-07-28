@@ -1,3 +1,4 @@
+import 'package:dough/dough.dart';
 import 'package:flutter/material.dart';
 
 import '../../../models/location/location.dart';
@@ -35,7 +36,7 @@ class WeatherSuccess extends StatelessWidget {
         /// APP BAR
         ///
         WeatherAppBar(
-          locationName: location.locality,
+          locationName: location.locality ?? '--',
         ),
 
         ///
@@ -45,12 +46,20 @@ class WeatherSuccess extends StatelessWidget {
           flex: 7,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 56),
-            child: Image.asset(
-              getConditionImage(
-                passedConditionCode: weather.currentWeather?.conditionCode,
-                daylight: weather.currentWeather?.daylight ?? true,
+            child: PressableDough(
+              onReleased: (details) {
+                /// User dragged a lot
+                if (details.delta.distance > 400) {
+                  // TODO: Play some `auu` sound here
+                }
+              },
+              child: Image.asset(
+                getConditionImage(
+                  passedConditionCode: weather.currentWeather?.conditionCode,
+                  daylight: weather.currentWeather?.daylight ?? true,
+                ),
+                alignment: Alignment.topCenter,
               ),
-              alignment: Alignment.topCenter,
             ),
           ),
         ),

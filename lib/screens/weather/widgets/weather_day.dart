@@ -34,7 +34,7 @@ class WeatherDay extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
         ),
         backgroundColor: context.colors.background.withValues(alpha: 0.3),
-        overlayColor: context.colors.background,
+        overlayColor: Colors.transparent,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,

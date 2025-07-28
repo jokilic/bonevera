@@ -25,13 +25,13 @@ class LocationsSuccess extends StatelessWidget {
         onPressed: () => onPressLocation(location),
         child: ListTile(
           title: Text(
-            location.locality,
+            location.locality ?? '--',
             style: context.textStyles.locationsName,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
           subtitle: Text(
-            location.country,
+            location.country ?? '--',
             style: context.textStyles.locationsCountry,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,

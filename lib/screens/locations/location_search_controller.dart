@@ -83,8 +83,17 @@ class LocationSearchController extends ValueNotifier<CJVnkState<List<cjvnk_locat
           final locations = placemarks
               .map(
                 (placemark) => cjvnk_location.Location(
-                  locality: placemark.locality ?? '--',
-                  country: placemark.country ?? '--',
+                  name: placemark.name,
+                  street: placemark.street,
+                  isoCountryCode: placemark.isoCountryCode,
+                  country: placemark.country,
+                  postalCode: placemark.postalCode,
+                  administrativeArea: placemark.administrativeArea,
+                  subAdministrativeArea: placemark.subAdministrativeArea,
+                  locality: placemark.locality,
+                  subLocality: placemark.subLocality,
+                  thoroughfare: placemark.thoroughfare,
+                  subThoroughfare: placemark.subThoroughfare,
                   latitude: location.latitude,
                   longitude: location.longitude,
                 ),

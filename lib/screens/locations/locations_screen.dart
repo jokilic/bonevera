@@ -4,7 +4,6 @@ import 'package:watch_it/watch_it.dart';
 import '../../constants/durations.dart';
 import '../../models/location/location.dart' as cjvnk_location;
 import '../../services/logger_service.dart';
-import '../../theme/icons.dart';
 import '../../theme/theme.dart';
 import '../../util/dependencies.dart';
 import '../../util/state.dart';
@@ -139,12 +138,6 @@ class _LocationsScreenState extends State<LocationsScreen> {
                       Center(
                         child: Column(
                           children: [
-                            const SizedBox(height: 56),
-                            Image.asset(
-                              CJVnkIcons.noLocation,
-                              height: 104,
-                              width: 104,
-                            ),
                             const SizedBox(height: 32),
                             Text(
                               'Add some locations'.toUpperCase(),

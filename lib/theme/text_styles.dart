@@ -82,6 +82,12 @@ abstract class CJVnkTextStyles {
     fontWeight: FontWeight.w500,
   );
 
+  static const locationsNoLocation = TextStyle(
+    fontFamily: 'ProductSans',
+    fontSize: 24,
+    fontWeight: FontWeight.w700,
+  );
+
   static const locationsAppName = TextStyle(
     fontFamily: 'ProductSans',
     fontSize: 16,
@@ -109,6 +115,7 @@ class CJVnkTextThemesExtension extends ThemeExtension<CJVnkTextThemesExtension> 
   final TextStyle locationsTitle;
   final TextStyle locationsName;
   final TextStyle locationsCountry;
+  final TextStyle locationsNoLocation;
   final TextStyle locationsAppName;
   final TextStyle locationsAppVersion;
 
@@ -126,6 +133,7 @@ class CJVnkTextThemesExtension extends ThemeExtension<CJVnkTextThemesExtension> 
     required this.locationsTitle,
     required this.locationsName,
     required this.locationsCountry,
+    required this.locationsNoLocation,
     required this.locationsAppName,
     required this.locationsAppVersion,
   });
@@ -145,6 +153,7 @@ class CJVnkTextThemesExtension extends ThemeExtension<CJVnkTextThemesExtension> 
     TextStyle? locationsTitle,
     TextStyle? locationsName,
     TextStyle? locationsCountry,
+    TextStyle? locationsNoLocation,
     TextStyle? locationsAppName,
     TextStyle? locationsAppVersion,
   }) => CJVnkTextThemesExtension(
@@ -161,6 +170,7 @@ class CJVnkTextThemesExtension extends ThemeExtension<CJVnkTextThemesExtension> 
     locationsTitle: locationsTitle ?? this.locationsTitle,
     locationsName: locationsName ?? this.locationsName,
     locationsCountry: locationsCountry ?? this.locationsCountry,
+    locationsNoLocation: locationsNoLocation ?? this.locationsNoLocation,
     locationsAppName: locationsAppName ?? this.locationsAppName,
     locationsAppVersion: locationsAppVersion ?? this.locationsAppVersion,
   );
@@ -188,6 +198,7 @@ class CJVnkTextThemesExtension extends ThemeExtension<CJVnkTextThemesExtension> 
       locationsTitle: TextStyle.lerp(locationsTitle, other.locationsTitle, t)!,
       locationsName: TextStyle.lerp(locationsName, other.locationsName, t)!,
       locationsCountry: TextStyle.lerp(locationsCountry, other.locationsCountry, t)!,
+      locationsNoLocation: TextStyle.lerp(locationsNoLocation, other.locationsNoLocation, t)!,
       locationsAppName: TextStyle.lerp(locationsAppName, other.locationsAppName, t)!,
       locationsAppVersion: TextStyle.lerp(locationsAppVersion, other.locationsAppVersion, t)!,
     );

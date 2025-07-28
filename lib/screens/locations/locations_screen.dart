@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
+import '../../constants/durations.dart';
 import '../../models/location/location.dart' as cjvnk_location;
 import '../../services/logger_service.dart';
+import '../../theme/icons.dart';
 import '../../theme/theme.dart';
 import '../../util/dependencies.dart';
 import '../../util/state.dart';
 import '../../widgets/cjvnk_version_logo.dart';
-import '../main/main_controller.dart';
-import 'locations_controller.dart';
+import '../main/locations_controller.dart';
+import 'location_search_controller.dart';
 import 'widgets/locations_list.dart';
 import 'widgets/locations_search_field.dart';
 import 'widgets/locations_success.dart';
@@ -17,14 +19,11 @@ class LocationsScreen extends WatchingStatefulWidget {
   final Function() drawerButtonPressed;
   final List<cjvnk_location.Location> locations;
   final Color backgroundColor;
-  final bool weatherActive;
 
   const LocationsScreen({
     required this.drawerButtonPressed,
     required this.locations,
     required this.backgroundColor,
-    required this.weatherActive,
-    required super.key,
   });
 
   @override
@@ -36,34 +35,29 @@ class _LocationsScreenState extends State<LocationsScreen> {
   void initState() {
     super.initState();
 
-    registerIfNotInitialized<LocationsController>(
-      () => LocationsController(
+    registerIfNotInitialized<LocationSearchController>(
+      () => LocationSearchController(
         logger: getIt.get<LoggerService>(),
       ),
-      instanceName: 'locations',
     );
   }
 
   @override
   void dispose() {
-    getIt.unregister<LocationsController>(
-      instanceName: 'locations',
-    );
+    getIt.unregister<LocationSearchController>();
 
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final locationsState = watchIt<LocationsController>(
-      instanceName: 'locations',
-    ).value;
+    final locationSearchState = watchIt<LocationSearchController>().value;
 
     return Scaffold(
       backgroundColor: context.colors.primary,
       body: SafeArea(
         child: Container(
-          width: (widget.weatherActive ? 288 : double.infinity) - 14,
+          width: 288 - 14,
           height: MediaQuery.sizeOf(context).height - 80,
           padding: const EdgeInsets.symmetric(horizontal: 16),
           color: widget.backgroundColor,
@@ -79,26 +73,22 @@ class _LocationsScreenState extends State<LocationsScreen> {
                 children: [
                   Expanded(
                     child: LocationsSearchField(
-                      textEditingController: getIt
-                          .get<LocationsController>(
-                            instanceName: 'locations',
-                          )
-                          .textEditingController,
-                      onSubmitted: (address) => getIt
-                          .get<LocationsController>(
-                            instanceName: 'locations',
-                          )
-                          .onLocationSearch(address: address.trim()),
+                      textEditingController: getIt.get<LocationSearchController>().textEditingController,
+                      onSubmitted: (address) => getIt.get<LocationSearchController>().onLocationSearch(address: address.trim()),
                     ),
                   ),
-                  if (widget.weatherActive) const SizedBox(width: 72),
+                  AnimatedContainer(
+                    duration: CJVnkDurations.fadeAnimation,
+                    curve: Curves.easeIn,
+                    width: widget.locations.isNotEmpty ? 72 : 0,
+                  ),
                 ],
               ),
 
               ///
               /// SEARCH RESULTS
               ///
-              switch (locationsState) {
+              switch (locationSearchState) {
                 Initial() => const SizedBox(height: 24),
                 Loading() => Container(
                   height: 100,
@@ -116,52 +106,52 @@ class _LocationsScreenState extends State<LocationsScreen> {
                   color: Colors.red,
                 ),
                 Success() => LocationsSuccess(
-                  locations: (locationsState as Success).data,
-                  onPressLocation: getIt
-                      .get<LocationsController>(
-                        instanceName: 'locations',
-                      )
-                      .locationPressed,
+                  locations: (locationSearchState as Success).data,
+                  onPressLocation: getIt.get<LocationSearchController>().locationPressed,
                 ),
               },
 
-              ///
-              /// LOCATIONS
-              ///
               Expanded(
-                child: widget.locations.isNotEmpty
+                child:
+                    ///
+                    /// LOCATIONS
+                    ///
+                    widget.locations.isNotEmpty
                     ? LocationsList(
                         locations: widget.locations,
                         locationPressed: (location) {
-                          getIt
-                              .get<MainController>(
-                                instanceName: 'main',
-                              )
-                              .updateCurrentLocation(
-                                newCurrentLocation: location,
-                              );
+                          getIt.get<LocationsController>().updateCurrentLocation(
+                            newCurrentLocation: location,
+                          );
 
                           widget.drawerButtonPressed();
                         },
-                        onReorder: getIt
-                            .get<MainController>(
-                              instanceName: 'main',
-                            )
-                            .reorderLocations,
+                        onReorder: getIt.get<LocationsController>().reorderLocations,
                         onTapDelete: (handler, location) {
                           handler(false);
-                          getIt
-                              .get<MainController>(
-                                instanceName: 'main',
-                              )
-                              .deleteLocation(location);
+                          getIt.get<LocationsController>().deleteLocation(location);
                         },
                       )
-                    : const Text(
-                        'No locations',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 24,
+                    :
+                      ///
+                      /// NO LOCATIONS
+                      ///
+                      Center(
+                        child: Column(
+                          children: [
+                            const SizedBox(height: 56),
+                            Image.asset(
+                              CJVnkIcons.noLocation,
+                              height: 104,
+                              width: 104,
+                            ),
+                            const SizedBox(height: 32),
+                            Text(
+                              'Add some locations'.toUpperCase(),
+                              style: context.textStyles.locationsNoLocation,
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
                         ),
                       ),
               ),

@@ -1,7 +1,7 @@
 name: ca_je_vanka
 description: "A new Flutter project."
 publish_to: 'none'
-version: 0.1.0
+version: 1.0.0
 
 #
 # DEPLOYING APP
@@ -60,6 +60,7 @@ flutter:
     - assets/close.png
     - assets/delete.png
     - assets/drawer.png
+    - assets/no_location.png
     - assets/key.pem
     - assets/weather/
 

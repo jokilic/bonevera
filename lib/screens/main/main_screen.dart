@@ -12,13 +12,9 @@ import '../../util/dependencies.dart';
 import '../../widgets/cjvnk_drawer_button.dart';
 import '../locations/locations_screen.dart';
 import '../weather/weather_screen.dart';
-import 'main_controller.dart';
+import 'locations_controller.dart';
 
 class MainScreen extends WatchingStatefulWidget {
-  const MainScreen({
-    required super.key,
-  });
-
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
@@ -34,12 +30,11 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
   void initState() {
     super.initState();
 
-    registerIfNotInitialized<MainController>(
-      () => MainController(
+    registerIfNotInitialized<LocationsController>(
+      () => LocationsController(
         logger: getIt.get<LoggerService>(),
         hive: getIt.get<HiveService>(),
       ),
-      instanceName: 'main',
     );
 
     animationController = AnimationController(
@@ -60,16 +55,18 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
         curve: Curves.fastOutSlowIn,
       ),
     );
+
+    final locationExists = getIt.get<LocationsController>().value.locations.isNotEmpty && getIt.get<LocationsController>().value.currentLocation != null;
+
+    if (!locationExists) {
+      drawerButtonPressed();
+    }
   }
 
   @override
   void dispose() {
-    getIt.unregister<MainController>(
-      instanceName: 'main',
-    );
-
+    getIt.unregister<LocationsController>();
     animationController.dispose();
-
     super.dispose();
   }
 
@@ -82,11 +79,9 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
 
   @override
   Widget build(BuildContext context) {
-    final locationsState = watchIt<MainController>(
-      instanceName: 'main',
-    ).value;
-
+    final locationsState = watchIt<LocationsController>().value;
     final location = locationsState.currentLocation;
+    final locationExists = locationsState.locations.isNotEmpty && location != null;
 
     return Scaffold(
       backgroundColor: context.colors.primary,
@@ -95,21 +90,18 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
           ///
           /// DRAWER
           ///
-          if (location != null)
-            AnimatedPositioned(
-              duration: CJVnkDurations.fadeAnimation,
-              curve: Curves.fastOutSlowIn,
-              height: double.maxFinite,
-              width: 288,
-              left: isSideMenuOpened ? 0 : -288,
-              child: LocationsScreen(
-                drawerButtonPressed: drawerButtonPressed,
-                locations: locationsState.locations,
-                backgroundColor: context.colors.primary,
-                weatherActive: true,
-                key: const ValueKey('locations-weather-active'),
-              ),
+          AnimatedPositioned(
+            duration: CJVnkDurations.fadeAnimation,
+            curve: Curves.fastOutSlowIn,
+            height: double.maxFinite,
+            width: 288,
+            left: isSideMenuOpened ? 0 : -288,
+            child: LocationsScreen(
+              drawerButtonPressed: drawerButtonPressed,
+              locations: locationsState.locations,
+              backgroundColor: context.colors.primary,
             ),
+          ),
 
           ///
           /// WEATHER
@@ -127,18 +119,19 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
                   scale: scaleAnimation.value,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(24),
-                    child: location != null
-                        ? WeatherScreen(
-                            location: location,
-                            key: ValueKey(location),
-                          )
-                        : LocationsScreen(
-                            drawerButtonPressed: drawerButtonPressed,
-                            locations: locationsState.locations,
-                            backgroundColor: context.colors.primary,
-                            weatherActive: false,
-                            key: const ValueKey('locations-weather-inactive'),
-                          ),
+                    child: AnimatedSwitcher(
+                      duration: CJVnkDurations.fadeAnimation,
+                      switchInCurve: Curves.fastOutSlowIn,
+                      switchOutCurve: Curves.fastOutSlowIn,
+                      child: locationExists
+                          ? WeatherScreen(
+                              location: location,
+                              key: ValueKey(location),
+                            )
+                          : Container(
+                              color: Colors.greenAccent,
+                            ),
+                    ),
                   ),
                 ),
               ),
@@ -148,25 +141,25 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
           ///
           /// DRAWER BUTTON
           ///
-          if (location != null)
-            AnimatedPositioned(
-              duration: CJVnkDurations.fadeAnimation,
-              curve: Curves.fastOutSlowIn,
-              left: isSideMenuOpened ? 184 : 0,
-              child: SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 8,
-                  ),
-                  child: CJVnkDrawerButton(
-                    onPressed: drawerButtonPressed,
-                    icon: isSideMenuOpened ? CJVnkIcons.close : CJVnkIcons.drawer,
-                    iconColor: isSideMenuOpened ? context.colors.background : context.colors.primary,
-                  ),
+          AnimatedPositioned(
+            duration: CJVnkDurations.fadeAnimation,
+            curve: Curves.fastOutSlowIn,
+            left: isSideMenuOpened ? 184 : 0,
+            child: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
+                child: CJVnkDrawerButton(
+                  onPressed: drawerButtonPressed,
+                  icon: isSideMenuOpened ? CJVnkIcons.close : CJVnkIcons.drawer,
+                  iconColor: isSideMenuOpened ? context.colors.background : context.colors.primary,
+                  isHidden: !locationExists,
                 ),
               ),
             ),
+          ),
         ],
       ),
     );

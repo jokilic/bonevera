@@ -15,7 +15,7 @@ final getIt = GetIt.instance;
 /// Optionally runs a function with newly registered class
 void registerIfNotInitialized<T extends Object>(
   T Function() factoryFunc, {
-  required String instanceName,
+  String? instanceName,
   void Function(T controller)? afterRegister,
 }) {
   if (!getIt.isRegistered<T>(instanceName: instanceName)) {

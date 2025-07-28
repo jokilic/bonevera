@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../constants/durations.dart';
 import '../theme/icons.dart';
 import '../theme/theme.dart';
 import 'cjvnk_button.dart';
@@ -20,7 +21,9 @@ class CJVnkDrawerButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) => IgnorePointer(
     ignoring: isHidden,
-    child: Opacity(
+    child: AnimatedOpacity(
+      duration: CJVnkDurations.fadeAnimation,
+      curve: Curves.easeIn,
       opacity: isHidden ? 0 : 1,
       child: CJVnkButton(
         onPressed: onPressed,

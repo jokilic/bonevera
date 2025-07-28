@@ -27,9 +27,7 @@ class CJVnkApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: const MainScreen(
-      key: ValueKey('main'),
-    ),
+    home: MainScreen(),
     theme: CJVnkTheme.light,
     builder: (_, child) {
       final appWidget =

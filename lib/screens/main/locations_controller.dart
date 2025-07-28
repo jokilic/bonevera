@@ -4,7 +4,7 @@ import '../../models/location/location.dart' as cjvnk_location;
 import '../../services/hive_service.dart';
 import '../../services/logger_service.dart';
 
-class MainController extends ValueNotifier<({List<cjvnk_location.Location> locations, cjvnk_location.Location? currentLocation})> {
+class LocationsController extends ValueNotifier<({List<cjvnk_location.Location> locations, cjvnk_location.Location? currentLocation})> {
   ///
   /// CONSTRUCTOR
   ///
@@ -12,13 +12,17 @@ class MainController extends ValueNotifier<({List<cjvnk_location.Location> locat
   final LoggerService logger;
   final HiveService hive;
 
-  MainController({
+  LocationsController({
     required this.logger,
     required this.hive,
-  }) : super((
-         locations: hive.getLocations(),
-         currentLocation: hive.getLocations().firstOrNull,
-       ));
+  }) : super((locations: [], currentLocation: null)) {
+    final locations = hive.getLocations();
+
+    value = (
+      locations: locations,
+      currentLocation: locations.firstOrNull,
+    );
+  }
 
   ///
   /// METHODS
@@ -67,7 +71,7 @@ class MainController extends ValueNotifier<({List<cjvnk_location.Location> locat
     /// `location` doesn't exist, write in [Hive] and update `state`
     if (!locationExists) {
       /// Generate new `state`
-      final newLocations = hive.getLocations()..add(passedLocation);
+      final newLocations = List<cjvnk_location.Location>.from(value.locations)..add(passedLocation);
 
       /// Add new location in [Hive]
       hive.writeLocation(newLocation: passedLocation);

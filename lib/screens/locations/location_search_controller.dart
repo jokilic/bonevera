@@ -6,16 +6,16 @@ import '../../models/location/location.dart' as cjvnk_location;
 import '../../services/logger_service.dart';
 import '../../util/dependencies.dart';
 import '../../util/state.dart';
-import '../main/main_controller.dart';
+import '../main/locations_controller.dart';
 
-class LocationsController extends ValueNotifier<CJVnkState<List<cjvnk_location.Location>>> implements Disposable {
+class LocationSearchController extends ValueNotifier<CJVnkState<List<cjvnk_location.Location>>> implements Disposable {
   ///
   /// CONSTRUCTOR
   ///
 
   final LoggerService logger;
 
-  LocationsController({
+  LocationSearchController({
     required this.logger,
   }) : super(Initial()) {
     textEditingController = TextEditingController();
@@ -43,22 +43,21 @@ class LocationsController extends ValueNotifier<CJVnkState<List<cjvnk_location.L
   /// Triggered when user presses location
   void locationPressed(cjvnk_location.Location location) {
     /// Add new location to [Hive]
-    final locationAdded = getIt
-        .get<MainController>(
-          instanceName: 'main',
-        )
-        .addLocationToHive(passedLocation: location);
+    final locationAdded = getIt.get<LocationsController>().addLocationToHive(passedLocation: location);
 
     /// Location successfully added, clear the [TextField] & update `state`
     if (locationAdded) {
-      getIt
-          .get<LocationsController>(
-            instanceName: 'locations',
-          )
-          .textEditingController
-          .clear();
+      textEditingController.clear();
 
       value = Initial();
+
+      /// Get `locations`
+      final locations = getIt.get<LocationsController>().value.locations;
+
+      /// If only one location, set it as `currentLocation`
+      if (locations.length == 1) {
+        getIt.get<LocationsController>().updateCurrentLocation(newCurrentLocation: location);
+      }
     }
   }
 

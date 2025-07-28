@@ -66,6 +66,9 @@ class CJVnkTheme {
     locationsCountry: CJVnkTextStyles.locationsCountry.copyWith(
       color: lightAppColors.background,
     ),
+    locationsNoLocation: CJVnkTextStyles.locationsNoLocation.copyWith(
+      color: lightAppColors.background,
+    ),
     locationsAppName: CJVnkTextStyles.locationsAppName.copyWith(
       color: lightAppColors.background,
     ),

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../../../theme/theme.dart';
+import '../../../../theme/theme.dart';
 
-class LocationsSearchField extends StatelessWidget {
+class LocationSearchField extends StatelessWidget {
   final TextEditingController textEditingController;
   final Function(String address) onSubmitted;
 
-  const LocationsSearchField({
+  const LocationSearchField({
     required this.textEditingController,
     required this.onSubmitted,
   });

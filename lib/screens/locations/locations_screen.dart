@@ -10,9 +10,9 @@ import '../../util/state.dart';
 import '../../widgets/cjvnk_version_logo.dart';
 import '../main/locations_controller.dart';
 import 'location_search_controller.dart';
+import 'widgets/location_search/location_search_field.dart';
+import 'widgets/location_search/location_search_success.dart';
 import 'widgets/locations_list.dart';
-import 'widgets/locations_search_field.dart';
-import 'widgets/locations_success.dart';
 
 class LocationsScreen extends WatchingStatefulWidget {
   final Function() drawerButtonPressed;
@@ -44,7 +44,6 @@ class _LocationsScreenState extends State<LocationsScreen> {
   @override
   void dispose() {
     getIt.unregister<LocationSearchController>();
-
     super.dispose();
   }
 
@@ -71,7 +70,7 @@ class _LocationsScreenState extends State<LocationsScreen> {
               Row(
                 children: [
                   Expanded(
-                    child: LocationsSearchField(
+                    child: LocationSearchField(
                       textEditingController: getIt.get<LocationSearchController>().textEditingController,
                       onSubmitted: (address) => getIt.get<LocationSearchController>().onLocationSearch(address: address.trim()),
                     ),
@@ -104,7 +103,7 @@ class _LocationsScreenState extends State<LocationsScreen> {
                   width: 100,
                   color: Colors.red,
                 ),
-                Success() => LocationsSuccess(
+                Success() => LocationSearchSuccess(
                   locations: (locationSearchState as Success).data,
                   onPressLocation: getIt.get<LocationSearchController>().locationPressed,
                 ),

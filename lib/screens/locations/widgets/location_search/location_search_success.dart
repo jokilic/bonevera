@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import '../../../models/location/location.dart' as cjvnk_location;
-import '../../../theme/theme.dart';
-import '../../../widgets/cjvnk_button.dart';
+import '../../../../models/location/location.dart' as cjvnk_location;
+import '../../../../theme/theme.dart';
+import '../../../../widgets/cjvnk_button.dart';
 
-class LocationsSuccess extends StatelessWidget {
+class LocationSearchSuccess extends StatelessWidget {
   final List<cjvnk_location.Location> locations;
   final Function(cjvnk_location.Location location) onPressLocation;
 
-  const LocationsSuccess({
+  const LocationSearchSuccess({
     required this.locations,
     required this.onPressLocation,
   });

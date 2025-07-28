@@ -47,7 +47,6 @@ class _WeatherScreenState extends State<WeatherScreen> {
     // getIt.unregister<WeatherController>(
     //   instanceName: widget.location.toString(),
     // );
-
     super.dispose();
   }
 

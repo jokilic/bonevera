@@ -1,16 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_swipe_action_cell/core/cell.dart';
 
+import '../../../constants/durations.dart';
 import '../../../models/location/location.dart';
+import '../../../theme/icons.dart';
 import '../../../theme/theme.dart';
 import '../../../widgets/cjvnk_button.dart';
 
 class LocationsList extends StatelessWidget {
   final List<Location> locations;
   final Function(Location location) locationPressed;
+  final Function(int oldIndex, int newIndex) onReorder;
+  final Function(CompletionHandler handler, Location location) onTapDelete;
 
   const LocationsList({
     required this.locations,
     required this.locationPressed,
+    required this.onReorder,
+    required this.onTapDelete,
   });
 
   @override
@@ -23,32 +31,90 @@ class LocationsList extends StatelessWidget {
         style: context.textStyles.locationsTitle,
       ),
       Expanded(
-        child: ListView.separated(
+        child: ReorderableListView.builder(
+          proxyDecorator: (child, index, animation) => Material(
+            borderRadius: BorderRadius.circular(16),
+            color: context.colors.accent,
+            child: child,
+          ),
+          onReorder: (oldIndex, newIndex) {
+            if (newIndex > oldIndex) {
+              newIndex--;
+            }
+
+            onReorder(oldIndex, newIndex);
+          },
           physics: const BouncingScrollPhysics(),
           itemCount: locations.length,
           itemBuilder: (_, index) {
             final location = locations[index];
 
-            return CJVnkButton(
-              onPressed: () => locationPressed(location),
-              child: ListTile(
-                title: Text(
-                  location.locality,
-                  style: context.textStyles.locationsName,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
+            return Animate(
+              key: ValueKey(location),
+              delay: (CJVnkDurations.buttonAnimation.inMilliseconds * index).milliseconds,
+              effects: const [
+                FadeEffect(
+                  curve: Curves.easeIn,
+                  duration: CJVnkDurations.fadeAnimation,
                 ),
-                subtitle: Text(
-                  location.country,
-                  style: context.textStyles.locationsCountry,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+              ],
+              child: SwipeActionCell(
+                key: ValueKey(location),
+                openAnimationCurve: Curves.easeIn,
+                closeAnimationCurve: Curves.easeIn,
+                backgroundColor: Colors.transparent,
+                trailingActions: [
+                  SwipeAction(
+                    onTap: (handler) => onTapDelete(handler, location),
+                    color: Colors.transparent,
+                    backgroundRadius: 100,
+                    content: CJVnkButton(
+                      child: IconButton(
+                        onPressed: null,
+                        padding: const EdgeInsets.all(12),
+                        style: IconButton.styleFrom(
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          backgroundColor: context.colors.background.withValues(alpha: 0.3),
+                          disabledBackgroundColor: context.colors.background.withValues(alpha: 0.3),
+                          overlayColor: context.colors.background,
+                        ),
+                        icon: Image.asset(
+                          CJVnkIcons.delete,
+                          height: 32,
+                          width: 32,
+                          color: context.colors.background,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  child: CJVnkButton(
+                    onPressed: () => locationPressed(location),
+                    child: ListTile(
+                      title: Text(
+                        location.locality,
+                        style: context.textStyles.locationsName,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      subtitle: Text(
+                        location.country,
+                        style: context.textStyles.locationsCountry,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 4),
+                    ),
+                  ),
                 ),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 4),
               ),
             );
           },
-          separatorBuilder: (_, __) => const SizedBox(height: 8),
         ),
       ),
     ],

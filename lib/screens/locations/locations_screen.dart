@@ -141,7 +141,20 @@ class _LocationsScreenState extends State<LocationsScreen> {
                                 newCurrentLocation: location,
                               );
 
-                          // widget.drawerButtonPressed();
+                          widget.drawerButtonPressed();
+                        },
+                        onReorder: getIt
+                            .get<MainController>(
+                              instanceName: 'main',
+                            )
+                            .reorderLocations,
+                        onTapDelete: (handler, location) {
+                          handler(false);
+                          getIt
+                              .get<MainController>(
+                                instanceName: 'main',
+                              )
+                              .deleteLocation(location);
                         },
                       )
                     : const Text(

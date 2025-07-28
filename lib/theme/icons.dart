@@ -1,5 +1,6 @@
 class CJVnkIcons {
   static const close = 'assets/close.png';
+  static const delete = 'assets/delete.png';
   static const drawer = 'assets/drawer.png';
 
   ///

@@ -33,6 +33,7 @@ dependencies:
   envied: 1.1.1
   fl_chart: 1.0.0
   flutter_animate: 4.5.2
+  flutter_swipe_action_cell: 3.1.5
   flutter_timezone: 4.1.1
   geocoding: 4.0.0
   geolocator: 14.0.2
@@ -57,6 +58,7 @@ flutter:
 
   assets:
     - assets/close.png
+    - assets/delete.png
     - assets/drawer.png
     - assets/key.pem
     - assets/weather/

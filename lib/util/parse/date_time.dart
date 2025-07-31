@@ -60,27 +60,27 @@ List<Day>? getDaysExceptToday(List<Day>? days) {
   }
 }
 
-/// Returns the first 24 hours from passed `List<Hour>`
-List<Hour> getNext24Hours({required List<Hour>? allHours}) {
+/// Returns the next 24 hours from the given `startTime`
+List<Hour> get24HoursFromDateTime({
+  required List<Hour>? allHours,
+  required DateTime startTime,
+}) {
   if (allHours?.isNotEmpty ?? false) {
-    /// Current date and time
-    final now = DateTime.now();
-
-    /// Sort the list in case it's not already sorted
+    /// Sort the list just in case
     allHours!.sort(
       (a, b) => a.forecastStart.compareTo(b.forecastStart),
     );
 
-    /// Find the first hour that is >= now
+    /// Find the first hour that is >= `startTime`
     final startIndex = allHours.indexWhere(
-      (hour) => hour.forecastStart.isAfter(now) || hour.forecastStart.isAtSameMomentAs(now),
+      (hour) => hour.forecastStart.isAfter(startTime) || hour.forecastStart.isAtSameMomentAs(startTime),
     );
 
     if (startIndex == -1) {
       return [];
     }
 
-    /// Take 24 from that point
+    /// Return the next 24 hours from that point
     return allHours.skip(startIndex).take(24).toList();
   }
 

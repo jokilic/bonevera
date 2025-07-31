@@ -26,6 +26,8 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
 
   var isSideMenuOpened = false;
 
+  final drawerWidth = 288.0;
+
   @override
   void initState() {
     super.initState();
@@ -77,90 +79,119 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
     );
   }
 
+  void onHorizontalDragStart(DragStartDetails details) {
+    /// Only allow from left edge
+    if (!isSideMenuOpened && details.globalPosition.dx > 40) {
+      return;
+    }
+  }
+
+  void onHorizontalDragUpdate(DragUpdateDetails details) {
+    final delta = details.primaryDelta ?? 0;
+    final newValue = animationController.value + delta / drawerWidth;
+    animationController.value = newValue.clamp(0.0, 1.0);
+  }
+
+  void onHorizontalDragEnd(DragEndDetails details) {
+    if (animationController.value > 0.5) {
+      animationController.forward();
+      setState(() => isSideMenuOpened = true);
+    } else {
+      animationController.reverse();
+      setState(() => isSideMenuOpened = false);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final locationsState = watchIt<LocationsController>().value;
     final location = locationsState.currentLocation;
     final locationExists = locationsState.locations.isNotEmpty && location != null;
 
-    return Scaffold(
-      backgroundColor: context.colors.primary,
-      body: Stack(
-        children: [
-          ///
-          /// DRAWER
-          ///
-          AnimatedPositioned(
-            duration: CJVnkDurations.fadeAnimation,
-            curve: Curves.fastOutSlowIn,
-            height: double.maxFinite,
-            width: 288,
-            left: isSideMenuOpened ? 0 : -288,
-            child: LocationsScreen(
-              drawerButtonPressed: drawerButtonPressed,
-              locations: locationsState.locations,
-              backgroundColor: context.colors.primary,
+    return GestureDetector(
+      onHorizontalDragStart: onHorizontalDragStart,
+      onHorizontalDragUpdate: onHorizontalDragUpdate,
+      onHorizontalDragEnd: onHorizontalDragEnd,
+      child: Scaffold(
+        backgroundColor: context.colors.primary,
+        body: Stack(
+          children: [
+            ///
+            /// DRAWER
+            ///
+            AnimatedPositioned(
+              duration: CJVnkDurations.fadeAnimation,
+              curve: Curves.fastOutSlowIn,
+              height: double.maxFinite,
+              width: drawerWidth,
+              left: isSideMenuOpened ? 0 : -drawerWidth,
+              child: LocationsScreen(
+                drawerButtonPressed: drawerButtonPressed,
+                locations: locationsState.locations,
+                backgroundColor: context.colors.primary,
+                drawerWidth: drawerWidth,
+              ),
             ),
-          ),
 
-          ///
-          /// WEATHER
-          ///
-          AnimatedBuilder(
-            animation: animationController,
-            builder: (_, child) => Transform(
-              alignment: Alignment.center,
-              transform: Matrix4.identity()
-                ..setEntry(3, 2, 0.001)
-                ..rotateY(animation.value - 30 * animation.value * pi / 180),
-              child: Transform.translate(
-                offset: Offset(animation.value * 240, 0),
-                child: Transform.scale(
-                  scale: scaleAnimation.value,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(24),
-                    child: AnimatedSwitcher(
-                      duration: CJVnkDurations.fadeAnimation,
-                      switchInCurve: Curves.fastOutSlowIn,
-                      switchOutCurve: Curves.fastOutSlowIn,
-                      child: locationExists
-                          ? WeatherScreen(
-                              location: location,
-                              key: ValueKey(location),
-                            )
-                          : Container(
-                              color: Colors.greenAccent,
-                            ),
+            ///
+            /// WEATHER
+            ///
+            AnimatedBuilder(
+              animation: animationController,
+              builder: (_, child) => Transform(
+                alignment: Alignment.center,
+                transform: Matrix4.identity()
+                  ..setEntry(3, 2, 0.001)
+                  ..rotateY(animation.value - 30 * animation.value * pi / 180),
+                child: Transform.translate(
+                  offset: Offset(animation.value * 240, 0),
+                  child: Transform.scale(
+                    scale: scaleAnimation.value,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(24),
+                      child: AnimatedSwitcher(
+                        duration: CJVnkDurations.fadeAnimation,
+                        switchInCurve: Curves.fastOutSlowIn,
+                        switchOutCurve: Curves.fastOutSlowIn,
+                        child: locationExists
+                            ? WeatherScreen(
+                                location: location,
+                                key: ValueKey(location),
+                              )
+                            : Container(
+                                color: Colors.greenAccent,
+                              ),
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
-          ),
 
-          ///
-          /// DRAWER BUTTON
-          ///
-          AnimatedPositioned(
-            duration: CJVnkDurations.fadeAnimation,
-            curve: Curves.fastOutSlowIn,
-            left: isSideMenuOpened ? 184 : 0,
-            child: SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 8,
-                ),
-                child: CJVnkDrawerButton(
-                  onPressed: drawerButtonPressed,
-                  icon: isSideMenuOpened ? CJVnkIcons.close : CJVnkIcons.drawer,
-                  iconColor: isSideMenuOpened ? context.colors.background : context.colors.primary,
-                  isHidden: !locationExists,
+            ///
+            /// DRAWER BUTTON
+            ///
+            AnimatedPositioned(
+              duration: CJVnkDurations.fadeAnimation,
+              curve: Curves.fastOutSlowIn,
+              left: isSideMenuOpened ? 184 : 0,
+              child: SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
+                  ),
+                  child: CJVnkDrawerButton(
+                    onPressed: drawerButtonPressed,
+                    icon: isSideMenuOpened ? CJVnkIcons.close : CJVnkIcons.drawer,
+                    iconColor: isSideMenuOpened ? context.colors.background : context.colors.primary,
+                    isHidden: !locationExists,
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

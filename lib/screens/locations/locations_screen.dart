@@ -18,11 +18,13 @@ class LocationsScreen extends WatchingStatefulWidget {
   final Function() drawerButtonPressed;
   final List<cjvnk_location.Location> locations;
   final Color backgroundColor;
+  final double drawerWidth;
 
   const LocationsScreen({
     required this.drawerButtonPressed,
     required this.locations,
     required this.backgroundColor,
+    required this.drawerWidth,
   });
 
   @override
@@ -55,7 +57,7 @@ class _LocationsScreenState extends State<LocationsScreen> {
       backgroundColor: context.colors.primary,
       body: SafeArea(
         child: Container(
-          width: 288 - 14,
+          width: widget.drawerWidth - 14,
           height: MediaQuery.sizeOf(context).height - 80,
           padding: const EdgeInsets.symmetric(horizontal: 16),
           color: widget.backgroundColor,

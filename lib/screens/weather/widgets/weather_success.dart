@@ -177,8 +177,9 @@ class WeatherSuccess extends StatelessWidget {
                 flex: 4,
                 child: WeatherHourTemperatureChart(
                   title: '24-hour forecast',
-                  hours: getNext24Hours(
+                  hours: get24HoursFromDateTime(
                     allHours: weather.forecastHourly?.hours,
+                    startTime: DateTime.now(),
                   ),
                 ),
               ),

@@ -1,17 +1,20 @@
 import 'package:dough/dough.dart';
 import 'package:flutter/material.dart';
 
+import '../../../constants/durations.dart';
 import '../../../models/location/location.dart';
 import '../../../models/response_weather.dart';
 import '../../../util/parse/condition_code.dart';
 import '../../../util/parse/date_time.dart';
 import '../../../util/parse/temperature.dart';
+import '../../../util/zoom_switcher_transition.dart';
+import '../../../widgets/cjvnk_button.dart';
 import 'weather_app_bar.dart';
 import 'weather_current_temperature_condition.dart';
 import 'weather_day.dart';
 import 'weather_hour_temperature_chart.dart';
 
-class WeatherSuccess extends StatelessWidget {
+class WeatherSuccess extends StatefulWidget {
   final Location location;
   final ResponseWeather weather;
 
@@ -21,13 +24,24 @@ class WeatherSuccess extends StatelessWidget {
   });
 
   @override
+  State<WeatherSuccess> createState() => _WeatherSuccessState();
+}
+
+class _WeatherSuccessState extends State<WeatherSuccess> {
+  var showTemperatures = true;
+
+  void toggleBottomWidget() => setState(
+    () => showTemperatures = !showTemperatures,
+  );
+
+  @override
   Widget build(BuildContext context) {
     final today = getCurrentDay(
-      weather.forecastDaily?.days,
+      widget.weather.forecastDaily?.days,
     );
 
     final daysExceptToday = getDaysExceptToday(
-      weather.forecastDaily?.days,
+      widget.weather.forecastDaily?.days,
     );
 
     return Column(
@@ -36,7 +50,7 @@ class WeatherSuccess extends StatelessWidget {
         /// APP BAR
         ///
         WeatherAppBar(
-          locationName: location.locality ?? '--',
+          locationName: widget.location.locality ?? '--',
         ),
 
         ///
@@ -55,8 +69,8 @@ class WeatherSuccess extends StatelessWidget {
               },
               child: Image.asset(
                 getConditionImage(
-                  passedConditionCode: weather.currentWeather?.conditionCode,
-                  daylight: weather.currentWeather?.daylight ?? true,
+                  passedConditionCode: widget.weather.currentWeather?.conditionCode,
+                  daylight: widget.weather.currentWeather?.daylight ?? true,
                 ),
                 alignment: Alignment.topCenter,
               ),
@@ -74,11 +88,11 @@ class WeatherSuccess extends StatelessWidget {
               ///
               WeatherCurrentTemperatureCondition(
                 currentTemperature: getTemperatureString(
-                  weather.currentWeather?.temperature,
+                  widget.weather.currentWeather?.temperature,
                 ),
                 conditionText: getConditionString(
-                  passedConditionCode: weather.currentWeather?.conditionCode,
-                  daylight: weather.currentWeather?.daylight ?? true,
+                  passedConditionCode: widget.weather.currentWeather?.conditionCode,
+                  daylight: widget.weather.currentWeather?.daylight ?? true,
                 ),
                 currentHighTemperature: getTemperatureString(
                   today?.temperatureMax,
@@ -175,11 +189,35 @@ class WeatherSuccess extends StatelessWidget {
               ///
               Expanded(
                 flex: 4,
-                child: WeatherHourTemperatureChart(
-                  title: '24-hour forecast',
-                  hours: get24HoursFromDateTime(
-                    allHours: weather.forecastHourly?.hours,
-                    startTime: DateTime.now(),
+                child: CJVnkButton(
+                  onPressed: toggleBottomWidget,
+                  child: AnimatedSwitcher(
+                    duration: CJVnkDurations.fadeAnimation,
+                    switchInCurve: Curves.easeIn,
+                    switchOutCurve: Curves.easeIn,
+                    transitionBuilder: (child, listenable) => ZoomTransition(
+                      listenable: listenable,
+                      scaleInFactor: 0.88,
+                      scaleOutFactor: 1.14,
+                      child: child,
+                    ),
+                    child: showTemperatures
+                        ? WeatherHourTemperatureChart(
+                            title: '24-hour forecast',
+                            hours: get24HoursFromDateTime(
+                              allHours: widget.weather.forecastHourly?.hours,
+                              startTime: DateTime.now(),
+                            ),
+                          )
+                        :
+                          // TODO: Widget with additional information here
+                          Center(
+                            child: Container(
+                              color: Colors.amber,
+                              height: 100,
+                              width: 200,
+                            ),
+                          ),
                   ),
                 ),
               ),

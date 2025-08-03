@@ -36,6 +36,8 @@ class WeatherCurrentTemperatureCondition extends StatelessWidget {
           ),
           textAlign: TextAlign.center,
           style: context.textStyles.currentTemperature,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
         ),
 
         const SizedBox(width: 8),
@@ -53,6 +55,8 @@ class WeatherCurrentTemperatureCondition extends StatelessWidget {
               Text(
                 conditionText,
                 style: context.textStyles.currentCondition,
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
               ),
 
               const SizedBox(height: 2),
@@ -82,6 +86,8 @@ class WeatherCurrentTemperatureCondition extends StatelessWidget {
                   ],
                 ),
                 style: context.textStyles.currentHighLowTemperature,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
               ),
             ],
           ),

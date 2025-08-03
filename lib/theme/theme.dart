@@ -5,91 +5,96 @@ import 'text_styles.dart';
 
 class CJVnkTheme {
   ///
-  /// LIGHT
+  /// LIGHT BLUE
   ///
 
-  static ThemeData get light {
+  static ThemeData get lightBlue {
     final defaultTheme = ThemeData.light();
 
     return defaultTheme.copyWith(
-      scaffoldBackgroundColor: lightAppColors.accent,
       extensions: [
-        lightAppColors,
-        lightTextTheme,
+        lightBlueAppColors,
+        lightBlueTextTheme,
       ],
     );
   }
 
-  static final lightAppColors = CJVnkColorsExtension(
-    background: CJVnkColors.white,
-    primary: CJVnkColors.black,
-    accent: CJVnkColors.blue,
+  static final lightBlueAppColors = CJVnkColorsExtension(
+    weatherBackground: CJVnkColors.blue,
+    appBarDaysBackground: CJVnkColors.white.withValues(alpha: 0.25),
+    bottomWidgetBackground: CJVnkColors.black,
+    locationsBackground: CJVnkColors.black,
+    appBarText: CJVnkColors.black,
+    mainWeatherText: CJVnkColors.black,
+    daysWidgetText: CJVnkColors.white,
+    bottomWidgetText: CJVnkColors.white,
+    locationsText: CJVnkColors.white,
   );
 
-  static final lightTextTheme = CJVnkTextThemesExtension(
+  static final lightBlueTextTheme = CJVnkTextThemesExtension(
     currentLocation: CJVnkTextStyles.currentLocation.copyWith(
-      color: lightAppColors.primary,
+      color: lightBlueAppColors.appBarText,
     ),
     currentTemperature: CJVnkTextStyles.currentTemperature.copyWith(
-      color: lightAppColors.primary,
+      color: lightBlueAppColors.mainWeatherText,
     ),
     currentCondition: CJVnkTextStyles.currentCondition.copyWith(
-      color: lightAppColors.primary,
+      color: lightBlueAppColors.mainWeatherText,
     ),
     currentHighLowTemperature: CJVnkTextStyles.currentHighLowTemperature.copyWith(
-      color: lightAppColors.primary,
+      color: lightBlueAppColors.mainWeatherText,
     ),
-    currentDayTitle: CJVnkTextStyles.currentDayTitle.copyWith(
-      color: lightAppColors.background,
+    dayTitle: CJVnkTextStyles.dayTitle.copyWith(
+      color: lightBlueAppColors.daysWidgetText,
     ),
-    currentDayHighLowTemperature: CJVnkTextStyles.currentDayHighLowTemperature.copyWith(
-      color: lightAppColors.background,
+    dayHighLowTemperature: CJVnkTextStyles.dayHighLowTemperature.copyWith(
+      color: lightBlueAppColors.daysWidgetText,
     ),
-    currentDayCondition: CJVnkTextStyles.currentDayCondition.copyWith(
-      color: lightAppColors.background.withValues(alpha: 0.6),
+    dayCondition: CJVnkTextStyles.dayCondition.copyWith(
+      color: lightBlueAppColors.daysWidgetText.withValues(alpha: 0.6),
     ),
-    currentHourChartTitle: CJVnkTextStyles.currentHourChartTitle.copyWith(
-      color: lightAppColors.background,
+    chartTitle: CJVnkTextStyles.chartTitle.copyWith(
+      color: lightBlueAppColors.bottomWidgetText,
     ),
-    currentHourChartTemperature: CJVnkTextStyles.currentHourChartTemperature.copyWith(
-      color: lightAppColors.background,
+    chartTemperature: CJVnkTextStyles.chartTemperature.copyWith(
+      color: lightBlueAppColors.bottomWidgetText,
     ),
     locationsTextField: CJVnkTextStyles.locationsTextField.copyWith(
-      color: lightAppColors.background,
+      color: lightBlueAppColors.locationsText,
     ),
     locationsTitle: CJVnkTextStyles.locationsTitle.copyWith(
-      color: lightAppColors.background,
+      color: lightBlueAppColors.locationsText,
     ),
     locationsName: CJVnkTextStyles.locationsName.copyWith(
-      color: lightAppColors.background,
+      color: lightBlueAppColors.locationsText,
     ),
     locationsCountry: CJVnkTextStyles.locationsCountry.copyWith(
-      color: lightAppColors.background,
+      color: lightBlueAppColors.locationsText,
     ),
     locationsNoLocation: CJVnkTextStyles.locationsNoLocation.copyWith(
-      color: lightAppColors.background,
+      color: lightBlueAppColors.locationsText,
     ),
     locationsAppName: CJVnkTextStyles.locationsAppName.copyWith(
-      color: lightAppColors.background,
+      color: lightBlueAppColors.locationsText,
     ),
     locationsAppVersion: CJVnkTextStyles.locationsAppVersion.copyWith(
-      color: lightAppColors.background,
+      color: lightBlueAppColors.locationsText,
     ),
     weatherAdditionalValue: CJVnkTextStyles.weatherAdditionalValue.copyWith(
-      color: lightAppColors.background,
+      color: lightBlueAppColors.bottomWidgetText,
     ),
     weatherAdditionalSmallValue: CJVnkTextStyles.weatherAdditionalSmallValue.copyWith(
-      color: lightAppColors.background.withValues(alpha: 0.6),
+      color: lightBlueAppColors.bottomWidgetText.withValues(alpha: 0.6),
     ),
     weatherAdditionalTitle: CJVnkTextStyles.weatherAdditionalTitle.copyWith(
-      color: lightAppColors.background.withValues(alpha: 0.6),
+      color: lightBlueAppColors.bottomWidgetText.withValues(alpha: 0.6),
     ),
   );
 }
 
 extension CJVnkThemeExtension on ThemeData {
-  CJVnkColorsExtension get cJVnkColors => extension<CJVnkColorsExtension>() ?? CJVnkTheme.lightAppColors;
-  CJVnkTextThemesExtension get cJVnkTextStyles => extension<CJVnkTextThemesExtension>() ?? CJVnkTheme.lightTextTheme;
+  CJVnkColorsExtension get cJVnkColors => extension<CJVnkColorsExtension>() ?? CJVnkTheme.lightBlueAppColors;
+  CJVnkTextThemesExtension get cJVnkTextStyles => extension<CJVnkTextThemesExtension>() ?? CJVnkTheme.lightBlueTextTheme;
 }
 
 extension ThemeGetter on BuildContext {

@@ -7,25 +7,50 @@ abstract class CJVnkColors {
 }
 
 class CJVnkColorsExtension extends ThemeExtension<CJVnkColorsExtension> {
-  final Color background;
-  final Color primary;
-  final Color accent;
+  final Color weatherBackground;
+  final Color appBarDaysBackground;
+  final Color bottomWidgetBackground;
+  final Color locationsBackground;
+
+  final Color appBarText;
+  final Color mainWeatherText;
+  final Color daysWidgetText;
+  final Color bottomWidgetText;
+  final Color locationsText;
 
   CJVnkColorsExtension({
-    required this.background,
-    required this.primary,
-    required this.accent,
+    required this.weatherBackground,
+    required this.appBarDaysBackground,
+    required this.bottomWidgetBackground,
+    required this.locationsBackground,
+    required this.appBarText,
+    required this.mainWeatherText,
+    required this.daysWidgetText,
+    required this.bottomWidgetText,
+    required this.locationsText,
   });
 
   @override
   ThemeExtension<CJVnkColorsExtension> copyWith({
-    Color? background,
-    Color? primary,
-    Color? accent,
+    Color? weatherBackground,
+    Color? appBarDaysBackground,
+    Color? bottomWidgetBackground,
+    Color? locationsBackground,
+    Color? appBarText,
+    Color? mainWeatherText,
+    Color? daysWidgetText,
+    Color? bottomWidgetText,
+    Color? locationsText,
   }) => CJVnkColorsExtension(
-    background: background ?? this.background,
-    primary: primary ?? this.primary,
-    accent: accent ?? this.accent,
+    weatherBackground: weatherBackground ?? this.weatherBackground,
+    appBarDaysBackground: appBarDaysBackground ?? this.appBarDaysBackground,
+    bottomWidgetBackground: bottomWidgetBackground ?? this.bottomWidgetBackground,
+    locationsBackground: locationsBackground ?? this.locationsBackground,
+    appBarText: appBarText ?? this.appBarText,
+    mainWeatherText: mainWeatherText ?? this.mainWeatherText,
+    daysWidgetText: daysWidgetText ?? this.daysWidgetText,
+    bottomWidgetText: bottomWidgetText ?? this.bottomWidgetText,
+    locationsText: locationsText ?? this.locationsText,
   );
 
   @override
@@ -38,9 +63,15 @@ class CJVnkColorsExtension extends ThemeExtension<CJVnkColorsExtension> {
     }
 
     return CJVnkColorsExtension(
-      background: Color.lerp(background, other.background, t)!,
-      primary: Color.lerp(primary, other.primary, t)!,
-      accent: Color.lerp(accent, other.accent, t)!,
+      weatherBackground: Color.lerp(weatherBackground, other.weatherBackground, t)!,
+      appBarDaysBackground: Color.lerp(appBarDaysBackground, other.appBarDaysBackground, t)!,
+      bottomWidgetBackground: Color.lerp(bottomWidgetBackground, other.bottomWidgetBackground, t)!,
+      locationsBackground: Color.lerp(locationsBackground, other.locationsBackground, t)!,
+      appBarText: Color.lerp(appBarText, other.appBarText, t)!,
+      mainWeatherText: Color.lerp(mainWeatherText, other.mainWeatherText, t)!,
+      daysWidgetText: Color.lerp(daysWidgetText, other.daysWidgetText, t)!,
+      bottomWidgetText: Color.lerp(bottomWidgetText, other.bottomWidgetText, t)!,
+      locationsText: Color.lerp(locationsText, other.locationsText, t)!,
     );
   }
 }

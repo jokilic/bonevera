@@ -8,6 +8,7 @@ import '../../services/api_service.dart';
 import '../../services/logger_service.dart';
 import '../../services/timezone_service.dart';
 import '../../services/token_service.dart';
+import '../../theme/theme.dart';
 import '../../util/dependencies.dart';
 import 'weather_controller.dart';
 import 'widgets/weather_content.dart';
@@ -57,6 +58,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
     ).value;
 
     return Scaffold(
+      backgroundColor: context.colors.weatherBackground,
       body: SafeArea(
         child: Animate(
           key: ValueKey(weatherState),

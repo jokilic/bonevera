@@ -28,7 +28,7 @@ class CJVnkApp extends StatelessWidget {
   Widget build(BuildContext context) => MaterialApp(
     debugShowCheckedModeBanner: false,
     home: MainScreen(),
-    theme: CJVnkTheme.light,
+    theme: CJVnkTheme.lightBlue,
     builder: (_, child) {
       final appWidget =
           child ??

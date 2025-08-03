@@ -33,7 +33,7 @@ class WeatherDay extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
         ),
-        backgroundColor: context.colors.background.withValues(alpha: 0.3),
+        backgroundColor: context.colors.appBarDaysBackground,
         overlayColor: Colors.transparent,
       ),
       child: Column(
@@ -44,7 +44,7 @@ class WeatherDay extends StatelessWidget {
           ///
           Text(
             title.toUpperCase(),
-            style: context.textStyles.currentDayTitle,
+            style: context.textStyles.dayTitle,
             textAlign: TextAlign.center,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
@@ -65,7 +65,7 @@ class WeatherDay extends StatelessWidget {
           ///
           Text(
             '$highTemperature / $lowTemperature',
-            style: context.textStyles.currentDayHighLowTemperature,
+            style: context.textStyles.dayHighLowTemperature,
             textAlign: TextAlign.center,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
@@ -76,7 +76,7 @@ class WeatherDay extends StatelessWidget {
           ///
           Text(
             conditionText.toUpperCase(),
-            style: context.textStyles.currentDayCondition,
+            style: context.textStyles.dayCondition,
             textAlign: TextAlign.center,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,

@@ -18,7 +18,7 @@ class LocationSearchField extends StatelessWidget {
     textCapitalization: TextCapitalization.words,
     textInputAction: TextInputAction.search,
     style: context.textStyles.locationsTextField,
-    cursorColor: context.colors.background,
+    cursorColor: context.colors.locationsText,
     cursorWidth: 2.5,
     cursorHeight: 28,
     decoration: InputDecoration(
@@ -30,37 +30,37 @@ class LocationSearchField extends StatelessWidget {
       hintStyle: context.textStyles.locationsTextField,
       border: UnderlineInputBorder(
         borderSide: BorderSide(
-          color: context.colors.background,
+          color: context.colors.locationsText,
           width: 2.5,
         ),
       ),
       errorBorder: UnderlineInputBorder(
         borderSide: BorderSide(
-          color: context.colors.background,
+          color: context.colors.locationsText,
           width: 2.5,
         ),
       ),
       enabledBorder: UnderlineInputBorder(
         borderSide: BorderSide(
-          color: context.colors.background,
+          color: context.colors.locationsText,
           width: 2.5,
         ),
       ),
       focusedBorder: UnderlineInputBorder(
         borderSide: BorderSide(
-          color: context.colors.background,
+          color: context.colors.locationsText,
           width: 2.5,
         ),
       ),
       disabledBorder: UnderlineInputBorder(
         borderSide: BorderSide(
-          color: context.colors.background,
+          color: context.colors.locationsText,
           width: 2.5,
         ),
       ),
       focusedErrorBorder: UnderlineInputBorder(
         borderSide: BorderSide(
-          color: context.colors.background,
+          color: context.colors.locationsText,
           width: 2.5,
         ),
       ),

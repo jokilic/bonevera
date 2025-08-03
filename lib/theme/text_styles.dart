@@ -28,31 +28,31 @@ abstract class CJVnkTextStyles {
     height: 1.25,
   );
 
-  static const currentDayTitle = TextStyle(
+  static const dayTitle = TextStyle(
     fontFamily: 'ProductSans',
     fontSize: 14,
     fontWeight: FontWeight.w700,
   );
 
-  static const currentDayHighLowTemperature = TextStyle(
+  static const dayHighLowTemperature = TextStyle(
     fontFamily: 'ProductSans',
     fontSize: 16,
     fontWeight: FontWeight.w700,
   );
 
-  static const currentDayCondition = TextStyle(
+  static const dayCondition = TextStyle(
     fontFamily: 'ProductSans',
     fontSize: 10,
     fontWeight: FontWeight.w700,
   );
 
-  static const currentHourChartTitle = TextStyle(
+  static const chartTitle = TextStyle(
     fontFamily: 'ProductSans',
     fontSize: 14,
     fontWeight: FontWeight.w700,
   );
 
-  static const currentHourChartTemperature = TextStyle(
+  static const chartTemperature = TextStyle(
     fontFamily: 'ProductSans',
     fontSize: 16,
     fontWeight: FontWeight.w700,
@@ -124,11 +124,11 @@ class CJVnkTextThemesExtension extends ThemeExtension<CJVnkTextThemesExtension> 
   final TextStyle currentTemperature;
   final TextStyle currentCondition;
   final TextStyle currentHighLowTemperature;
-  final TextStyle currentDayTitle;
-  final TextStyle currentDayHighLowTemperature;
-  final TextStyle currentDayCondition;
-  final TextStyle currentHourChartTitle;
-  final TextStyle currentHourChartTemperature;
+  final TextStyle dayTitle;
+  final TextStyle dayHighLowTemperature;
+  final TextStyle dayCondition;
+  final TextStyle chartTitle;
+  final TextStyle chartTemperature;
   final TextStyle locationsTextField;
   final TextStyle locationsTitle;
   final TextStyle locationsName;
@@ -145,11 +145,11 @@ class CJVnkTextThemesExtension extends ThemeExtension<CJVnkTextThemesExtension> 
     required this.currentTemperature,
     required this.currentCondition,
     required this.currentHighLowTemperature,
-    required this.currentDayTitle,
-    required this.currentDayHighLowTemperature,
-    required this.currentDayCondition,
-    required this.currentHourChartTitle,
-    required this.currentHourChartTemperature,
+    required this.dayTitle,
+    required this.dayHighLowTemperature,
+    required this.dayCondition,
+    required this.chartTitle,
+    required this.chartTemperature,
     required this.locationsTextField,
     required this.locationsTitle,
     required this.locationsName,
@@ -168,11 +168,11 @@ class CJVnkTextThemesExtension extends ThemeExtension<CJVnkTextThemesExtension> 
     TextStyle? currentTemperature,
     TextStyle? currentCondition,
     TextStyle? currentHighLowTemperature,
-    TextStyle? currentDayTitle,
-    TextStyle? currentDayHighLowTemperature,
-    TextStyle? currentDayCondition,
-    TextStyle? currentHourChartTitle,
-    TextStyle? currentHourChartTemperature,
+    TextStyle? dayTitle,
+    TextStyle? dayHighLowTemperature,
+    TextStyle? dayCondition,
+    TextStyle? chartTitle,
+    TextStyle? chartTemperature,
     TextStyle? locationsTextField,
     TextStyle? locationsTitle,
     TextStyle? locationsName,
@@ -188,11 +188,11 @@ class CJVnkTextThemesExtension extends ThemeExtension<CJVnkTextThemesExtension> 
     currentTemperature: currentTemperature ?? this.currentTemperature,
     currentCondition: currentCondition ?? this.currentCondition,
     currentHighLowTemperature: currentHighLowTemperature ?? this.currentHighLowTemperature,
-    currentDayTitle: currentDayTitle ?? this.currentDayTitle,
-    currentDayHighLowTemperature: currentDayHighLowTemperature ?? this.currentDayHighLowTemperature,
-    currentDayCondition: currentDayCondition ?? this.currentDayCondition,
-    currentHourChartTitle: currentHourChartTitle ?? this.currentHourChartTitle,
-    currentHourChartTemperature: currentHourChartTemperature ?? this.currentHourChartTemperature,
+    dayTitle: dayTitle ?? this.dayTitle,
+    dayHighLowTemperature: dayHighLowTemperature ?? this.dayHighLowTemperature,
+    dayCondition: dayCondition ?? this.dayCondition,
+    chartTitle: chartTitle ?? this.chartTitle,
+    chartTemperature: chartTemperature ?? this.chartTemperature,
     locationsTextField: locationsTextField ?? this.locationsTextField,
     locationsTitle: locationsTitle ?? this.locationsTitle,
     locationsName: locationsName ?? this.locationsName,
@@ -219,11 +219,11 @@ class CJVnkTextThemesExtension extends ThemeExtension<CJVnkTextThemesExtension> 
       currentTemperature: TextStyle.lerp(currentTemperature, other.currentTemperature, t)!,
       currentCondition: TextStyle.lerp(currentCondition, other.currentCondition, t)!,
       currentHighLowTemperature: TextStyle.lerp(currentHighLowTemperature, other.currentHighLowTemperature, t)!,
-      currentDayTitle: TextStyle.lerp(currentDayTitle, other.currentDayTitle, t)!,
-      currentDayHighLowTemperature: TextStyle.lerp(currentDayHighLowTemperature, other.currentDayHighLowTemperature, t)!,
-      currentDayCondition: TextStyle.lerp(currentDayCondition, other.currentDayCondition, t)!,
-      currentHourChartTitle: TextStyle.lerp(currentHourChartTitle, other.currentHourChartTitle, t)!,
-      currentHourChartTemperature: TextStyle.lerp(currentHourChartTemperature, other.currentHourChartTemperature, t)!,
+      dayTitle: TextStyle.lerp(dayTitle, other.dayTitle, t)!,
+      dayHighLowTemperature: TextStyle.lerp(dayHighLowTemperature, other.dayHighLowTemperature, t)!,
+      dayCondition: TextStyle.lerp(dayCondition, other.dayCondition, t)!,
+      chartTitle: TextStyle.lerp(chartTitle, other.chartTitle, t)!,
+      chartTemperature: TextStyle.lerp(chartTemperature, other.chartTemperature, t)!,
       locationsTextField: TextStyle.lerp(locationsTextField, other.locationsTextField, t)!,
       locationsTitle: TextStyle.lerp(locationsTitle, other.locationsTitle, t)!,
       locationsName: TextStyle.lerp(locationsName, other.locationsName, t)!,

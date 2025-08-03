@@ -34,7 +34,7 @@ class LocationsList extends StatelessWidget {
         child: ReorderableListView.builder(
           proxyDecorator: (child, index, animation) => Material(
             borderRadius: BorderRadius.circular(16),
-            color: context.colors.accent,
+            color: context.colors.locationsText,
             child: child,
           ),
           onReorder: (oldIndex, newIndex) {
@@ -77,15 +77,15 @@ class LocationsList extends StatelessWidget {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16),
                           ),
-                          backgroundColor: context.colors.background.withValues(alpha: 0.3),
-                          disabledBackgroundColor: context.colors.background.withValues(alpha: 0.3),
-                          overlayColor: context.colors.background,
+                          backgroundColor: context.colors.locationsText.withValues(alpha: 0.3),
+                          disabledBackgroundColor: context.colors.locationsText.withValues(alpha: 0.3),
+                          overlayColor: context.colors.locationsText,
                         ),
                         icon: Image.asset(
                           CJVnkIcons.delete,
                           height: 32,
                           width: 32,
-                          color: context.colors.background,
+                          color: context.colors.locationsText,
                         ),
                       ),
                     ),

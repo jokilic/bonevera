@@ -26,7 +26,7 @@ class WeatherAdditionalWind extends StatelessWidget {
       vertical: 12,
     ),
     decoration: BoxDecoration(
-      color: context.colors.primary,
+      color: context.colors.bottomWidgetBackground,
       borderRadius: BorderRadius.circular(16),
     ),
     child: Column(
@@ -37,7 +37,7 @@ class WeatherAdditionalWind extends StatelessWidget {
             Expanded(
               child: Text(
                 'Visibility & Wind'.toUpperCase(),
-                style: context.textStyles.currentHourChartTitle,
+                style: context.textStyles.chartTitle,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -46,7 +46,7 @@ class WeatherAdditionalWind extends StatelessWidget {
               CJVnkIcons.arrow,
               height: 16,
               width: 16,
-              color: context.colors.background,
+              color: context.colors.bottomWidgetText,
             ),
           ],
         ),
@@ -105,7 +105,7 @@ class WeatherAdditionalWind extends StatelessWidget {
                                   CJVnkIcons.arrow,
                                   width: 16,
                                   height: 16,
-                                  color: context.colors.background.withValues(alpha: 0.6),
+                                  color: context.colors.bottomWidgetText.withValues(alpha: 0.6),
                                 ),
                               ),
                             ),

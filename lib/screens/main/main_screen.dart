@@ -113,7 +113,7 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
       onHorizontalDragUpdate: onHorizontalDragUpdate,
       onHorizontalDragEnd: onHorizontalDragEnd,
       child: Scaffold(
-        backgroundColor: context.colors.primary,
+        backgroundColor: context.colors.locationsBackground,
         body: Stack(
           children: [
             ///
@@ -128,7 +128,7 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
               child: LocationsScreen(
                 drawerButtonPressed: drawerButtonPressed,
                 locations: locationsState.locations,
-                backgroundColor: context.colors.primary,
+                backgroundColor: context.colors.locationsBackground,
                 drawerWidth: drawerWidth,
               ),
             ),
@@ -184,7 +184,7 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
                   child: CJVnkDrawerButton(
                     onPressed: drawerButtonPressed,
                     icon: isSideMenuOpened ? CJVnkIcons.close : CJVnkIcons.drawer,
-                    iconColor: isSideMenuOpened ? context.colors.background : context.colors.primary,
+                    iconColor: isSideMenuOpened ? context.colors.locationsText : context.colors.appBarText,
                     isHidden: !locationExists,
                   ),
                 ),

@@ -55,7 +55,7 @@ class WeatherHourTemperatureChart extends StatelessWidget {
     final lineBar = LineChartBarData(
       spots: spots,
       isCurved: true,
-      color: context.colors.accent,
+      color: context.colors.bottomWidgetText,
       barWidth: 4,
       showingIndicators: highlightedIndexes,
       dotData: const FlDotData(show: false),
@@ -68,7 +68,7 @@ class WeatherHourTemperatureChart extends StatelessWidget {
         vertical: 12,
       ),
       decoration: BoxDecoration(
-        color: context.colors.primary,
+        color: context.colors.bottomWidgetBackground,
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
@@ -79,7 +79,7 @@ class WeatherHourTemperatureChart extends StatelessWidget {
               Expanded(
                 child: Text(
                   '24-hour forecast'.toUpperCase(),
-                  style: context.textStyles.currentHourChartTitle,
+                  style: context.textStyles.chartTitle,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -88,7 +88,7 @@ class WeatherHourTemperatureChart extends StatelessWidget {
                 CJVnkIcons.arrow,
                 height: 16,
                 width: 16,
-                color: context.colors.background,
+                color: context.colors.bottomWidgetText,
               ),
             ],
           ),
@@ -120,7 +120,7 @@ class WeatherHourTemperatureChart extends StatelessWidget {
                         .map(
                           (spot) => LineTooltipItem(
                             '${spot.y.round()}°',
-                            context.textStyles.currentHourChartTemperature,
+                            context.textStyles.chartTemperature,
                           ),
                         )
                         .toList(),

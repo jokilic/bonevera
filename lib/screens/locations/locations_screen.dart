@@ -54,7 +54,7 @@ class _LocationsScreenState extends State<LocationsScreen> {
     final locationSearchState = watchIt<LocationSearchController>().value;
 
     return Scaffold(
-      backgroundColor: context.colors.primary,
+      backgroundColor: context.colors.locationsBackground,
       body: SafeArea(
         child: Container(
           width: widget.drawerWidth - 14,

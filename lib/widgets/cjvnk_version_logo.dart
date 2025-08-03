@@ -15,7 +15,7 @@ class CJVnKVersionLogo extends StatelessWidget {
           padding: const EdgeInsets.all(4),
           decoration: BoxDecoration(
             border: Border.all(
-              color: context.colors.background,
+              color: context.colors.locationsText,
               width: 2,
             ),
             borderRadius: BorderRadius.circular(16),

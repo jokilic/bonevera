@@ -24,8 +24,16 @@ class WeatherCurrentTemperatureCondition extends StatelessWidget {
         ///
         /// TEMPERATURE
         ///
-        Text(
-          currentTemperature,
+        Text.rich(
+          TextSpan(
+            text: currentTemperature,
+            children: [
+              TextSpan(
+                text: '°',
+                style: context.textStyles.currentTemperature,
+              ),
+            ],
+          ),
           textAlign: TextAlign.center,
           style: context.textStyles.currentTemperature,
         ),

@@ -3,15 +3,14 @@ import 'package:flutter/material.dart';
 
 import '../../../constants/durations.dart';
 import '../../../models/hour.dart';
+import '../../../theme/icons.dart';
 import '../../../theme/theme.dart';
 import '../../../util/parse/chart.dart';
 
 class WeatherHourTemperatureChart extends StatelessWidget {
-  final String title;
   final List<Hour> hours;
 
   const WeatherHourTemperatureChart({
-    required this.title,
     required this.hours,
   });
 
@@ -75,9 +74,23 @@ class WeatherHourTemperatureChart extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            title.toUpperCase(),
-            style: context.textStyles.currentHourChartTitle,
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  '24-hour forecast'.toUpperCase(),
+                  style: context.textStyles.currentHourChartTitle,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              Image.asset(
+                CJVnkIcons.arrow,
+                height: 16,
+                width: 16,
+                color: context.colors.background,
+              ),
+            ],
           ),
           const SizedBox(height: 28),
           Expanded(

@@ -2,6 +2,7 @@ import 'package:dough/dough.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants/durations.dart';
+import '../../../constants/enums.dart';
 import '../../../models/location/location.dart';
 import '../../../models/response_weather.dart';
 import '../../../util/parse/condition_code.dart';
@@ -9,6 +10,9 @@ import '../../../util/parse/date_time.dart';
 import '../../../util/parse/temperature.dart';
 import '../../../util/zoom_switcher_transition.dart';
 import '../../../widgets/cjvnk_button.dart';
+import 'weather_additional_air.dart';
+import 'weather_additional_temperature.dart';
+import 'weather_additional_wind.dart';
 import 'weather_app_bar.dart';
 import 'weather_current_temperature_condition.dart';
 import 'weather_day.dart';
@@ -28,11 +32,20 @@ class WeatherSuccess extends StatefulWidget {
 }
 
 class _WeatherSuccessState extends State<WeatherSuccess> {
-  var showTemperatures = true;
+  var currentWeatherWidget = WeatherWidget.chart;
 
-  void toggleBottomWidget() => setState(
-    () => showTemperatures = !showTemperatures,
-  );
+  final weatherWidgets = [
+    WeatherWidget.chart,
+    WeatherWidget.air,
+    WeatherWidget.temperature,
+    WeatherWidget.wind,
+  ];
+
+  void toggleWeatherWidget() => setState(() {
+    final currentIndex = weatherWidgets.indexOf(currentWeatherWidget);
+    final nextIndex = (currentIndex + 1) % weatherWidgets.length;
+    currentWeatherWidget = weatherWidgets[nextIndex];
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -185,12 +198,12 @@ class _WeatherSuccessState extends State<WeatherSuccess> {
               const SizedBox(height: 16),
 
               ///
-              /// HOURLY CHART
+              /// BOTTOM WEATHER WIDGET
               ///
               Expanded(
                 flex: 4,
                 child: CJVnkButton(
-                  onPressed: toggleBottomWidget,
+                  onPressed: toggleWeatherWidget,
                   child: AnimatedSwitcher(
                     duration: CJVnkDurations.fadeAnimation,
                     switchInCurve: Curves.easeIn,
@@ -201,23 +214,29 @@ class _WeatherSuccessState extends State<WeatherSuccess> {
                       scaleOutFactor: 1.14,
                       child: child,
                     ),
-                    child: showTemperatures
-                        ? WeatherHourTemperatureChart(
-                            title: '24-hour forecast',
-                            hours: get24HoursFromDateTime(
-                              allHours: widget.weather.forecastHourly?.hours,
-                              startTime: DateTime.now(),
-                            ),
-                          )
-                        :
-                          // TODO: Widget with additional information here
-                          Center(
-                            child: Container(
-                              color: Colors.amber,
-                              height: 100,
-                              width: 200,
-                            ),
-                          ),
+                    child: switch (currentWeatherWidget) {
+                      WeatherWidget.chart => WeatherHourTemperatureChart(
+                        hours: get24HoursFromDateTime(
+                          allHours: widget.weather.forecastHourly?.hours,
+                          startTime: DateTime.now(),
+                        ),
+                      ),
+                      WeatherWidget.air => WeatherAdditionalAir(
+                        cloudCover: widget.weather.currentWeather?.cloudCover,
+                        humidity: widget.weather.currentWeather?.humidity,
+                        precipitationIntensity: widget.weather.currentWeather?.precipitationIntensity,
+                      ),
+                      WeatherWidget.temperature => WeatherAdditionalTemperature(
+                        temperatureApparent: widget.weather.currentWeather?.temperatureApparent,
+                        pressure: widget.weather.currentWeather?.pressure,
+                        uvIndex: widget.weather.currentWeather?.uvIndex,
+                      ),
+                      WeatherWidget.wind => WeatherAdditionalWind(
+                        visibility: widget.weather.currentWeather?.visibility,
+                        windDirection: widget.weather.currentWeather?.windDirection,
+                        windSpeed: widget.weather.currentWeather?.windSpeed,
+                      ),
+                    },
                   ),
                 ),
               ),

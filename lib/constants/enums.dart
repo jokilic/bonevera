@@ -1,5 +1,12 @@
 // ignore_for_file: constant_identifier_names
 
+enum WeatherWidget {
+  chart,
+  air,
+  temperature,
+  wind,
+}
+
 enum DataSet {
   /// The current weather for the requested location.
   currentWeather,

@@ -75,6 +75,15 @@ class CJVnkTheme {
     locationsAppVersion: CJVnkTextStyles.locationsAppVersion.copyWith(
       color: lightAppColors.background,
     ),
+    weatherAdditionalValue: CJVnkTextStyles.weatherAdditionalValue.copyWith(
+      color: lightAppColors.background,
+    ),
+    weatherAdditionalSmallValue: CJVnkTextStyles.weatherAdditionalSmallValue.copyWith(
+      color: lightAppColors.background.withValues(alpha: 0.6),
+    ),
+    weatherAdditionalTitle: CJVnkTextStyles.weatherAdditionalTitle.copyWith(
+      color: lightAppColors.background.withValues(alpha: 0.6),
+    ),
   );
 }
 

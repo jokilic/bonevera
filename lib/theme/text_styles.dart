@@ -99,6 +99,24 @@ abstract class CJVnkTextStyles {
     fontSize: 14,
     fontWeight: FontWeight.w500,
   );
+
+  static const weatherAdditionalValue = TextStyle(
+    fontFamily: 'ProductSans',
+    fontSize: 24,
+    fontWeight: FontWeight.w700,
+  );
+
+  static const weatherAdditionalSmallValue = TextStyle(
+    fontFamily: 'ProductSans',
+    fontSize: 14,
+    fontWeight: FontWeight.w700,
+  );
+
+  static const weatherAdditionalTitle = TextStyle(
+    fontFamily: 'ProductSans',
+    fontSize: 12,
+    fontWeight: FontWeight.w500,
+  );
 }
 
 class CJVnkTextThemesExtension extends ThemeExtension<CJVnkTextThemesExtension> {
@@ -118,6 +136,9 @@ class CJVnkTextThemesExtension extends ThemeExtension<CJVnkTextThemesExtension> 
   final TextStyle locationsNoLocation;
   final TextStyle locationsAppName;
   final TextStyle locationsAppVersion;
+  final TextStyle weatherAdditionalValue;
+  final TextStyle weatherAdditionalSmallValue;
+  final TextStyle weatherAdditionalTitle;
 
   const CJVnkTextThemesExtension({
     required this.currentLocation,
@@ -136,6 +157,9 @@ class CJVnkTextThemesExtension extends ThemeExtension<CJVnkTextThemesExtension> 
     required this.locationsNoLocation,
     required this.locationsAppName,
     required this.locationsAppVersion,
+    required this.weatherAdditionalValue,
+    required this.weatherAdditionalSmallValue,
+    required this.weatherAdditionalTitle,
   });
 
   @override
@@ -156,6 +180,9 @@ class CJVnkTextThemesExtension extends ThemeExtension<CJVnkTextThemesExtension> 
     TextStyle? locationsNoLocation,
     TextStyle? locationsAppName,
     TextStyle? locationsAppVersion,
+    TextStyle? weatherAdditionalValue,
+    TextStyle? weatherAdditionalSmallValue,
+    TextStyle? weatherAdditionalTitle,
   }) => CJVnkTextThemesExtension(
     currentLocation: currentLocation ?? this.currentLocation,
     currentTemperature: currentTemperature ?? this.currentTemperature,
@@ -173,6 +200,9 @@ class CJVnkTextThemesExtension extends ThemeExtension<CJVnkTextThemesExtension> 
     locationsNoLocation: locationsNoLocation ?? this.locationsNoLocation,
     locationsAppName: locationsAppName ?? this.locationsAppName,
     locationsAppVersion: locationsAppVersion ?? this.locationsAppVersion,
+    weatherAdditionalValue: weatherAdditionalValue ?? this.weatherAdditionalValue,
+    weatherAdditionalSmallValue: weatherAdditionalSmallValue ?? this.weatherAdditionalSmallValue,
+    weatherAdditionalTitle: weatherAdditionalTitle ?? this.weatherAdditionalTitle,
   );
 
   @override
@@ -201,6 +231,9 @@ class CJVnkTextThemesExtension extends ThemeExtension<CJVnkTextThemesExtension> 
       locationsNoLocation: TextStyle.lerp(locationsNoLocation, other.locationsNoLocation, t)!,
       locationsAppName: TextStyle.lerp(locationsAppName, other.locationsAppName, t)!,
       locationsAppVersion: TextStyle.lerp(locationsAppVersion, other.locationsAppVersion, t)!,
+      weatherAdditionalValue: TextStyle.lerp(weatherAdditionalValue, other.weatherAdditionalValue, t)!,
+      weatherAdditionalSmallValue: TextStyle.lerp(weatherAdditionalSmallValue, other.weatherAdditionalSmallValue, t)!,
+      weatherAdditionalTitle: TextStyle.lerp(weatherAdditionalTitle, other.weatherAdditionalTitle, t)!,
     );
   }
 }

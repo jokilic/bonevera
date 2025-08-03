@@ -20,75 +20,81 @@ class CJVnkTheme {
   }
 
   static final lightBlueAppColors = CJVnkColorsExtension(
-    weatherBackground: CJVnkColors.blue,
+    weatherBackground: CJVnkColors.lightBlue,
     appBarDaysBackground: CJVnkColors.white.withValues(alpha: 0.25),
-    bottomWidgetBackground: CJVnkColors.black,
-    locationsBackground: CJVnkColors.black,
-    appBarText: CJVnkColors.black,
-    mainWeatherText: CJVnkColors.black,
+    bottomWidgetBackground: CJVnkColors.darkPurple,
+    locationsBackground: CJVnkColors.darkPurple,
+    appBarText: CJVnkColors.darkPurple,
+    mainWeatherText: CJVnkColors.darkPurple,
     daysWidgetText: CJVnkColors.white,
     bottomWidgetText: CJVnkColors.white,
     locationsText: CJVnkColors.white,
   );
 
-  static final lightBlueTextTheme = CJVnkTextThemesExtension(
-    currentLocation: CJVnkTextStyles.currentLocation.copyWith(
-      color: lightBlueAppColors.appBarText,
-    ),
-    currentTemperature: CJVnkTextStyles.currentTemperature.copyWith(
-      color: lightBlueAppColors.mainWeatherText,
-    ),
-    currentCondition: CJVnkTextStyles.currentCondition.copyWith(
-      color: lightBlueAppColors.mainWeatherText,
-    ),
-    currentHighLowTemperature: CJVnkTextStyles.currentHighLowTemperature.copyWith(
-      color: lightBlueAppColors.mainWeatherText,
-    ),
-    dayTitle: CJVnkTextStyles.dayTitle.copyWith(
-      color: lightBlueAppColors.daysWidgetText,
-    ),
-    dayHighLowTemperature: CJVnkTextStyles.dayHighLowTemperature.copyWith(
-      color: lightBlueAppColors.daysWidgetText,
-    ),
-    dayCondition: CJVnkTextStyles.dayCondition.copyWith(
-      color: lightBlueAppColors.daysWidgetText.withValues(alpha: 0.6),
-    ),
-    chartTitle: CJVnkTextStyles.chartTitle.copyWith(
-      color: lightBlueAppColors.bottomWidgetText,
-    ),
-    chartTemperature: CJVnkTextStyles.chartTemperature.copyWith(
-      color: lightBlueAppColors.bottomWidgetText,
-    ),
-    locationsTextField: CJVnkTextStyles.locationsTextField.copyWith(
-      color: lightBlueAppColors.locationsText,
-    ),
-    locationsTitle: CJVnkTextStyles.locationsTitle.copyWith(
-      color: lightBlueAppColors.locationsText,
-    ),
-    locationsName: CJVnkTextStyles.locationsName.copyWith(
-      color: lightBlueAppColors.locationsText,
-    ),
-    locationsCountry: CJVnkTextStyles.locationsCountry.copyWith(
-      color: lightBlueAppColors.locationsText,
-    ),
-    locationsNoLocation: CJVnkTextStyles.locationsNoLocation.copyWith(
-      color: lightBlueAppColors.locationsText,
-    ),
-    locationsAppName: CJVnkTextStyles.locationsAppName.copyWith(
-      color: lightBlueAppColors.locationsText,
-    ),
-    locationsAppVersion: CJVnkTextStyles.locationsAppVersion.copyWith(
-      color: lightBlueAppColors.locationsText,
-    ),
-    weatherAdditionalValue: CJVnkTextStyles.weatherAdditionalValue.copyWith(
-      color: lightBlueAppColors.bottomWidgetText,
-    ),
-    weatherAdditionalSmallValue: CJVnkTextStyles.weatherAdditionalSmallValue.copyWith(
-      color: lightBlueAppColors.bottomWidgetText.withValues(alpha: 0.6),
-    ),
-    weatherAdditionalTitle: CJVnkTextStyles.weatherAdditionalTitle.copyWith(
-      color: lightBlueAppColors.bottomWidgetText.withValues(alpha: 0.6),
-    ),
+  static final lightBlueTextTheme = getTextThemesExtension(
+    colorsExtension: lightBlueAppColors,
+  );
+
+  ///
+  /// DARK
+  ///
+
+  static ThemeData get dark {
+    final defaultTheme = ThemeData.dark();
+
+    return defaultTheme.copyWith(
+      extensions: [
+        darkAppColors,
+        darkTextTheme,
+      ],
+    );
+  }
+
+  static final darkAppColors = CJVnkColorsExtension(
+    weatherBackground: CJVnkColors.darkPurple,
+    appBarDaysBackground: CJVnkColors.white.withValues(alpha: 0.1),
+    bottomWidgetBackground: CJVnkColors.lightBlue,
+    locationsBackground: CJVnkColors.lightBlue,
+    appBarText: CJVnkColors.white,
+    mainWeatherText: CJVnkColors.white,
+    daysWidgetText: CJVnkColors.white,
+    bottomWidgetText: CJVnkColors.white,
+    locationsText: CJVnkColors.white,
+  );
+
+  static final darkTextTheme = getTextThemesExtension(
+    colorsExtension: darkAppColors,
+  );
+
+  ///
+  /// WHITE
+  ///
+
+  static ThemeData get white {
+    final defaultTheme = ThemeData.light();
+
+    return defaultTheme.copyWith(
+      extensions: [
+        whiteAppColors,
+        whiteTextTheme,
+      ],
+    );
+  }
+
+  static final whiteAppColors = CJVnkColorsExtension(
+    weatherBackground: CJVnkColors.white,
+    appBarDaysBackground: Colors.white,
+    bottomWidgetBackground: CJVnkColors.lightBlue,
+    locationsBackground: CJVnkColors.lightBlue,
+    appBarText: CJVnkColors.darkPurple,
+    mainWeatherText: CJVnkColors.darkPurple,
+    daysWidgetText: CJVnkColors.darkPurple,
+    bottomWidgetText: CJVnkColors.white,
+    locationsText: CJVnkColors.darkPurple,
+  );
+
+  static final whiteTextTheme = getTextThemesExtension(
+    colorsExtension: whiteAppColors,
   );
 }
 
@@ -102,3 +108,65 @@ extension ThemeGetter on BuildContext {
   CJVnkColorsExtension get colors => theme.cJVnkColors;
   CJVnkTextThemesExtension get textStyles => theme.cJVnkTextStyles;
 }
+
+CJVnkTextThemesExtension getTextThemesExtension({
+  required CJVnkColorsExtension colorsExtension,
+}) => CJVnkTextThemesExtension(
+  currentLocation: CJVnkTextStyles.currentLocation.copyWith(
+    color: colorsExtension.appBarText,
+  ),
+  currentTemperature: CJVnkTextStyles.currentTemperature.copyWith(
+    color: colorsExtension.mainWeatherText,
+  ),
+  currentCondition: CJVnkTextStyles.currentCondition.copyWith(
+    color: colorsExtension.mainWeatherText,
+  ),
+  currentHighLowTemperature: CJVnkTextStyles.currentHighLowTemperature.copyWith(
+    color: colorsExtension.mainWeatherText,
+  ),
+  dayTitle: CJVnkTextStyles.dayTitle.copyWith(
+    color: colorsExtension.daysWidgetText,
+  ),
+  dayHighLowTemperature: CJVnkTextStyles.dayHighLowTemperature.copyWith(
+    color: colorsExtension.daysWidgetText,
+  ),
+  dayCondition: CJVnkTextStyles.dayCondition.copyWith(
+    color: colorsExtension.daysWidgetText.withValues(alpha: 0.6),
+  ),
+  chartTitle: CJVnkTextStyles.chartTitle.copyWith(
+    color: colorsExtension.bottomWidgetText,
+  ),
+  chartTemperature: CJVnkTextStyles.chartTemperature.copyWith(
+    color: colorsExtension.bottomWidgetText,
+  ),
+  locationsTextField: CJVnkTextStyles.locationsTextField.copyWith(
+    color: colorsExtension.locationsText,
+  ),
+  locationsTitle: CJVnkTextStyles.locationsTitle.copyWith(
+    color: colorsExtension.locationsText,
+  ),
+  locationsName: CJVnkTextStyles.locationsName.copyWith(
+    color: colorsExtension.locationsText,
+  ),
+  locationsCountry: CJVnkTextStyles.locationsCountry.copyWith(
+    color: colorsExtension.locationsText,
+  ),
+  locationsNoLocation: CJVnkTextStyles.locationsNoLocation.copyWith(
+    color: colorsExtension.locationsText,
+  ),
+  locationsAppName: CJVnkTextStyles.locationsAppName.copyWith(
+    color: colorsExtension.locationsText,
+  ),
+  locationsAppVersion: CJVnkTextStyles.locationsAppVersion.copyWith(
+    color: colorsExtension.locationsText,
+  ),
+  weatherAdditionalValue: CJVnkTextStyles.weatherAdditionalValue.copyWith(
+    color: colorsExtension.bottomWidgetText,
+  ),
+  weatherAdditionalSmallValue: CJVnkTextStyles.weatherAdditionalSmallValue.copyWith(
+    color: colorsExtension.bottomWidgetText.withValues(alpha: 0.6),
+  ),
+  weatherAdditionalTitle: CJVnkTextStyles.weatherAdditionalTitle.copyWith(
+    color: colorsExtension.bottomWidgetText.withValues(alpha: 0.6),
+  ),
+);

@@ -73,7 +73,12 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
   }
 
   void drawerButtonPressed() {
-    isSideMenuOpened ? animationController.reverse() : animationController.forward();
+    if (isSideMenuOpened) {
+      animationController.reverse();
+    } else {
+      animationController.forward();
+    }
+
     setState(
       () => isSideMenuOpened = !isSideMenuOpened,
     );

@@ -6,6 +6,7 @@ import '../services/hive_service.dart';
 import '../services/location_service.dart';
 import '../services/logger_service.dart';
 import '../services/permission_service.dart';
+import '../services/theme_service.dart';
 import '../services/timezone_service.dart';
 import '../services/token_service.dart';
 
@@ -45,6 +46,13 @@ void initializeServices() {
         return hive;
       },
       dependsOn: [LoggerService],
+    )
+    ..registerSingletonAsync(
+      () async => ThemeService(
+        logger: getIt.get<LoggerService>(),
+        hive: getIt.get<HiveService>(),
+      ),
+      dependsOn: [LoggerService, HiveService],
     )
     ..registerSingletonAsync(
       () async => DioService(

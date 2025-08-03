@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 abstract class CJVnkColors {
   static const white = Color(0xFFDFECFB);
-  static const black = Color(0xFF342464);
-  static const blue = Color(0xFF74AEDE);
+  static const darkPurple = Color(0xFF342464);
+  static const lightBlue = Color(0xFF74AEDE);
 }
 
 class CJVnkColorsExtension extends ThemeExtension<CJVnkColorsExtension> {

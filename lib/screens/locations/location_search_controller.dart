@@ -118,6 +118,7 @@ class LocationSearchController extends ValueNotifier<CJVnkState<List<cjvnk_locat
         );
       }
     } catch (e) {
+      logger.e('LocationSearchController -> onLocationSearch() -> $e');
       value = Error(
         error: '$e',
       );

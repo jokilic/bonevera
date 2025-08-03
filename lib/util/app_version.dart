@@ -5,7 +5,7 @@ Future<String?> getAppVersion() async {
   try {
     final packageInfo = await PackageInfo.fromPlatform();
     return packageInfo.version;
-  } catch (e) {
+  } catch (_) {
     return null;
   }
 }

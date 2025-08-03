@@ -55,7 +55,7 @@ List<Day>? getDaysExceptToday(List<Day>? days) {
           (day) => now.isBefore(day.forecastStart) || now.isAfter(day.forecastEnd),
         )
         .toList();
-  } catch (e) {
+  } catch (_) {
     return null;
   }
 }

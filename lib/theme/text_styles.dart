@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 
 abstract class CJVnkTextStyles {
-  static const currentLocation = TextStyle(
+  static const appBarTitle = TextStyle(
     fontFamily: 'ProductSans',
     fontSize: 24,
     fontWeight: FontWeight.w700,
+  );
+
+  static const appBarSubtitle = TextStyle(
+    fontFamily: 'ProductSans',
+    fontSize: 18,
+    fontWeight: FontWeight.w500,
   );
 
   static const currentTemperature = TextStyle(
@@ -120,7 +126,8 @@ abstract class CJVnkTextStyles {
 }
 
 class CJVnkTextThemesExtension extends ThemeExtension<CJVnkTextThemesExtension> {
-  final TextStyle currentLocation;
+  final TextStyle appBarTitle;
+  final TextStyle appBarSubtitle;
   final TextStyle currentTemperature;
   final TextStyle currentCondition;
   final TextStyle currentHighLowTemperature;
@@ -141,7 +148,8 @@ class CJVnkTextThemesExtension extends ThemeExtension<CJVnkTextThemesExtension> 
   final TextStyle weatherAdditionalTitle;
 
   const CJVnkTextThemesExtension({
-    required this.currentLocation,
+    required this.appBarTitle,
+    required this.appBarSubtitle,
     required this.currentTemperature,
     required this.currentCondition,
     required this.currentHighLowTemperature,
@@ -164,7 +172,8 @@ class CJVnkTextThemesExtension extends ThemeExtension<CJVnkTextThemesExtension> 
 
   @override
   ThemeExtension<CJVnkTextThemesExtension> copyWith({
-    TextStyle? currentLocation,
+    TextStyle? appBarTitle,
+    TextStyle? appBarSubtitle,
     TextStyle? currentTemperature,
     TextStyle? currentCondition,
     TextStyle? currentHighLowTemperature,
@@ -184,7 +193,8 @@ class CJVnkTextThemesExtension extends ThemeExtension<CJVnkTextThemesExtension> 
     TextStyle? weatherAdditionalSmallValue,
     TextStyle? weatherAdditionalTitle,
   }) => CJVnkTextThemesExtension(
-    currentLocation: currentLocation ?? this.currentLocation,
+    appBarTitle: appBarTitle ?? this.appBarTitle,
+    appBarSubtitle: appBarSubtitle ?? this.appBarSubtitle,
     currentTemperature: currentTemperature ?? this.currentTemperature,
     currentCondition: currentCondition ?? this.currentCondition,
     currentHighLowTemperature: currentHighLowTemperature ?? this.currentHighLowTemperature,
@@ -215,7 +225,8 @@ class CJVnkTextThemesExtension extends ThemeExtension<CJVnkTextThemesExtension> 
     }
 
     return CJVnkTextThemesExtension(
-      currentLocation: TextStyle.lerp(currentLocation, other.currentLocation, t)!,
+      appBarTitle: TextStyle.lerp(appBarTitle, other.appBarTitle, t)!,
+      appBarSubtitle: TextStyle.lerp(appBarSubtitle, other.appBarSubtitle, t)!,
       currentTemperature: TextStyle.lerp(currentTemperature, other.currentTemperature, t)!,
       currentCondition: TextStyle.lerp(currentCondition, other.currentCondition, t)!,
       currentHighLowTemperature: TextStyle.lerp(currentHighLowTemperature, other.currentHighLowTemperature, t)!,

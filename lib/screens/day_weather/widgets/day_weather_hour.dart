@@ -3,20 +3,18 @@ import 'package:flutter/material.dart';
 import '../../../theme/theme.dart';
 import '../../../widgets/cjvnk_button.dart';
 
-class WeatherDay extends StatelessWidget {
+class DayWeatherHour extends StatelessWidget {
   final Function() onPressed;
   final String title;
   final String conditionImage;
-  final String lowTemperature;
-  final String highTemperature;
+  final String temperature;
   final String conditionText;
 
-  const WeatherDay({
+  const DayWeatherHour({
     required this.onPressed,
     required this.title,
     required this.conditionImage,
-    required this.lowTemperature,
-    required this.highTemperature,
+    required this.temperature,
     required this.conditionText,
   });
 
@@ -63,10 +61,10 @@ class WeatherDay extends StatelessWidget {
           const SizedBox(height: 8),
 
           ///
-          /// LOW / HIGH TEMPERATURES
+          /// TEMPERATURE
           ///
           Text(
-            '$highTemperature° / $lowTemperature°',
+            '$temperature°',
             style: context.textStyles.dayHighLowTemperature,
             textAlign: TextAlign.center,
             maxLines: 2,

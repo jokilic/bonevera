@@ -5,6 +5,7 @@ import '../../../constants/durations.dart';
 import '../../../constants/enums.dart';
 import '../../../models/location/location.dart';
 import '../../../models/response_weather.dart';
+import '../../../routing.dart';
 import '../../../util/parse/condition_code.dart';
 import '../../../util/parse/date_time.dart';
 import '../../../util/parse/temperature.dart';
@@ -32,6 +33,8 @@ class WeatherSuccess extends StatefulWidget {
 }
 
 class _WeatherSuccessState extends State<WeatherSuccess> {
+  // TODO: Move this logic in controller
+
   var currentWeatherWidget = WeatherWidget.chart;
 
   final weatherWidgets = [
@@ -52,6 +55,10 @@ class _WeatherSuccessState extends State<WeatherSuccess> {
     final today = getCurrentDay(
       widget.weather.forecastDaily?.days,
     );
+    final todayHours = get24HoursFromDateTime(
+      allHours: widget.weather.forecastHourly?.hours,
+      startTime: DateTime.now(),
+    );
 
     final daysExceptToday = getDaysExceptToday(
       widget.weather.forecastDaily?.days,
@@ -63,7 +70,7 @@ class _WeatherSuccessState extends State<WeatherSuccess> {
         /// APP BAR
         ///
         WeatherAppBar(
-          locationName: widget.location.locality ?? '--',
+          title: widget.location.locality ?? '--',
         ),
 
         ///
@@ -131,6 +138,12 @@ class _WeatherSuccessState extends State<WeatherSuccess> {
                       Padding(
                         padding: const EdgeInsets.only(left: 16),
                         child: WeatherDay(
+                          onPressed: () => openDayWeather(
+                            context,
+                            location: widget.location,
+                            day: today,
+                            hours: todayHours,
+                          ),
                           title: getFormattedDate(
                             forecastStart: today.forecastStart,
                             forecastEnd: today.forecastEnd,
@@ -168,6 +181,16 @@ class _WeatherSuccessState extends State<WeatherSuccess> {
                             final day = daysExceptToday[index];
 
                             return WeatherDay(
+                              onPressed: () => openDayWeather(
+                                context,
+                                location: widget.location,
+                                day: day,
+                                hours: get24HoursFromDateTime(
+                                  allHours: widget.weather.forecastHourly?.hours,
+                                  startTime: day.forecastStart,
+                                ),
+                              ),
+
                               title: getFormattedDate(
                                 forecastStart: day.forecastStart,
                                 forecastEnd: day.forecastEnd,
@@ -216,10 +239,7 @@ class _WeatherSuccessState extends State<WeatherSuccess> {
                     ),
                     child: switch (currentWeatherWidget) {
                       WeatherWidget.chart => WeatherHourTemperatureChart(
-                        hours: get24HoursFromDateTime(
-                          allHours: widget.weather.forecastHourly?.hours,
-                          startTime: DateTime.now(),
-                        ),
+                        hours: todayHours,
                       ),
                       WeatherWidget.air => WeatherAdditionalAir(
                         cloudCover: widget.weather.currentWeather?.cloudCover,

@@ -1,14 +1,19 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
+import '../../../theme/icons.dart';
 import '../../../theme/theme.dart';
 import '../../../widgets/cjvnk_drawer_button.dart';
 
-class WeatherAppBar extends StatelessWidget {
+class DayWeatherAppBar extends StatelessWidget {
   final String title;
   final String? subtitle;
+  final Function() onPressedBack;
 
-  const WeatherAppBar({
+  const DayWeatherAppBar({
     required this.title,
+    required this.onPressedBack,
     this.subtitle,
   });
 
@@ -25,8 +30,9 @@ class WeatherAppBar extends StatelessWidget {
         /// LOCATIONS BUTTON
         ///
         CJVnkDrawerButton(
-          onPressed: () {},
-          isHidden: true,
+          onPressed: onPressedBack,
+          icon: CJVnkIcons.arrow,
+          angle: pi,
         ),
         const SizedBox(width: 16),
 

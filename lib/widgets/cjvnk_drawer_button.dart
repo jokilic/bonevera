@@ -10,12 +10,14 @@ class CJVnkDrawerButton extends StatelessWidget {
   final String icon;
   final Color? iconColor;
   final bool isHidden;
+  final double angle;
 
   const CJVnkDrawerButton({
     required this.onPressed,
     this.icon = CJVnkIcons.drawer,
     this.isHidden = false,
     this.iconColor,
+    this.angle = 0,
   });
 
   @override
@@ -39,11 +41,14 @@ class CJVnkDrawerButton extends StatelessWidget {
             disabledBackgroundColor: context.colors.appBarDaysBackground,
             overlayColor: Colors.transparent,
           ),
-          icon: Image.asset(
-            icon,
-            height: 20,
-            width: 20,
-            color: iconColor ?? context.colors.appBarText,
+          icon: Transform.rotate(
+            angle: angle,
+            child: Image.asset(
+              icon,
+              height: 20,
+              width: 20,
+              color: iconColor ?? context.colors.appBarText,
+            ),
           ),
         ),
       ),

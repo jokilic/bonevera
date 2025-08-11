@@ -112,7 +112,10 @@ extension ThemeGetter on BuildContext {
 CJVnkTextThemesExtension getTextThemesExtension({
   required CJVnkColorsExtension colorsExtension,
 }) => CJVnkTextThemesExtension(
-  currentLocation: CJVnkTextStyles.currentLocation.copyWith(
+  appBarTitle: CJVnkTextStyles.appBarTitle.copyWith(
+    color: colorsExtension.appBarText,
+  ),
+  appBarSubtitle: CJVnkTextStyles.appBarSubtitle.copyWith(
     color: colorsExtension.appBarText,
   ),
   currentTemperature: CJVnkTextStyles.currentTemperature.copyWith(

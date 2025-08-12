@@ -10,8 +10,8 @@ import '../../../util/parse/date_time.dart';
 import '../../../util/parse/temperature.dart';
 import '../../../util/zoom_switcher_transition.dart';
 import '../../../widgets/bonevera_button.dart';
-import '../../weather/widgets/weather_temperature_condition.dart';
 import 'hour_weather_app_bar.dart';
+import 'hour_weather_temperature_condition.dart';
 
 class HourWeatherContent extends StatefulWidget {
   final Location location;
@@ -87,7 +87,7 @@ class _HourWeatherContentState extends State<HourWeatherContent> {
             ///
             /// CURRENT TEMPERATURE & CONDITION
             ///
-            WeatherTemperatureCondition(
+            HourWeatherTemperatureCondition(
               currentTemperature: getTemperatureString(
                 widget.hour.temperature,
               ),
@@ -95,10 +95,7 @@ class _HourWeatherContentState extends State<HourWeatherContent> {
                 passedConditionCode: widget.hour.conditionCode,
                 daylight: widget.hour.daylight ?? true,
               ),
-              currentHighTemperature: getTemperatureString(
-                widget.hour.temperature,
-              ),
-              currentLowTemperature: getTemperatureString(
+              feelsLikeTemperature: getTemperatureString(
                 widget.hour.temperatureApparent,
               ),
             ),

@@ -2,17 +2,15 @@ import 'package:flutter/material.dart';
 
 import '../../../theme/theme.dart';
 
-class WeatherTemperatureCondition extends StatelessWidget {
+class HourWeatherTemperatureCondition extends StatelessWidget {
   final String currentTemperature;
   final String conditionText;
-  final String currentHighTemperature;
-  final String currentLowTemperature;
+  final String feelsLikeTemperature;
 
-  const WeatherTemperatureCondition({
+  const HourWeatherTemperatureCondition({
     required this.currentTemperature,
     required this.conditionText,
-    required this.currentHighTemperature,
-    required this.currentLowTemperature,
+    required this.feelsLikeTemperature,
   });
 
   @override
@@ -66,19 +64,10 @@ class WeatherTemperatureCondition extends StatelessWidget {
               ///
               Text.rich(
                 TextSpan(
-                  text: 'H: ',
+                  text: 'Feels like: ',
                   children: [
                     TextSpan(
-                      text: '$currentHighTemperature°',
-                      style: context.textStyles.currentHighLowTemperature.copyWith(
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    const TextSpan(
-                      text: ' | L: ',
-                    ),
-                    TextSpan(
-                      text: '$currentLowTemperature°',
+                      text: '$feelsLikeTemperature°',
                       style: context.textStyles.currentHighLowTemperature.copyWith(
                         fontWeight: FontWeight.w700,
                       ),

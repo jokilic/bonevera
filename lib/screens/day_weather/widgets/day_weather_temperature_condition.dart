@@ -69,7 +69,7 @@ class DayWeatherTemperatureCondition extends StatelessWidget {
                   text: 'H: ',
                   children: [
                     TextSpan(
-                      text: currentHighTemperature,
+                      text: '$currentHighTemperature°',
                       style: context.textStyles.currentHighLowTemperature.copyWith(
                         fontWeight: FontWeight.w700,
                       ),
@@ -78,7 +78,7 @@ class DayWeatherTemperatureCondition extends StatelessWidget {
                       text: ' | L: ',
                     ),
                     TextSpan(
-                      text: currentLowTemperature,
+                      text: '$currentLowTemperature°',
                       style: context.textStyles.currentHighLowTemperature.copyWith(
                         fontWeight: FontWeight.w700,
                       ),

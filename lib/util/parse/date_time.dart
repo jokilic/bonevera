@@ -6,22 +6,22 @@ import '../../models/hour.dart';
 /// Returns properly formatted date, e.g. `Today` or `Monday`
 String getFormattedDate({
   required DateTime forecastStart,
-  required DateTime forecastEnd,
+  DateTime? forecastEnd,
 }) {
   /// Current date and time
-  final now = DateTime.now().toUtc();
+  final now = DateTime.now().toLocal();
 
-  /// Get `UTC` versions of passed forecast [DateTimes]
-  final forecastStartUtc = forecastStart.toUtc();
-  final forecastEndUtc = forecastEnd.toUtc();
+  /// Get `local` versions of passed forecast [DateTimes]
+  final forecastStartLocal = forecastStart.toLocal();
+  final forecastEndLocal = forecastEnd?.toLocal();
 
   /// Today
-  if (now.isAfter(forecastStartUtc) && now.isBefore(forecastEndUtc)) {
+  if (now.isAfter(forecastStartLocal) && (forecastEndLocal == null || now.isBefore(forecastEndLocal))) {
     return 'Today';
   }
 
   /// Convert to local date for display
-  final localDate = forecastStartUtc.toLocal();
+  final localDate = forecastStartLocal.toLocal();
   return DateFormat('EEEE').format(localDate);
 }
 
@@ -30,7 +30,7 @@ String getFormattedTime(DateTime dateTime) => DateFormat.Hm().format(dateTime);
 
 /// Returns current [Day] from [List<Day>]
 Day? getCurrentDay(List<Day>? days) {
-  final now = DateTime.now().toUtc();
+  final now = DateTime.now().toLocal();
 
   try {
     return days?.firstWhere(
@@ -43,7 +43,7 @@ Day? getCurrentDay(List<Day>? days) {
 
 /// Returns all [Days] from [List<Day>] except the current `day`
 List<Day>? getDaysExceptToday(List<Day>? days) {
-  final now = DateTime.now().toUtc();
+  final now = DateTime.now().toLocal();
 
   if (days == null) {
     return [];

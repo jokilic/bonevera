@@ -31,7 +31,7 @@ class TokenService {
       final cachedToken = hive.getToken();
 
       /// Store `now` in a variable
-      final now = DateTime.now().toUtc();
+      final now = DateTime.now().toLocal();
 
       /// `token` exists in [Hive]
       if (cachedToken != null) {

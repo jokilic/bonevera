@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../../../constants/durations.dart';
 import '../../../constants/enums.dart';
-import '../../../models/day.dart';
 import '../../../models/hour.dart';
 import '../../../models/location/location.dart';
 import '../../../util/parse/condition_code.dart';
@@ -11,17 +10,15 @@ import '../../../util/parse/date_time.dart';
 import '../../../util/parse/temperature.dart';
 import '../../../util/zoom_switcher_transition.dart';
 import '../../../widgets/bonevera_button.dart';
-import '../../../widgets/hour_temperature_chart.dart';
-import '../../weather/widgets/weather_current_temperature_condition.dart';
+import '../../weather/widgets/weather_temperature_condition.dart';
+import 'hour_weather_app_bar.dart';
 
 class HourWeatherContent extends StatefulWidget {
   final Location location;
-  final Day day;
   final Hour hour;
 
   const HourWeatherContent({
     required this.location,
-    required this.day,
     required this.hour,
   });
 
@@ -46,13 +43,15 @@ class _HourWeatherContentState extends State<HourWeatherContent> {
       ///
       /// APP BAR
       ///
-      DayWeatherAppBar(
+      HourWeatherAppBar(
         onPressedBack: Navigator.of(context).pop,
         title: widget.location.locality ?? '--',
-        subtitle: getFormattedDate(
-          forecastStart: widget.day.forecastStart,
-          forecastEnd: widget.day.forecastEnd,
-        ),
+        subtitle:
+            '${getFormattedDate(
+              forecastStart: widget.hour.forecastStart,
+            )} at ${getFormattedTime(
+              widget.hour.forecastStart,
+            )}',
       ),
 
       ///
@@ -71,8 +70,8 @@ class _HourWeatherContentState extends State<HourWeatherContent> {
             },
             child: Image.asset(
               getConditionImage(
-                passedConditionCode: widget.day.conditionCode,
-                daylight: true,
+                passedConditionCode: widget.hour.conditionCode,
+                daylight: widget.hour.daylight ?? true,
               ),
               alignment: Alignment.topCenter,
             ),
@@ -88,19 +87,19 @@ class _HourWeatherContentState extends State<HourWeatherContent> {
             ///
             /// CURRENT TEMPERATURE & CONDITION
             ///
-            WeatherCurrentTemperatureCondition(
+            WeatherTemperatureCondition(
               currentTemperature: getTemperatureString(
-                widget.day.temperatureMax,
+                widget.hour.temperature,
               ),
               conditionText: getConditionString(
-                passedConditionCode: widget.day.conditionCode,
-                daylight: true,
+                passedConditionCode: widget.hour.conditionCode,
+                daylight: widget.hour.daylight ?? true,
               ),
               currentHighTemperature: getTemperatureString(
-                widget.day.temperatureMax,
+                widget.hour.temperature,
               ),
               currentLowTemperature: getTemperatureString(
-                widget.day.temperatureMin,
+                widget.hour.temperatureApparent,
               ),
             ),
 
@@ -109,38 +108,37 @@ class _HourWeatherContentState extends State<HourWeatherContent> {
             ///
             /// HOURLY WEATHER
             ///
-            Expanded(
-              flex: 5,
-              child: ListView.separated(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                physics: const BouncingScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                itemCount: widget.hours.length,
-                itemBuilder: (_, index) {
-                  final hour = widget.hours[index];
+            // Expanded(
+            //   flex: 5,
+            //   child: ListView.separated(
+            //     padding: const EdgeInsets.symmetric(horizontal: 16),
+            //     physics: const BouncingScrollPhysics(),
+            //     scrollDirection: Axis.horizontal,
+            //     itemCount: widget.hours.length,
+            //     itemBuilder: (_, index) {
+            //       final hour = widget.hours[index];
 
-                  return DayWeatherHour(
-                    onPressed: () {},
-                    title: getFormattedTime(
-                      hour.forecastStart,
-                    ),
-                    conditionImage: getConditionImage(
-                      passedConditionCode: hour.conditionCode,
-                      daylight: hour.daylight ?? true,
-                    ),
-                    temperature: getTemperatureString(
-                      hour.temperature,
-                    ),
-                    conditionText: getConditionString(
-                      passedConditionCode: hour.conditionCode,
-                      daylight: hour.daylight ?? true,
-                    ),
-                  );
-                },
-                separatorBuilder: (_, __) => const SizedBox(width: 16),
-              ),
-            ),
-
+            //       return DayWeatherHour(
+            //         onPressed: () {},
+            //         title: getFormattedTime(
+            //           hour.forecastStart,
+            //         ),
+            //         conditionImage: getConditionImage(
+            //           passedConditionCode: hour.conditionCode,
+            //           daylight: widget.hour.daylight??true,
+            //         ),
+            //         temperature: getTemperatureString(
+            //           hour.temperature,
+            //         ),
+            //         conditionText: getConditionString(
+            //           passedConditionCode: hour.conditionCode,
+            //           daylight: widget.hour.daylight??true,
+            //         ),
+            //       );
+            //     },
+            //     separatorBuilder: (_, __) => const SizedBox(width: 16),
+            //   ),
+            // ),
             const SizedBox(height: 16),
 
             ///
@@ -161,10 +159,10 @@ class _HourWeatherContentState extends State<HourWeatherContent> {
                     child: child,
                   ),
                   child: switch (currentWeatherWidget) {
-                    WeatherWidget.chart => HourTemperatureChart(
-                      hours: widget.hours,
-                    ),
                     // TODO: Proper widgets here
+                    // WeatherWidget.chart => HourTemperatureChart(
+                    //   hours: widget.hours,
+                    // ),
                     _ => Container(
                       margin: const EdgeInsets.symmetric(horizontal: 16),
                       padding: const EdgeInsets.symmetric(

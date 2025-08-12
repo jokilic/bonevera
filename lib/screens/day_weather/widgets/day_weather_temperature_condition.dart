@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 import '../../../theme/theme.dart';
 
-class WeatherCurrentTemperatureCondition extends StatelessWidget {
+class DayWeatherTemperatureCondition extends StatelessWidget {
   final String currentTemperature;
   final String conditionText;
   final String currentHighTemperature;
   final String currentLowTemperature;
 
-  const WeatherCurrentTemperatureCondition({
+  const DayWeatherTemperatureCondition({
     required this.currentTemperature,
     required this.conditionText,
     required this.currentHighTemperature,

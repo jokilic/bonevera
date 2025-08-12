@@ -19,8 +19,8 @@ import 'weather_additional_air.dart';
 import 'weather_additional_temperature.dart';
 import 'weather_additional_wind.dart';
 import 'weather_app_bar.dart';
-import 'weather_current_temperature_condition.dart';
 import 'weather_day.dart';
+import 'weather_temperature_condition.dart';
 
 class WeatherSuccess extends WatchingWidget {
   final Location location;
@@ -84,7 +84,7 @@ class WeatherSuccess extends WatchingWidget {
               ///
               /// CURRENT TEMPERATURE & CONDITION
               ///
-              WeatherCurrentTemperatureCondition(
+              WeatherTemperatureCondition(
                 currentTemperature: getTemperatureString(
                   weather.currentWeather?.temperature,
                 ),

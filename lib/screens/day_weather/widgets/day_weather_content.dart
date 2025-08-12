@@ -6,15 +6,16 @@ import '../../../constants/enums.dart';
 import '../../../models/day.dart';
 import '../../../models/hour.dart';
 import '../../../models/location/location.dart';
+import '../../../routing.dart';
 import '../../../util/parse/condition_code.dart';
 import '../../../util/parse/date_time.dart';
 import '../../../util/parse/temperature.dart';
 import '../../../util/zoom_switcher_transition.dart';
 import '../../../widgets/bonevera_button.dart';
 import '../../../widgets/hour_temperature_chart.dart';
-import '../../weather/widgets/weather_current_temperature_condition.dart';
 import 'day_weather_app_bar.dart';
 import 'day_weather_hour.dart';
+import 'day_weather_temperature_condition.dart';
 
 class DayWeatherContent extends StatefulWidget {
   final Location location;
@@ -90,7 +91,7 @@ class _DayWeatherContentState extends State<DayWeatherContent> {
             ///
             /// CURRENT TEMPERATURE & CONDITION
             ///
-            WeatherCurrentTemperatureCondition(
+            DayWeatherTemperatureCondition(
               currentTemperature: getTemperatureString(
                 widget.day.temperatureMax,
               ),
@@ -122,7 +123,11 @@ class _DayWeatherContentState extends State<DayWeatherContent> {
                   final hour = widget.hours[index];
 
                   return DayWeatherHour(
-                    onPressed: () {},
+                    onPressed: () => openHourWeather(
+                      context,
+                      location: widget.location,
+                      hour: hour,
+                    ),
                     title: getFormattedTime(
                       hour.forecastStart,
                     ),

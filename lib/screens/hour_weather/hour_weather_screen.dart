@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../constants/durations.dart';
-import '../../models/day.dart';
 import '../../models/hour.dart';
 import '../../models/location/location.dart';
 import '../../theme/theme.dart';
@@ -10,12 +9,10 @@ import 'widgets/hour_weather_content.dart';
 
 class HourWeatherScreen extends StatelessWidget {
   final Location location;
-  final Day day;
   final Hour hour;
 
   const HourWeatherScreen({
     required this.location,
-    required this.day,
     required this.hour,
     required super.key,
   });
@@ -33,7 +30,6 @@ class HourWeatherScreen extends StatelessWidget {
         ],
         child: HourWeatherContent(
           location: location,
-          day: day,
           hour: hour,
         ),
       ),

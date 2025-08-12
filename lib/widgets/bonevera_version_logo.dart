@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import '../theme/icons.dart';
 import '../theme/theme.dart';
 import '../util/app_version.dart';
-import 'cjvnk_button.dart';
+import 'bonevera_button.dart';
 
-class CJVnKVersionLogo extends StatelessWidget {
+class BoneveraVersionLogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Row(
     children: [
-      CJVnkButton(
+      BoneveraButton(
         onLongPressed: () {},
         child: Container(
           padding: const EdgeInsets.all(4),
@@ -22,7 +22,7 @@ class CJVnKVersionLogo extends StatelessWidget {
           ),
           child: ClipOval(
             child: Image.asset(
-              CJVnkIcons.sun,
+              BoneveraIcons.sun,
               height: 48,
               width: 48,
             ),
@@ -34,7 +34,7 @@ class CJVnKVersionLogo extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Ča ima vanka?',
+            'Bonevera',
             style: context.textStyles.locationsAppName,
           ),
           FutureBuilder(

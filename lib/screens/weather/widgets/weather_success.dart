@@ -12,7 +12,7 @@ import '../../../util/parse/condition_code.dart';
 import '../../../util/parse/date_time.dart';
 import '../../../util/parse/temperature.dart';
 import '../../../util/zoom_switcher_transition.dart';
-import '../../../widgets/cjvnk_button.dart';
+import '../../../widgets/bonevera_button.dart';
 import 'weather_additional_air.dart';
 import 'weather_additional_temperature.dart';
 import 'weather_additional_wind.dart';
@@ -236,10 +236,10 @@ class _WeatherSuccessState extends State<WeatherSuccess> {
             ///
             Expanded(
               flex: 4,
-              child: CJVnkButton(
+              child: BoneveraButton(
                 onPressed: toggleWeatherWidget,
                 child: AnimatedSwitcher(
-                  duration: CJVnkDurations.fadeAnimation,
+                  duration: BoneveraDurations.fadeAnimation,
                   switchInCurve: Curves.easeIn,
                   switchOutCurve: Curves.easeIn,
                   transitionBuilder: (child, listenable) => ZoomTransition(

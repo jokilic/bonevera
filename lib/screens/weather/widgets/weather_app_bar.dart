@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../theme/theme.dart';
-import '../../../widgets/cjvnk_drawer_button.dart';
+import '../../../widgets/bonevera_drawer_button.dart';
 
 class WeatherAppBar extends StatelessWidget {
   final String title;
@@ -24,7 +24,7 @@ class WeatherAppBar extends StatelessWidget {
         ///
         /// LOCATIONS BUTTON
         ///
-        CJVnkDrawerButton(
+        BoneveraDrawerButton(
           onPressed: () {},
           isHidden: true,
         ),
@@ -63,7 +63,7 @@ class WeatherAppBar extends StatelessWidget {
         /// EMPTY SPACE
         ///
         const SizedBox(width: 16),
-        CJVnkDrawerButton(
+        BoneveraDrawerButton(
           onPressed: () {},
           isHidden: true,
         ),

@@ -65,7 +65,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
           effects: const [
             FadeEffect(
               curve: Curves.easeIn,
-              duration: CJVnkDurations.fadeAnimation,
+              duration: BoneveraDurations.fadeAnimation,
             ),
           ],
           child: WeatherContent(

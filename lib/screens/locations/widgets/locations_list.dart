@@ -6,7 +6,7 @@ import '../../../constants/durations.dart';
 import '../../../models/location/location.dart';
 import '../../../theme/icons.dart';
 import '../../../theme/theme.dart';
-import '../../../widgets/cjvnk_button.dart';
+import '../../../widgets/bonevera_button.dart';
 
 class LocationsList extends StatelessWidget {
   final List<Location> locations;
@@ -51,11 +51,11 @@ class LocationsList extends StatelessWidget {
 
             return Animate(
               key: ValueKey(location),
-              delay: (CJVnkDurations.buttonAnimation.inMilliseconds * index).milliseconds,
+              delay: (BoneveraDurations.buttonAnimation.inMilliseconds * index).milliseconds,
               effects: const [
                 FadeEffect(
                   curve: Curves.easeIn,
-                  duration: CJVnkDurations.fadeAnimation,
+                  duration: BoneveraDurations.fadeAnimation,
                 ),
               ],
               child: SwipeActionCell(
@@ -68,7 +68,7 @@ class LocationsList extends StatelessWidget {
                     onTap: (handler) => onTapDelete(handler, location),
                     color: Colors.transparent,
                     backgroundRadius: 100,
-                    content: CJVnkButton(
+                    content: BoneveraButton(
                       child: IconButton(
                         onPressed: null,
                         padding: const EdgeInsets.all(12),
@@ -82,7 +82,7 @@ class LocationsList extends StatelessWidget {
                           overlayColor: context.colors.locationsText,
                         ),
                         icon: Image.asset(
-                          CJVnkIcons.delete,
+                          BoneveraIcons.delete,
                           height: 32,
                           width: 32,
                           color: context.colors.locationsText,
@@ -93,7 +93,7 @@ class LocationsList extends StatelessWidget {
                 ],
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 4),
-                  child: CJVnkButton(
+                  child: BoneveraButton(
                     onPressed: () => locationPressed(location),
                     child: ListTile(
                       title: Text(

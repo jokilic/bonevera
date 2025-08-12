@@ -3,8 +3,8 @@
 // Check in to version control
 
 import 'package:hive_ce/hive.dart';
-import 'package:ca_je_vanka/models/location/location.dart';
-import 'package:ca_je_vanka/models/token/token.dart';
+import 'package:bonevera/models/location/location.dart';
+import 'package:bonevera/models/token/token.dart';
 
 extension HiveRegistrar on HiveInterface {
   void registerAdapters() {

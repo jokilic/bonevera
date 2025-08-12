@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-abstract class CJVnkTextStyles {
+abstract class BoneveraTextStyles {
   static const appBarTitle = TextStyle(
     fontFamily: 'ProductSans',
     fontSize: 24,
@@ -125,7 +125,7 @@ abstract class CJVnkTextStyles {
   );
 }
 
-class CJVnkTextThemesExtension extends ThemeExtension<CJVnkTextThemesExtension> {
+class BoneveraTextThemesExtension extends ThemeExtension<BoneveraTextThemesExtension> {
   final TextStyle appBarTitle;
   final TextStyle appBarSubtitle;
   final TextStyle currentTemperature;
@@ -147,7 +147,7 @@ class CJVnkTextThemesExtension extends ThemeExtension<CJVnkTextThemesExtension> 
   final TextStyle weatherAdditionalSmallValue;
   final TextStyle weatherAdditionalTitle;
 
-  const CJVnkTextThemesExtension({
+  const BoneveraTextThemesExtension({
     required this.appBarTitle,
     required this.appBarSubtitle,
     required this.currentTemperature,
@@ -171,7 +171,7 @@ class CJVnkTextThemesExtension extends ThemeExtension<CJVnkTextThemesExtension> 
   });
 
   @override
-  ThemeExtension<CJVnkTextThemesExtension> copyWith({
+  ThemeExtension<BoneveraTextThemesExtension> copyWith({
     TextStyle? appBarTitle,
     TextStyle? appBarSubtitle,
     TextStyle? currentTemperature,
@@ -192,7 +192,7 @@ class CJVnkTextThemesExtension extends ThemeExtension<CJVnkTextThemesExtension> 
     TextStyle? weatherAdditionalValue,
     TextStyle? weatherAdditionalSmallValue,
     TextStyle? weatherAdditionalTitle,
-  }) => CJVnkTextThemesExtension(
+  }) => BoneveraTextThemesExtension(
     appBarTitle: appBarTitle ?? this.appBarTitle,
     appBarSubtitle: appBarSubtitle ?? this.appBarSubtitle,
     currentTemperature: currentTemperature ?? this.currentTemperature,
@@ -216,15 +216,15 @@ class CJVnkTextThemesExtension extends ThemeExtension<CJVnkTextThemesExtension> 
   );
 
   @override
-  ThemeExtension<CJVnkTextThemesExtension> lerp(
-    covariant ThemeExtension<CJVnkTextThemesExtension>? other,
+  ThemeExtension<BoneveraTextThemesExtension> lerp(
+    covariant ThemeExtension<BoneveraTextThemesExtension>? other,
     double t,
   ) {
-    if (other is! CJVnkTextThemesExtension) {
+    if (other is! BoneveraTextThemesExtension) {
       return this;
     }
 
-    return CJVnkTextThemesExtension(
+    return BoneveraTextThemesExtension(
       appBarTitle: TextStyle.lerp(appBarTitle, other.appBarTitle, t)!,
       appBarSubtitle: TextStyle.lerp(appBarSubtitle, other.appBarSubtitle, t)!,
       currentTemperature: TextStyle.lerp(currentTemperature, other.currentTemperature, t)!,

@@ -151,10 +151,10 @@ class _DayWeatherContentState extends State<DayWeatherContent> {
             ///
             // Expanded(
             //   flex: 4,
-            //   child: CJVnkButton(
+            //   child: BoneveraButton(
             //     onPressed: toggleWeatherWidget,
             //     child: AnimatedSwitcher(
-            //       duration: CJVnkDurations.fadeAnimation,
+            //       duration: BoneveraDurations.fadeAnimation,
             //       switchInCurve: Curves.easeIn,
             //       switchOutCurve: Curves.easeIn,
             //       transitionBuilder: (child, listenable) => ZoomTransition(

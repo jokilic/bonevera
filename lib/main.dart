@@ -22,15 +22,15 @@ Future<void> main() async {
   /// Wait for initialization to finish
   await getIt.allReady();
 
-  runApp(CJVnkApp());
+  runApp(BoneveraApp());
 }
 
-class CJVnkApp extends StatelessWidget {
+class BoneveraApp extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => CJVnkWidget();
+  Widget build(BuildContext context) => BoneveraWidget();
 }
 
-class CJVnkWidget extends WatchingWidget {
+class BoneveraWidget extends WatchingWidget {
   @override
   Widget build(BuildContext context) {
     final theme = watchIt<ThemeService>().value;
@@ -38,8 +38,8 @@ class CJVnkWidget extends WatchingWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: MainScreen(),
-      theme: theme ?? CJVnkTheme.lightBlue,
-      darkTheme: theme ?? CJVnkTheme.dark,
+      theme: theme ?? BoneveraTheme.lightBlue,
+      darkTheme: theme ?? BoneveraTheme.dark,
       builder: (_, child) {
         final appWidget =
             child ??

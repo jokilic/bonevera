@@ -1,4 +1,4 @@
-class CJVnkDurations {
+class BoneveraDurations {
   static const tokenBuffer = Duration(minutes: 1);
   static const tokenDuration = Duration(minutes: 10);
   static const fadeAnimation = Duration(milliseconds: 225);

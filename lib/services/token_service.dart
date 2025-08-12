@@ -36,14 +36,14 @@ class TokenService {
       /// `token` exists in [Hive]
       if (cachedToken != null) {
         /// Check if cached `token` is still valid
-        if (now.isBefore(cachedToken.expiry.subtract(CJVnkDurations.tokenBuffer))) {
+        if (now.isBefore(cachedToken.expiry.subtract(BoneveraDurations.tokenBuffer))) {
           logger.f('TokenService -> getToken() -> Using cached token');
           return cachedToken;
         }
       }
 
       /// Store new `expiry`
-      final expiry = now.add(CJVnkDurations.tokenDuration);
+      final expiry = now.add(BoneveraDurations.tokenDuration);
 
       /// Generate new `token` value
       final newTokenValue = await generateToken(

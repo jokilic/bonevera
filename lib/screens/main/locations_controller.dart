@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
 
-import '../../models/location/location.dart' as cjvnk_location;
+import '../../models/location/location.dart' as bonevera_location;
 import '../../services/hive_service.dart';
 import '../../services/logger_service.dart';
 
-class LocationsController extends ValueNotifier<({List<cjvnk_location.Location> locations, cjvnk_location.Location? currentLocation})> {
+class LocationsController extends ValueNotifier<({List<bonevera_location.Location> locations, bonevera_location.Location? currentLocation})> {
   ///
   /// CONSTRUCTOR
   ///
@@ -29,9 +29,9 @@ class LocationsController extends ValueNotifier<({List<cjvnk_location.Location> 
   ///
 
   /// Triggered when user deletes locations
-  void deleteLocation(cjvnk_location.Location location) {
+  void deleteLocation(bonevera_location.Location location) {
     /// Generate new `state`
-    final newLocations = List<cjvnk_location.Location>.from(value.locations)..remove(location);
+    final newLocations = List<bonevera_location.Location>.from(value.locations)..remove(location);
 
     /// Update all locations in [Hive]
     hive.writeLocationList(newLocations: newLocations);
@@ -49,7 +49,7 @@ class LocationsController extends ValueNotifier<({List<cjvnk_location.Location> 
     final item = value.locations.removeAt(oldIndex);
 
     /// Generate new `state`
-    final newLocations = List<cjvnk_location.Location>.from(value.locations)..insert(newIndex, item);
+    final newLocations = List<bonevera_location.Location>.from(value.locations)..insert(newIndex, item);
 
     /// Update all locations in [Hive]
     hive.writeLocationList(newLocations: newLocations);
@@ -62,7 +62,7 @@ class LocationsController extends ValueNotifier<({List<cjvnk_location.Location> 
   }
 
   /// Adds `location` to [Hive]
-  bool addLocationToHive({required cjvnk_location.Location passedLocation}) {
+  bool addLocationToHive({required bonevera_location.Location passedLocation}) {
     /// Check if `location` already exists
     final locationExists = value.locations.any(
       (location) => location.latitude == passedLocation.latitude && location.longitude == passedLocation.longitude,
@@ -71,7 +71,7 @@ class LocationsController extends ValueNotifier<({List<cjvnk_location.Location> 
     /// `location` doesn't exist, write in [Hive] and update `state`
     if (!locationExists) {
       /// Generate new `state`
-      final newLocations = List<cjvnk_location.Location>.from(value.locations)..add(passedLocation);
+      final newLocations = List<bonevera_location.Location>.from(value.locations)..add(passedLocation);
 
       /// Add new location in [Hive]
       hive.writeLocation(newLocation: passedLocation);
@@ -89,7 +89,7 @@ class LocationsController extends ValueNotifier<({List<cjvnk_location.Location> 
   }
 
   /// Updates `state` with new `currentLocation`
-  void updateCurrentLocation({required cjvnk_location.Location newCurrentLocation}) => value = (
+  void updateCurrentLocation({required bonevera_location.Location newCurrentLocation}) => value = (
     locations: value.locations,
     currentLocation: newCurrentLocation,
   );

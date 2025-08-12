@@ -43,7 +43,7 @@ class WeatherAdditionalWind extends StatelessWidget {
               ),
             ),
             Image.asset(
-              CJVnkIcons.arrow,
+              BoneveraIcons.arrow,
               height: 16,
               width: 16,
               color: context.colors.bottomWidgetText,
@@ -102,7 +102,7 @@ class WeatherAdditionalWind extends StatelessWidget {
                               child: Transform.rotate(
                                 angle: (windDirection! - 90) * (pi / 180),
                                 child: Image.asset(
-                                  CJVnkIcons.arrow,
+                                  BoneveraIcons.arrow,
                                   width: 16,
                                   height: 16,
                                   color: context.colors.bottomWidgetText.withValues(alpha: 0.6),

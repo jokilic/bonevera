@@ -1,4 +1,4 @@
-package com.josipkilic.ca_je_vanka
+package com.josipkilic.bonevera
 
 import io.flutter.embedding.android.FlutterActivity
 

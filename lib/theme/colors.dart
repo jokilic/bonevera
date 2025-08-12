@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-abstract class CJVnkColors {
+abstract class BoneveraColors {
   static const white = Color(0xFFDFECFB);
   static const darkPurple = Color(0xFF342464);
   static const lightBlue = Color(0xFF74AEDE);
 }
 
-class CJVnkColorsExtension extends ThemeExtension<CJVnkColorsExtension> {
+class BoneveraColorsExtension extends ThemeExtension<BoneveraColorsExtension> {
   final Color weatherBackground;
   final Color appBarDaysBackground;
   final Color bottomWidgetBackground;
@@ -18,7 +18,7 @@ class CJVnkColorsExtension extends ThemeExtension<CJVnkColorsExtension> {
   final Color bottomWidgetText;
   final Color locationsText;
 
-  CJVnkColorsExtension({
+  BoneveraColorsExtension({
     required this.weatherBackground,
     required this.appBarDaysBackground,
     required this.bottomWidgetBackground,
@@ -31,7 +31,7 @@ class CJVnkColorsExtension extends ThemeExtension<CJVnkColorsExtension> {
   });
 
   @override
-  ThemeExtension<CJVnkColorsExtension> copyWith({
+  ThemeExtension<BoneveraColorsExtension> copyWith({
     Color? weatherBackground,
     Color? appBarDaysBackground,
     Color? bottomWidgetBackground,
@@ -41,7 +41,7 @@ class CJVnkColorsExtension extends ThemeExtension<CJVnkColorsExtension> {
     Color? daysWidgetText,
     Color? bottomWidgetText,
     Color? locationsText,
-  }) => CJVnkColorsExtension(
+  }) => BoneveraColorsExtension(
     weatherBackground: weatherBackground ?? this.weatherBackground,
     appBarDaysBackground: appBarDaysBackground ?? this.appBarDaysBackground,
     bottomWidgetBackground: bottomWidgetBackground ?? this.bottomWidgetBackground,
@@ -54,15 +54,15 @@ class CJVnkColorsExtension extends ThemeExtension<CJVnkColorsExtension> {
   );
 
   @override
-  ThemeExtension<CJVnkColorsExtension> lerp(
-    covariant ThemeExtension<CJVnkColorsExtension>? other,
+  ThemeExtension<BoneveraColorsExtension> lerp(
+    covariant ThemeExtension<BoneveraColorsExtension>? other,
     double t,
   ) {
-    if (other is! CJVnkColorsExtension) {
+    if (other is! BoneveraColorsExtension) {
       return this;
     }
 
-    return CJVnkColorsExtension(
+    return BoneveraColorsExtension(
       weatherBackground: Color.lerp(weatherBackground, other.weatherBackground, t)!,
       appBarDaysBackground: Color.lerp(appBarDaysBackground, other.appBarDaysBackground, t)!,
       bottomWidgetBackground: Color.lerp(bottomWidgetBackground, other.bottomWidgetBackground, t)!,

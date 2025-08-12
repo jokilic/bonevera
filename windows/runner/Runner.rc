@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.josipkilic" "\0"
-            VALUE "FileDescription", "ca_je_vanka" "\0"
+            VALUE "FileDescription", "bonevera" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "ca_je_vanka" "\0"
+            VALUE "InternalName", "bonevera" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2025 com.josipkilic. All rights reserved." "\0"
-            VALUE "OriginalFilename", "ca_je_vanka.exe" "\0"
-            VALUE "ProductName", "ca_je_vanka" "\0"
+            VALUE "OriginalFilename", "bonevera.exe" "\0"
+            VALUE "ProductName", "bonevera" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

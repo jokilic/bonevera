@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import '../../../../models/location/location.dart' as cjvnk_location;
+import '../../../../models/location/location.dart' as bonevera_location;
 import '../../../../theme/theme.dart';
-import '../../../../widgets/cjvnk_button.dart';
+import '../../../../widgets/bonevera_button.dart';
 
 class LocationSearchSuccess extends StatelessWidget {
-  final List<cjvnk_location.Location> locations;
-  final Function(cjvnk_location.Location location) onPressLocation;
+  final List<bonevera_location.Location> locations;
+  final Function(bonevera_location.Location location) onPressLocation;
 
   const LocationSearchSuccess({
     required this.locations,
@@ -21,7 +21,7 @@ class LocationSearchSuccess extends StatelessWidget {
     itemBuilder: (_, index) {
       final location = locations[index];
 
-      return CJVnkButton(
+      return BoneveraButton(
         onPressed: () => onPressLocation(location),
         child: ListTile(
           title: Text(

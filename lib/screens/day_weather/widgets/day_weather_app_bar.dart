@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../../theme/icons.dart';
 import '../../../theme/theme.dart';
-import '../../../widgets/cjvnk_drawer_button.dart';
+import '../../../widgets/bonevera_drawer_button.dart';
 
 class DayWeatherAppBar extends StatelessWidget {
   final String title;
@@ -29,9 +29,9 @@ class DayWeatherAppBar extends StatelessWidget {
         ///
         /// LOCATIONS BUTTON
         ///
-        CJVnkDrawerButton(
+        BoneveraDrawerButton(
           onPressed: onPressedBack,
-          icon: CJVnkIcons.arrow,
+          icon: BoneveraIcons.arrow,
           angle: pi,
         ),
         const SizedBox(width: 16),
@@ -69,7 +69,7 @@ class DayWeatherAppBar extends StatelessWidget {
         /// EMPTY SPACE
         ///
         const SizedBox(width: 16),
-        CJVnkDrawerButton(
+        BoneveraDrawerButton(
           onPressed: () {},
           isHidden: true,
         ),

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'colors.dart';
 import 'text_styles.dart';
 
-class CJVnkTheme {
+class BoneveraTheme {
   ///
   /// LIGHT BLUE
   ///
@@ -19,16 +19,16 @@ class CJVnkTheme {
     );
   }
 
-  static final lightBlueAppColors = CJVnkColorsExtension(
-    weatherBackground: CJVnkColors.lightBlue,
-    appBarDaysBackground: CJVnkColors.white.withValues(alpha: 0.25),
-    bottomWidgetBackground: CJVnkColors.darkPurple,
-    locationsBackground: CJVnkColors.darkPurple,
-    appBarText: CJVnkColors.darkPurple,
-    mainWeatherText: CJVnkColors.darkPurple,
-    daysWidgetText: CJVnkColors.white,
-    bottomWidgetText: CJVnkColors.white,
-    locationsText: CJVnkColors.white,
+  static final lightBlueAppColors = BoneveraColorsExtension(
+    weatherBackground: BoneveraColors.lightBlue,
+    appBarDaysBackground: BoneveraColors.white.withValues(alpha: 0.25),
+    bottomWidgetBackground: BoneveraColors.darkPurple,
+    locationsBackground: BoneveraColors.darkPurple,
+    appBarText: BoneveraColors.darkPurple,
+    mainWeatherText: BoneveraColors.darkPurple,
+    daysWidgetText: BoneveraColors.white,
+    bottomWidgetText: BoneveraColors.white,
+    locationsText: BoneveraColors.white,
   );
 
   static final lightBlueTextTheme = getTextThemesExtension(
@@ -50,16 +50,16 @@ class CJVnkTheme {
     );
   }
 
-  static final darkAppColors = CJVnkColorsExtension(
-    weatherBackground: CJVnkColors.darkPurple,
-    appBarDaysBackground: CJVnkColors.white.withValues(alpha: 0.1),
-    bottomWidgetBackground: CJVnkColors.lightBlue,
-    locationsBackground: CJVnkColors.lightBlue,
-    appBarText: CJVnkColors.white,
-    mainWeatherText: CJVnkColors.white,
-    daysWidgetText: CJVnkColors.white,
-    bottomWidgetText: CJVnkColors.white,
-    locationsText: CJVnkColors.white,
+  static final darkAppColors = BoneveraColorsExtension(
+    weatherBackground: BoneveraColors.darkPurple,
+    appBarDaysBackground: BoneveraColors.white.withValues(alpha: 0.1),
+    bottomWidgetBackground: BoneveraColors.lightBlue,
+    locationsBackground: BoneveraColors.lightBlue,
+    appBarText: BoneveraColors.white,
+    mainWeatherText: BoneveraColors.white,
+    daysWidgetText: BoneveraColors.white,
+    bottomWidgetText: BoneveraColors.white,
+    locationsText: BoneveraColors.white,
   );
 
   static final darkTextTheme = getTextThemesExtension(
@@ -81,16 +81,16 @@ class CJVnkTheme {
     );
   }
 
-  static final whiteAppColors = CJVnkColorsExtension(
-    weatherBackground: CJVnkColors.white,
+  static final whiteAppColors = BoneveraColorsExtension(
+    weatherBackground: BoneveraColors.white,
     appBarDaysBackground: Colors.white,
-    bottomWidgetBackground: CJVnkColors.lightBlue,
-    locationsBackground: CJVnkColors.lightBlue,
-    appBarText: CJVnkColors.darkPurple,
-    mainWeatherText: CJVnkColors.darkPurple,
-    daysWidgetText: CJVnkColors.darkPurple,
-    bottomWidgetText: CJVnkColors.white,
-    locationsText: CJVnkColors.darkPurple,
+    bottomWidgetBackground: BoneveraColors.lightBlue,
+    locationsBackground: BoneveraColors.lightBlue,
+    appBarText: BoneveraColors.darkPurple,
+    mainWeatherText: BoneveraColors.darkPurple,
+    daysWidgetText: BoneveraColors.darkPurple,
+    bottomWidgetText: BoneveraColors.white,
+    locationsText: BoneveraColors.darkPurple,
   );
 
   static final whiteTextTheme = getTextThemesExtension(
@@ -98,78 +98,78 @@ class CJVnkTheme {
   );
 }
 
-extension CJVnkThemeExtension on ThemeData {
-  CJVnkColorsExtension get cJVnkColors => extension<CJVnkColorsExtension>() ?? CJVnkTheme.lightBlueAppColors;
-  CJVnkTextThemesExtension get cJVnkTextStyles => extension<CJVnkTextThemesExtension>() ?? CJVnkTheme.lightBlueTextTheme;
+extension BoneveraThemeExtension on ThemeData {
+  BoneveraColorsExtension get boneveraColors => extension<BoneveraColorsExtension>() ?? BoneveraTheme.lightBlueAppColors;
+  BoneveraTextThemesExtension get boneveraTextStyles => extension<BoneveraTextThemesExtension>() ?? BoneveraTheme.lightBlueTextTheme;
 }
 
 extension ThemeGetter on BuildContext {
   ThemeData get theme => Theme.of(this);
-  CJVnkColorsExtension get colors => theme.cJVnkColors;
-  CJVnkTextThemesExtension get textStyles => theme.cJVnkTextStyles;
+  BoneveraColorsExtension get colors => theme.boneveraColors;
+  BoneveraTextThemesExtension get textStyles => theme.boneveraTextStyles;
 }
 
-CJVnkTextThemesExtension getTextThemesExtension({
-  required CJVnkColorsExtension colorsExtension,
-}) => CJVnkTextThemesExtension(
-  appBarTitle: CJVnkTextStyles.appBarTitle.copyWith(
+BoneveraTextThemesExtension getTextThemesExtension({
+  required BoneveraColorsExtension colorsExtension,
+}) => BoneveraTextThemesExtension(
+  appBarTitle: BoneveraTextStyles.appBarTitle.copyWith(
     color: colorsExtension.appBarText,
   ),
-  appBarSubtitle: CJVnkTextStyles.appBarSubtitle.copyWith(
+  appBarSubtitle: BoneveraTextStyles.appBarSubtitle.copyWith(
     color: colorsExtension.appBarText,
   ),
-  currentTemperature: CJVnkTextStyles.currentTemperature.copyWith(
+  currentTemperature: BoneveraTextStyles.currentTemperature.copyWith(
     color: colorsExtension.mainWeatherText,
   ),
-  currentCondition: CJVnkTextStyles.currentCondition.copyWith(
+  currentCondition: BoneveraTextStyles.currentCondition.copyWith(
     color: colorsExtension.mainWeatherText,
   ),
-  currentHighLowTemperature: CJVnkTextStyles.currentHighLowTemperature.copyWith(
+  currentHighLowTemperature: BoneveraTextStyles.currentHighLowTemperature.copyWith(
     color: colorsExtension.mainWeatherText,
   ),
-  dayTitle: CJVnkTextStyles.dayTitle.copyWith(
+  dayTitle: BoneveraTextStyles.dayTitle.copyWith(
     color: colorsExtension.daysWidgetText,
   ),
-  dayHighLowTemperature: CJVnkTextStyles.dayHighLowTemperature.copyWith(
+  dayHighLowTemperature: BoneveraTextStyles.dayHighLowTemperature.copyWith(
     color: colorsExtension.daysWidgetText,
   ),
-  dayCondition: CJVnkTextStyles.dayCondition.copyWith(
+  dayCondition: BoneveraTextStyles.dayCondition.copyWith(
     color: colorsExtension.daysWidgetText.withValues(alpha: 0.6),
   ),
-  chartTitle: CJVnkTextStyles.chartTitle.copyWith(
+  chartTitle: BoneveraTextStyles.chartTitle.copyWith(
     color: colorsExtension.bottomWidgetText,
   ),
-  chartTemperature: CJVnkTextStyles.chartTemperature.copyWith(
+  chartTemperature: BoneveraTextStyles.chartTemperature.copyWith(
     color: colorsExtension.bottomWidgetText,
   ),
-  locationsTextField: CJVnkTextStyles.locationsTextField.copyWith(
+  locationsTextField: BoneveraTextStyles.locationsTextField.copyWith(
     color: colorsExtension.locationsText,
   ),
-  locationsTitle: CJVnkTextStyles.locationsTitle.copyWith(
+  locationsTitle: BoneveraTextStyles.locationsTitle.copyWith(
     color: colorsExtension.locationsText,
   ),
-  locationsName: CJVnkTextStyles.locationsName.copyWith(
+  locationsName: BoneveraTextStyles.locationsName.copyWith(
     color: colorsExtension.locationsText,
   ),
-  locationsCountry: CJVnkTextStyles.locationsCountry.copyWith(
+  locationsCountry: BoneveraTextStyles.locationsCountry.copyWith(
     color: colorsExtension.locationsText,
   ),
-  locationsNoLocation: CJVnkTextStyles.locationsNoLocation.copyWith(
+  locationsNoLocation: BoneveraTextStyles.locationsNoLocation.copyWith(
     color: colorsExtension.locationsText,
   ),
-  locationsAppName: CJVnkTextStyles.locationsAppName.copyWith(
+  locationsAppName: BoneveraTextStyles.locationsAppName.copyWith(
     color: colorsExtension.locationsText,
   ),
-  locationsAppVersion: CJVnkTextStyles.locationsAppVersion.copyWith(
+  locationsAppVersion: BoneveraTextStyles.locationsAppVersion.copyWith(
     color: colorsExtension.locationsText,
   ),
-  weatherAdditionalValue: CJVnkTextStyles.weatherAdditionalValue.copyWith(
+  weatherAdditionalValue: BoneveraTextStyles.weatherAdditionalValue.copyWith(
     color: colorsExtension.bottomWidgetText,
   ),
-  weatherAdditionalSmallValue: CJVnkTextStyles.weatherAdditionalSmallValue.copyWith(
+  weatherAdditionalSmallValue: BoneveraTextStyles.weatherAdditionalSmallValue.copyWith(
     color: colorsExtension.bottomWidgetText.withValues(alpha: 0.6),
   ),
-  weatherAdditionalTitle: CJVnkTextStyles.weatherAdditionalTitle.copyWith(
+  weatherAdditionalTitle: BoneveraTextStyles.weatherAdditionalTitle.copyWith(
     color: colorsExtension.bottomWidgetText.withValues(alpha: 0.6),
   ),
 );

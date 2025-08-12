@@ -40,7 +40,7 @@ class WeatherAdditionalAir extends StatelessWidget {
               ),
             ),
             Image.asset(
-              CJVnkIcons.arrow,
+              BoneveraIcons.arrow,
               height: 16,
               width: 16,
               color: context.colors.bottomWidgetText,

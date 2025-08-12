@@ -10,7 +10,7 @@ import '../../services/timezone_service.dart';
 import '../../services/token_service.dart';
 import '../../util/state.dart';
 
-class WeatherController extends ValueNotifier<CJVnkState<ResponseWeather>> {
+class WeatherController extends ValueNotifier<BoneveraState<ResponseWeather>> {
   ///
   /// CONSTRUCTOR
   ///

@@ -2,13 +2,13 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Ča je vanka? Debug",
+            "name": "Bonevera Debug",
             "request": "launch",
             "type": "dart",
             "flutterMode": "debug",
         },
         {
-            "name": "Ča je vanka? Release",
+            "name": "Bonevera Release",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release",

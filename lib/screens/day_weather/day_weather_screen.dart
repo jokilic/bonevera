@@ -28,7 +28,7 @@ class DayWeatherScreen extends StatelessWidget {
         effects: const [
           FadeEffect(
             curve: Curves.easeIn,
-            duration: CJVnkDurations.fadeAnimation,
+            duration: BoneveraDurations.fadeAnimation,
           ),
         ],
         child: DayWeatherContent(

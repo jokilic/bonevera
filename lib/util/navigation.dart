@@ -28,8 +28,8 @@ Route<T> fadePageTransition<T>(
   Duration? transitionDuration,
   Duration? reverseTransitionDuration,
 }) => PageRouteBuilder<T>(
-  transitionDuration: transitionDuration ?? CJVnkDurations.fadeAnimation,
-  reverseTransitionDuration: reverseTransitionDuration ?? CJVnkDurations.fadeAnimation,
+  transitionDuration: transitionDuration ?? BoneveraDurations.fadeAnimation,
+  reverseTransitionDuration: reverseTransitionDuration ?? BoneveraDurations.fadeAnimation,
   pageBuilder: (_, __, ___) => screen,
   transitionsBuilder: (_, animation, __, child) => FadeTransition(
     opacity: animation,
@@ -42,8 +42,8 @@ Route<T> circularPageTransition<T>(
   Duration? transitionDuration,
   Duration? reverseTransitionDuration,
 }) => PageRouteBuilder<T>(
-  transitionDuration: transitionDuration ?? CJVnkDurations.fadeAnimation,
-  reverseTransitionDuration: reverseTransitionDuration ?? CJVnkDurations.fadeAnimation,
+  transitionDuration: transitionDuration ?? BoneveraDurations.fadeAnimation,
+  reverseTransitionDuration: reverseTransitionDuration ?? BoneveraDurations.fadeAnimation,
   opaque: false,
   pageBuilder: (_, __, ___) => screen,
   transitionsBuilder: (context, animation, _, child) {

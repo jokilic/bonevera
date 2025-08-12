@@ -3,18 +3,18 @@ import 'package:flutter/material.dart';
 import '../constants/durations.dart';
 import '../theme/icons.dart';
 import '../theme/theme.dart';
-import 'cjvnk_button.dart';
+import 'bonevera_button.dart';
 
-class CJVnkDrawerButton extends StatelessWidget {
+class BoneveraDrawerButton extends StatelessWidget {
   final Function() onPressed;
   final String icon;
   final Color? iconColor;
   final bool isHidden;
   final double angle;
 
-  const CJVnkDrawerButton({
+  const BoneveraDrawerButton({
     required this.onPressed,
-    this.icon = CJVnkIcons.drawer,
+    this.icon = BoneveraIcons.drawer,
     this.isHidden = false,
     this.iconColor,
     this.angle = 0,
@@ -24,10 +24,10 @@ class CJVnkDrawerButton extends StatelessWidget {
   Widget build(BuildContext context) => IgnorePointer(
     ignoring: isHidden,
     child: AnimatedOpacity(
-      duration: CJVnkDurations.fadeAnimation,
+      duration: BoneveraDurations.fadeAnimation,
       curve: Curves.easeIn,
       opacity: isHidden ? 0 : 1,
-      child: CJVnkButton(
+      child: BoneveraButton(
         onPressed: onPressed,
         child: IconButton(
           onPressed: null,

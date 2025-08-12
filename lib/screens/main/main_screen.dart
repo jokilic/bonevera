@@ -9,7 +9,7 @@ import '../../services/logger_service.dart';
 import '../../theme/icons.dart';
 import '../../theme/theme.dart';
 import '../../util/dependencies.dart';
-import '../../widgets/cjvnk_drawer_button.dart';
+import '../../widgets/bonevera_drawer_button.dart';
 import '../locations/locations_screen.dart';
 import '../weather/weather_screen.dart';
 import 'locations_controller.dart';
@@ -41,7 +41,7 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
 
     animationController = AnimationController(
       vsync: this,
-      duration: CJVnkDurations.fadeAnimation,
+      duration: BoneveraDurations.fadeAnimation,
     );
 
     animation = Tween<double>(begin: 0, end: 1).animate(
@@ -125,7 +125,7 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
             /// DRAWER
             ///
             AnimatedPositioned(
-              duration: CJVnkDurations.fadeAnimation,
+              duration: BoneveraDurations.fadeAnimation,
               curve: Curves.fastOutSlowIn,
               height: double.maxFinite,
               width: drawerWidth,
@@ -155,7 +155,7 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(24),
                       child: AnimatedSwitcher(
-                        duration: CJVnkDurations.fadeAnimation,
+                        duration: BoneveraDurations.fadeAnimation,
                         switchInCurve: Curves.fastOutSlowIn,
                         switchOutCurve: Curves.fastOutSlowIn,
                         child: locationExists
@@ -177,7 +177,7 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
             /// DRAWER BUTTON
             ///
             AnimatedPositioned(
-              duration: CJVnkDurations.fadeAnimation,
+              duration: BoneveraDurations.fadeAnimation,
               curve: Curves.fastOutSlowIn,
               left: isSideMenuOpened ? 184 : 0,
               child: SafeArea(
@@ -186,9 +186,9 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
                     horizontal: 16,
                     vertical: 8,
                   ),
-                  child: CJVnkDrawerButton(
+                  child: BoneveraDrawerButton(
                     onPressed: drawerButtonPressed,
-                    icon: isSideMenuOpened ? CJVnkIcons.close : CJVnkIcons.drawer,
+                    icon: isSideMenuOpened ? BoneveraIcons.close : BoneveraIcons.drawer,
                     iconColor: isSideMenuOpened ? context.colors.locationsText : context.colors.appBarText,
                     isHidden: !locationExists,
                   ),

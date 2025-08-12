@@ -6,7 +6,7 @@ import 'weather_success.dart';
 
 class WeatherContent extends StatelessWidget {
   final Location location;
-  final CJVnkState weatherState;
+  final BoneveraState weatherState;
 
   const WeatherContent({
     required this.location,

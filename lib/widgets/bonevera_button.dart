@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../constants/durations.dart';
 
-class CJVnkButton extends StatefulWidget {
+class BoneveraButton extends StatefulWidget {
   final Widget child;
   final Function()? onPressed;
   final Function()? onLongPressed;
 
-  const CJVnkButton({
+  const BoneveraButton({
     required this.child,
     this.onPressed,
     this.onLongPressed,
@@ -15,10 +15,10 @@ class CJVnkButton extends StatefulWidget {
   });
 
   @override
-  State<CJVnkButton> createState() => _CJVnkButtonState();
+  State<BoneveraButton> createState() => _BoneveraButtonState();
 }
 
-class _CJVnkButtonState extends State<CJVnkButton> with SingleTickerProviderStateMixin {
+class _BoneveraButtonState extends State<BoneveraButton> with SingleTickerProviderStateMixin {
   late final AnimationController controller;
   late final Animation<double> animation;
 
@@ -28,7 +28,7 @@ class _CJVnkButtonState extends State<CJVnkButton> with SingleTickerProviderStat
 
     controller = AnimationController(
       vsync: this,
-      duration: CJVnkDurations.buttonAnimation,
+      duration: BoneveraDurations.buttonAnimation,
     );
 
     animation = Tween<double>(begin: 1, end: 0.95).animate(controller);

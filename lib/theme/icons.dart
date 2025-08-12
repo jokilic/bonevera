@@ -1,4 +1,4 @@
-class CJVnkIcons {
+class BoneveraIcons {
   static const arrow = 'assets/arrow.png';
   static const close = 'assets/close.png';
   static const delete = 'assets/delete.png';

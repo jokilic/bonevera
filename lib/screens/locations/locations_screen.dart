@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
 
 import '../../constants/durations.dart';
-import '../../models/location/location.dart' as cjvnk_location;
+import '../../models/location/location.dart' as bonevera_location;
 import '../../services/logger_service.dart';
 import '../../theme/theme.dart';
 import '../../util/dependencies.dart';
 import '../../util/state.dart';
-import '../../widgets/cjvnk_version_logo.dart';
+import '../../widgets/bonevera_version_logo.dart';
 import '../main/locations_controller.dart';
 import 'location_search_controller.dart';
 import 'widgets/location_search/location_search_field.dart';
@@ -16,7 +16,7 @@ import 'widgets/locations_list.dart';
 
 class LocationsScreen extends WatchingStatefulWidget {
   final Function() drawerButtonPressed;
-  final List<cjvnk_location.Location> locations;
+  final List<bonevera_location.Location> locations;
   final Color backgroundColor;
   final double drawerWidth;
 
@@ -78,7 +78,7 @@ class _LocationsScreenState extends State<LocationsScreen> {
                     ),
                   ),
                   AnimatedContainer(
-                    duration: CJVnkDurations.fadeAnimation,
+                    duration: BoneveraDurations.fadeAnimation,
                     curve: Curves.easeIn,
                     width: widget.locations.isNotEmpty ? 72 : 0,
                   ),
@@ -154,7 +154,7 @@ class _LocationsScreenState extends State<LocationsScreen> {
               ///
               /// ČJVNK LOGO & VERSION
               ///
-              CJVnKVersionLogo(),
+              BoneveraVersionLogo(),
               const SizedBox(height: 16),
             ],
           ),

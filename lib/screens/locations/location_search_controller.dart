@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:get_it/get_it.dart';
 
-import '../../models/location/location.dart' as cjvnk_location;
+import '../../models/location/location.dart' as bonevera_location;
 import '../../services/logger_service.dart';
 import '../../util/dependencies.dart';
 import '../../util/state.dart';
 import '../main/locations_controller.dart';
 
-class LocationSearchController extends ValueNotifier<CJVnkState<List<cjvnk_location.Location>>> implements Disposable {
+class LocationSearchController extends ValueNotifier<BoneveraState<List<bonevera_location.Location>>> implements Disposable {
   ///
   /// CONSTRUCTOR
   ///
@@ -41,7 +41,7 @@ class LocationSearchController extends ValueNotifier<CJVnkState<List<cjvnk_locat
   ///
 
   /// Triggered when user presses location
-  void locationPressed(cjvnk_location.Location location) {
+  void locationPressed(bonevera_location.Location location) {
     /// Add new location to [Hive]
     final locationAdded = getIt.get<LocationsController>().addLocationToHive(passedLocation: location);
 
@@ -82,7 +82,7 @@ class LocationSearchController extends ValueNotifier<CJVnkState<List<cjvnk_locat
           /// Generate `List<cjvnk_location.Location>` from `placemarks`
           final locations = placemarks
               .map(
-                (placemark) => cjvnk_location.Location(
+                (placemark) => bonevera_location.Location(
                   name: placemark.name,
                   street: placemark.street,
                   isoCountryCode: placemark.isoCountryCode,

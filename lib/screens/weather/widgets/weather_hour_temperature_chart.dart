@@ -85,7 +85,7 @@ class WeatherHourTemperatureChart extends StatelessWidget {
                 ),
               ),
               Image.asset(
-                CJVnkIcons.arrow,
+                BoneveraIcons.arrow,
                 height: 16,
                 width: 16,
                 color: context.colors.bottomWidgetText,
@@ -127,7 +127,7 @@ class WeatherHourTemperatureChart extends StatelessWidget {
                   ),
                 ),
               ),
-              duration: CJVnkDurations.fadeAnimation,
+              duration: BoneveraDurations.fadeAnimation,
               curve: Curves.easeIn,
             ),
           ),

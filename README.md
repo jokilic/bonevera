@@ -1,5 +1,5 @@
-# Ča je vanka? ☀️
+# Bonevera ☀️
 
-☀️ **Ča je vanka?** will be a new weather application made in **Flutter**. 👨‍💻
+☀️ **Bonevera** will be a new weather application made in **Flutter**. 👨‍💻
 
 ### Stay tuned...

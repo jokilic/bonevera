@@ -1,10 +1,10 @@
-sealed class CJVnkState<T> {}
+sealed class BoneveraState<T> {}
 
-class Initial<T> extends CJVnkState<T> {}
+class Initial<T> extends BoneveraState<T> {}
 
-class Loading<T> extends CJVnkState<T> {}
+class Loading<T> extends BoneveraState<T> {}
 
-class Empty<T> extends CJVnkState<T> {
+class Empty<T> extends BoneveraState<T> {
   final String? text;
 
   Empty({
@@ -12,7 +12,7 @@ class Empty<T> extends CJVnkState<T> {
   });
 }
 
-class Error<T> extends CJVnkState<T> {
+class Error<T> extends BoneveraState<T> {
   final String? error;
 
   Error({
@@ -20,7 +20,7 @@ class Error<T> extends CJVnkState<T> {
   });
 }
 
-class Success<T> extends CJVnkState<T> {
+class Success<T> extends BoneveraState<T> {
   final T data;
 
   Success({

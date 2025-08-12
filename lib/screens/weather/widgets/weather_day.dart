@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../theme/theme.dart';
-import '../../../widgets/cjvnk_button.dart';
+import '../../../widgets/bonevera_button.dart';
 
 class WeatherDay extends StatelessWidget {
   final Function() onPressed;
@@ -21,7 +21,7 @@ class WeatherDay extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => CJVnkButton(
+  Widget build(BuildContext context) => BoneveraButton(
     onPressed: onPressed,
     child: TextButton(
       onPressed: null,

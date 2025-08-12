@@ -9,7 +9,7 @@ abstract class BoneveraTextStyles {
 
   static const appBarSubtitle = TextStyle(
     fontFamily: 'ProductSans',
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: FontWeight.w500,
   );
 

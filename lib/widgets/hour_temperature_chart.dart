@@ -1,16 +1,16 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-import '../../../constants/durations.dart';
-import '../../../models/hour.dart';
-import '../../../theme/icons.dart';
-import '../../../theme/theme.dart';
-import '../../../util/parse/chart.dart';
+import '../constants/durations.dart';
+import '../models/hour.dart';
+import '../theme/icons.dart';
+import '../theme/theme.dart';
+import '../util/parse/chart.dart';
 
-class WeatherHourTemperatureChart extends StatelessWidget {
+class HourTemperatureChart extends StatelessWidget {
   final List<Hour> hours;
 
-  const WeatherHourTemperatureChart({
+  const HourTemperatureChart({
     required this.hours,
   });
 

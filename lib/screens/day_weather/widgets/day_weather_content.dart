@@ -1,6 +1,7 @@
 import 'package:dough/dough.dart';
 import 'package:flutter/material.dart';
 
+import '../../../constants/durations.dart';
 import '../../../constants/enums.dart';
 import '../../../models/day.dart';
 import '../../../models/hour.dart';
@@ -8,6 +9,9 @@ import '../../../models/location/location.dart';
 import '../../../util/parse/condition_code.dart';
 import '../../../util/parse/date_time.dart';
 import '../../../util/parse/temperature.dart';
+import '../../../util/zoom_switcher_transition.dart';
+import '../../../widgets/bonevera_button.dart';
+import '../../../widgets/hour_temperature_chart.dart';
 import '../../weather/widgets/weather_current_temperature_condition.dart';
 import 'day_weather_app_bar.dart';
 import 'day_weather_hour.dart';
@@ -28,19 +32,14 @@ class DayWeatherContent extends StatefulWidget {
 }
 
 class _DayWeatherContentState extends State<DayWeatherContent> {
+  // TODO: Move this logic in controller
+
   var currentWeatherWidget = WeatherWidget.chart;
 
-  final weatherWidgets = [
-    WeatherWidget.chart,
-    WeatherWidget.air,
-    WeatherWidget.temperature,
-    WeatherWidget.wind,
-  ];
-
   void toggleWeatherWidget() => setState(() {
-    final currentIndex = weatherWidgets.indexOf(currentWeatherWidget);
-    final nextIndex = (currentIndex + 1) % weatherWidgets.length;
-    currentWeatherWidget = weatherWidgets[nextIndex];
+    final currentIndex = WeatherWidget.values.indexOf(currentWeatherWidget);
+    final nextIndex = (currentIndex + 1) % WeatherWidget.values.length;
+    currentWeatherWidget = WeatherWidget.values[nextIndex];
   });
 
   @override
@@ -149,46 +148,44 @@ class _DayWeatherContentState extends State<DayWeatherContent> {
             ///
             /// BOTTOM WEATHER WIDGET
             ///
-            // Expanded(
-            //   flex: 4,
-            //   child: BoneveraButton(
-            //     onPressed: toggleWeatherWidget,
-            //     child: AnimatedSwitcher(
-            //       duration: BoneveraDurations.fadeAnimation,
-            //       switchInCurve: Curves.easeIn,
-            //       switchOutCurve: Curves.easeIn,
-            //       transitionBuilder: (child, listenable) => ZoomTransition(
-            //         listenable: listenable,
-            //         scaleInFactor: 0.88,
-            //         scaleOutFactor: 1.14,
-            //         child: child,
-            //       ),
-            //       child: switch (currentWeatherWidget) {
-            //         WeatherWidget.chart => WeatherHourTemperatureChart(
-            //           hours: get24HoursFromDateTime(
-            //             allHours: widget.weather.forecastHourly?.hours,
-            //             startTime: DateTime.now(),
-            //           ),
-            //         ),
-            //         WeatherWidget.air => WeatherAdditionalAir(
-            //           cloudCover: widget.weather.currentWeather?.cloudCover,
-            //           humidity: widget.weather.currentWeather?.humidity,
-            //           precipitationIntensity: widget.weather.currentWeather?.precipitationIntensity,
-            //         ),
-            //         WeatherWidget.temperature => WeatherAdditionalTemperature(
-            //           temperatureApparent: widget.weather.currentWeather?.temperatureApparent,
-            //           pressure: widget.weather.currentWeather?.pressure,
-            //           uvIndex: widget.weather.currentWeather?.uvIndex,
-            //         ),
-            //         WeatherWidget.wind => WeatherAdditionalWind(
-            //           visibility: widget.weather.currentWeather?.visibility,
-            //           windDirection: widget.weather.currentWeather?.windDirection,
-            //           windSpeed: widget.weather.currentWeather?.windSpeed,
-            //         ),
-            //       },
-            //     ),
-            //   ),
-            // ),
+            Expanded(
+              flex: 4,
+              child: BoneveraButton(
+                onPressed: toggleWeatherWidget,
+                child: AnimatedSwitcher(
+                  duration: BoneveraDurations.fadeAnimation,
+                  switchInCurve: Curves.easeIn,
+                  switchOutCurve: Curves.easeIn,
+                  transitionBuilder: (child, listenable) => ZoomTransition(
+                    listenable: listenable,
+                    scaleInFactor: 0.88,
+                    scaleOutFactor: 1.14,
+                    child: child,
+                  ),
+                  child: switch (currentWeatherWidget) {
+                    WeatherWidget.chart => HourTemperatureChart(
+                      hours: widget.hours,
+                    ),
+                    _ => const SizedBox(),
+                    // WeatherWidget.air => WeatherAdditionalAir(
+                    //   cloudCover: widget.day.daytimeForecast?.cloudCover,
+                    //   humidity: widget.day.daytimeForecast?.humidity,
+                    //   precipitationIntensity: widget.day.pre
+                    // ),
+                    // WeatherWidget.temperature => WeatherAdditionalTemperature(
+                    //   temperatureApparent: widget.weather.currentWeather?.temperatureApparent,
+                    //   pressure: widget.weather.currentWeather?.pressure,
+                    //   uvIndex: widget.weather.currentWeather?.uvIndex,
+                    // ),
+                    // WeatherWidget.wind => WeatherAdditionalWind(
+                    //   visibility: widget.weather.currentWeather?.visibility,
+                    //   windDirection: widget.weather.currentWeather?.windDirection,
+                    //   windSpeed: widget.weather.currentWeather?.windSpeed,
+                    // ),
+                  },
+                ),
+              ),
+            ),
           ],
         ),
       ),

@@ -13,25 +13,23 @@ import '../../../util/zoom_switcher_transition.dart';
 import '../../../widgets/bonevera_button.dart';
 import '../../../widgets/hour_temperature_chart.dart';
 import '../../weather/widgets/weather_current_temperature_condition.dart';
-import 'day_weather_app_bar.dart';
-import 'day_weather_hour.dart';
 
-class DayWeatherContent extends StatefulWidget {
+class HourWeatherContent extends StatefulWidget {
   final Location location;
   final Day day;
-  final List<Hour> hours;
+  final Hour hour;
 
-  const DayWeatherContent({
+  const HourWeatherContent({
     required this.location,
     required this.day,
-    required this.hours,
+    required this.hour,
   });
 
   @override
-  State<DayWeatherContent> createState() => _DayWeatherContentState();
+  State<HourWeatherContent> createState() => _HourWeatherContentState();
 }
 
-class _DayWeatherContentState extends State<DayWeatherContent> {
+class _HourWeatherContentState extends State<HourWeatherContent> {
   // TODO: Move this logic in controller
 
   var currentWeatherWidget = WeatherWidget.chart;

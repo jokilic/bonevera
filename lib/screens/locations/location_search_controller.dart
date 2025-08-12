@@ -79,7 +79,7 @@ class LocationSearchController extends ValueNotifier<BoneveraState<List<bonevera
 
         /// At least one [Placemark] is found
         if (placemarks.isNotEmpty) {
-          /// Generate `List<cjvnk_location.Location>` from `placemarks`
+          /// Generate `List<bonevera_location.Location>` from `placemarks`
           final locations = placemarks
               .map(
                 (placemark) => bonevera_location.Location(

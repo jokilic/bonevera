@@ -49,7 +49,7 @@ class BoneveraWidget extends WatchingWidget {
 
         return kDebugMode
             ? Banner(
-                message: 'ČJVnk?',
+                message: '',
                 color: Colors.indigo,
                 location: BannerLocation.topEnd,
                 layoutDirection: TextDirection.ltr,

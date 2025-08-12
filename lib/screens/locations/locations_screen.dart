@@ -152,7 +152,7 @@ class _LocationsScreenState extends State<LocationsScreen> {
               const SizedBox(height: 16),
 
               ///
-              /// ČJVNK LOGO & VERSION
+              /// BONEVERA LOGO & VERSION
               ///
               BoneveraVersionLogo(),
               const SizedBox(height: 16),

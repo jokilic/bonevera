@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 import '../../../constants/durations.dart';
 import '../../../constants/enums.dart';
+import '../../../models/day.dart';
+import '../../../models/hour.dart';
 import '../../../models/location/location.dart';
 import '../../../models/response_weather.dart';
 import '../../../routing.dart';
@@ -35,6 +37,10 @@ class WeatherSuccess extends StatefulWidget {
 class _WeatherSuccessState extends State<WeatherSuccess> {
   // TODO: Move this logic in controller
 
+  late final Day? today;
+  late final List<Hour> todayHours;
+  late final List<Day>? daysExceptToday;
+
   var currentWeatherWidget = WeatherWidget.chart;
 
   final weatherWidgets = [
@@ -51,219 +57,223 @@ class _WeatherSuccessState extends State<WeatherSuccess> {
   });
 
   @override
-  Widget build(BuildContext context) {
-    final today = getCurrentDay(
+  void initState() {
+    super.initState();
+
+    today = getCurrentDay(
       widget.weather.forecastDaily?.days,
     );
-    final todayHours = get24HoursFromDateTime(
+
+    todayHours = get24HoursFromDateTime(
       allHours: widget.weather.forecastHourly?.hours,
-      startTime: DateTime.now(),
+      startTime: DateTime.now().toLocal(),
     );
 
-    final daysExceptToday = getDaysExceptToday(
+    daysExceptToday = getDaysExceptToday(
       widget.weather.forecastDaily?.days,
     );
+  }
 
-    return Column(
-      children: [
-        ///
-        /// APP BAR
-        ///
-        WeatherAppBar(
-          title: widget.location.locality ?? '--',
-        ),
+  @override
+  Widget build(BuildContext context) => Column(
+    children: [
+      ///
+      /// APP BAR
+      ///
+      WeatherAppBar(
+        title: widget.location.locality ?? '--',
+      ),
 
-        ///
-        /// WEATHER ICON
-        ///
-        Expanded(
-          flex: 7,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 56),
-            child: PressableDough(
-              onReleased: (details) {
-                /// User dragged a lot
-                if (details.delta.distance > 400) {
-                  // TODO: Play some `auu` sound here
-                }
-              },
-              child: Image.asset(
-                getConditionImage(
-                  passedConditionCode: widget.weather.currentWeather?.conditionCode,
-                  daylight: widget.weather.currentWeather?.daylight ?? true,
-                ),
-                alignment: Alignment.topCenter,
+      ///
+      /// WEATHER ICON
+      ///
+      Expanded(
+        flex: 7,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 56),
+          child: PressableDough(
+            onReleased: (details) {
+              /// User dragged a lot
+              if (details.delta.distance > 400) {
+                // TODO: Play some `auu` sound here
+              }
+            },
+            child: Image.asset(
+              getConditionImage(
+                passedConditionCode: widget.weather.currentWeather?.conditionCode,
+                daylight: widget.weather.currentWeather?.daylight ?? true,
               ),
+              alignment: Alignment.topCenter,
             ),
           ),
         ),
+      ),
 
-        Expanded(
-          flex: 8,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ///
-              /// CURRENT TEMPERATURE & CONDITION
-              ///
-              WeatherCurrentTemperatureCondition(
-                currentTemperature: getTemperatureString(
-                  widget.weather.currentWeather?.temperature,
-                ),
-                conditionText: getConditionString(
-                  passedConditionCode: widget.weather.currentWeather?.conditionCode,
-                  daylight: widget.weather.currentWeather?.daylight ?? true,
-                ),
-                currentHighTemperature: getTemperatureString(
-                  today?.temperatureMax,
-                ),
-                currentLowTemperature: getTemperatureString(
-                  today?.temperatureMin,
-                ),
+      Expanded(
+        flex: 8,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ///
+            /// CURRENT TEMPERATURE & CONDITION
+            ///
+            WeatherCurrentTemperatureCondition(
+              currentTemperature: getTemperatureString(
+                widget.weather.currentWeather?.temperature,
               ),
+              conditionText: getConditionString(
+                passedConditionCode: widget.weather.currentWeather?.conditionCode,
+                daylight: widget.weather.currentWeather?.daylight ?? true,
+              ),
+              currentHighTemperature: getTemperatureString(
+                today?.temperatureMax,
+              ),
+              currentLowTemperature: getTemperatureString(
+                today?.temperatureMin,
+              ),
+            ),
 
-              const SizedBox(height: 32),
+            const SizedBox(height: 32),
 
-              ///
-              /// DAILY WEATHER
-              ///
-              Expanded(
-                flex: 5,
-                child: Row(
-                  children: [
-                    ///
-                    /// TODAY
-                    ///
-                    if (today != null) ...[
-                      Padding(
-                        padding: const EdgeInsets.only(left: 16),
-                        child: WeatherDay(
-                          onPressed: () => openDayWeather(
-                            context,
-                            location: widget.location,
-                            day: today,
-                            hours: todayHours,
-                          ),
-                          title: getFormattedDate(
-                            forecastStart: today.forecastStart,
-                            forecastEnd: today.forecastEnd,
-                          ),
-                          conditionImage: getConditionImage(
-                            passedConditionCode: today.conditionCode,
-                            daylight: true,
-                          ),
-                          lowTemperature: getTemperatureString(
-                            today.temperatureMin,
-                          ),
-                          highTemperature: getTemperatureString(
-                            today.temperatureMax,
-                          ),
-                          conditionText: getConditionString(
-                            passedConditionCode: today.conditionCode,
-                            daylight: true,
-                          ),
+            ///
+            /// DAILY WEATHER
+            ///
+            Expanded(
+              flex: 5,
+              child: Row(
+                children: [
+                  ///
+                  /// TODAY
+                  ///
+                  if (today != null) ...[
+                    Padding(
+                      padding: const EdgeInsets.only(left: 16),
+                      child: WeatherDay(
+                        onPressed: () => openDayWeather(
+                          context,
+                          location: widget.location,
+                          day: today!,
+                          hours: todayHours,
+                        ),
+                        title: getFormattedDate(
+                          forecastStart: today!.forecastStart,
+                          forecastEnd: today!.forecastEnd,
+                        ),
+                        conditionImage: getConditionImage(
+                          passedConditionCode: today!.conditionCode,
+                          daylight: true,
+                        ),
+                        lowTemperature: getTemperatureString(
+                          today!.temperatureMin,
+                        ),
+                        highTemperature: getTemperatureString(
+                          today!.temperatureMax,
+                        ),
+                        conditionText: getConditionString(
+                          passedConditionCode: today!.conditionCode,
+                          daylight: true,
                         ),
                       ),
-                      const SizedBox(width: 16),
-                    ],
-
-                    ///
-                    /// DAYS EXCEPT TODAY
-                    ///
-                    if (daysExceptToday?.isNotEmpty ?? false)
-                      Expanded(
-                        child: ListView.separated(
-                          padding: const EdgeInsets.only(right: 16),
-                          physics: const BouncingScrollPhysics(),
-                          scrollDirection: Axis.horizontal,
-                          itemCount: daysExceptToday!.length,
-                          itemBuilder: (_, index) {
-                            final day = daysExceptToday[index];
-
-                            return WeatherDay(
-                              onPressed: () => openDayWeather(
-                                context,
-                                location: widget.location,
-                                day: day,
-                                hours: get24HoursFromDateTime(
-                                  allHours: widget.weather.forecastHourly?.hours,
-                                  startTime: day.forecastStart,
-                                ),
-                              ),
-
-                              title: getFormattedDate(
-                                forecastStart: day.forecastStart,
-                                forecastEnd: day.forecastEnd,
-                              ),
-                              conditionImage: getConditionImage(
-                                passedConditionCode: day.conditionCode,
-                                daylight: true,
-                              ),
-                              lowTemperature: getTemperatureString(
-                                day.temperatureMin,
-                              ),
-                              highTemperature: getTemperatureString(
-                                day.temperatureMax,
-                              ),
-                              conditionText: getConditionString(
-                                passedConditionCode: day.conditionCode,
-                                daylight: true,
-                              ),
-                            );
-                          },
-                          separatorBuilder: (_, __) => const SizedBox(width: 16),
-                        ),
-                      ),
-                  ],
-                ),
-              ),
-
-              const SizedBox(height: 16),
-
-              ///
-              /// BOTTOM WEATHER WIDGET
-              ///
-              Expanded(
-                flex: 4,
-                child: CJVnkButton(
-                  onPressed: toggleWeatherWidget,
-                  child: AnimatedSwitcher(
-                    duration: CJVnkDurations.fadeAnimation,
-                    switchInCurve: Curves.easeIn,
-                    switchOutCurve: Curves.easeIn,
-                    transitionBuilder: (child, listenable) => ZoomTransition(
-                      listenable: listenable,
-                      scaleInFactor: 0.88,
-                      scaleOutFactor: 1.14,
-                      child: child,
                     ),
-                    child: switch (currentWeatherWidget) {
-                      WeatherWidget.chart => WeatherHourTemperatureChart(
-                        hours: todayHours,
+                    const SizedBox(width: 16),
+                  ],
+
+                  ///
+                  /// DAYS EXCEPT TODAY
+                  ///
+                  if (daysExceptToday?.isNotEmpty ?? false)
+                    Expanded(
+                      child: ListView.separated(
+                        padding: const EdgeInsets.only(right: 16),
+                        physics: const BouncingScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        itemCount: daysExceptToday!.length,
+                        itemBuilder: (_, index) {
+                          final day = daysExceptToday![index];
+
+                          return WeatherDay(
+                            onPressed: () => openDayWeather(
+                              context,
+                              location: widget.location,
+                              day: day,
+                              hours: get24HoursFromDateTime(
+                                allHours: widget.weather.forecastHourly?.hours,
+                                startTime: day.forecastStart.toLocal(),
+                              ),
+                            ),
+
+                            title: getFormattedDate(
+                              forecastStart: day.forecastStart,
+                              forecastEnd: day.forecastEnd,
+                            ),
+                            conditionImage: getConditionImage(
+                              passedConditionCode: day.conditionCode,
+                              daylight: true,
+                            ),
+                            lowTemperature: getTemperatureString(
+                              day.temperatureMin,
+                            ),
+                            highTemperature: getTemperatureString(
+                              day.temperatureMax,
+                            ),
+                            conditionText: getConditionString(
+                              passedConditionCode: day.conditionCode,
+                              daylight: true,
+                            ),
+                          );
+                        },
+                        separatorBuilder: (_, __) => const SizedBox(width: 16),
                       ),
-                      WeatherWidget.air => WeatherAdditionalAir(
-                        cloudCover: widget.weather.currentWeather?.cloudCover,
-                        humidity: widget.weather.currentWeather?.humidity,
-                        precipitationIntensity: widget.weather.currentWeather?.precipitationIntensity,
-                      ),
-                      WeatherWidget.temperature => WeatherAdditionalTemperature(
-                        temperatureApparent: widget.weather.currentWeather?.temperatureApparent,
-                        pressure: widget.weather.currentWeather?.pressure,
-                        uvIndex: widget.weather.currentWeather?.uvIndex,
-                      ),
-                      WeatherWidget.wind => WeatherAdditionalWind(
-                        visibility: widget.weather.currentWeather?.visibility,
-                        windDirection: widget.weather.currentWeather?.windDirection,
-                        windSpeed: widget.weather.currentWeather?.windSpeed,
-                      ),
-                    },
+                    ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 16),
+
+            ///
+            /// BOTTOM WEATHER WIDGET
+            ///
+            Expanded(
+              flex: 4,
+              child: CJVnkButton(
+                onPressed: toggleWeatherWidget,
+                child: AnimatedSwitcher(
+                  duration: CJVnkDurations.fadeAnimation,
+                  switchInCurve: Curves.easeIn,
+                  switchOutCurve: Curves.easeIn,
+                  transitionBuilder: (child, listenable) => ZoomTransition(
+                    listenable: listenable,
+                    scaleInFactor: 0.88,
+                    scaleOutFactor: 1.14,
+                    child: child,
                   ),
+                  child: switch (currentWeatherWidget) {
+                    WeatherWidget.chart => WeatherHourTemperatureChart(
+                      hours: todayHours,
+                    ),
+                    WeatherWidget.air => WeatherAdditionalAir(
+                      cloudCover: widget.weather.currentWeather?.cloudCover,
+                      humidity: widget.weather.currentWeather?.humidity,
+                      precipitationIntensity: widget.weather.currentWeather?.precipitationIntensity,
+                    ),
+                    WeatherWidget.temperature => WeatherAdditionalTemperature(
+                      temperatureApparent: widget.weather.currentWeather?.temperatureApparent,
+                      pressure: widget.weather.currentWeather?.pressure,
+                      uvIndex: widget.weather.currentWeather?.uvIndex,
+                    ),
+                    WeatherWidget.wind => WeatherAdditionalWind(
+                      visibility: widget.weather.currentWeather?.visibility,
+                      windDirection: widget.weather.currentWeather?.windDirection,
+                      windSpeed: widget.weather.currentWeather?.windSpeed,
+                    ),
+                  },
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-      ],
-    );
-  }
+      ),
+    ],
+  );
 }

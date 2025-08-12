@@ -71,9 +71,25 @@ List<Hour> get24HoursFromDateTime({
       (a, b) => a.forecastStart.compareTo(b.forecastStart),
     );
 
-    /// Find the first hour that is >= `startTime`
+    /// Use [DateTime] starting at midnight
+    final dayStart = DateTime(
+      startTime.year,
+      startTime.month,
+      startTime.day,
+    );
+
+    /// Find the first hour that is >= `dayStart`
     final startIndex = allHours.indexWhere(
-      (hour) => hour.forecastStart.isAfter(startTime) || hour.forecastStart.isAtSameMomentAs(startTime),
+      (hour) {
+        /// Create [DateTime] starting at midnight
+        final hourStart = DateTime(
+          hour.forecastStart.year,
+          hour.forecastStart.month,
+          hour.forecastStart.day,
+        );
+
+        return !hourStart.isBefore(dayStart);
+      },
     );
 
     if (startIndex == -1) {

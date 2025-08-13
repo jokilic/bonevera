@@ -21,7 +21,6 @@ void openDayWeather(
     key: ValueKey(day),
   ),
   context: context,
-  isCircularTransition: true,
 );
 
 /// Opens [HourWeatherScreen]
@@ -36,5 +35,4 @@ void openHourWeather(
     key: ValueKey(hour),
   ),
   context: context,
-  isCircularTransition: true,
 );

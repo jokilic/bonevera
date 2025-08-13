@@ -87,7 +87,7 @@ class DayWeatherContent extends WatchingWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ///
-              /// CURRENT TEMPERATURE & CONDITION
+              /// TEMPERATURES & CONDITION
               ///
               DayWeatherTemperatureCondition(
                 conditionText: getConditionString(

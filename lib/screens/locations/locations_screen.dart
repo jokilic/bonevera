@@ -91,6 +91,7 @@ class _LocationsScreenState extends State<LocationsScreen> {
               ///
               /// SEARCH RESULTS
               ///
+              // TODO: Finish UI for all states
               switch (locationSearchState) {
                 Initial() => const SizedBox(height: 24),
                 Loading() => Container(

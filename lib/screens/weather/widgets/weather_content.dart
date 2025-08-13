@@ -4,6 +4,7 @@ import '../../../models/location/location.dart';
 import '../../../util/state.dart';
 import 'weather_success.dart';
 
+// TODO: Finish UI for all states
 class WeatherContent extends StatelessWidget {
   final Location location;
   final BoneveraState weatherState;

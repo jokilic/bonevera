@@ -85,7 +85,7 @@ class _HourWeatherContentState extends State<HourWeatherContent> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ///
-            /// CURRENT TEMPERATURE & CONDITION
+            /// TEMPERATURE & CONDITION
             ///
             HourWeatherTemperatureCondition(
               currentTemperature: getTemperatureString(
@@ -101,6 +101,8 @@ class _HourWeatherContentState extends State<HourWeatherContent> {
             ),
 
             const SizedBox(height: 32),
+
+            // TODO: Proper widgets here
 
             ///
             /// HOURLY WEATHER

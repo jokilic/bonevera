@@ -1,5 +1,7 @@
 import 'package:flutter/services.dart';
 
+// TODO: Use these methods when changing theme & triggering Location drawer
+
 void setStatusBarTextWhite() => SystemChrome.setSystemUIOverlayStyle(
   const SystemUiOverlayStyle(
     statusBarIconBrightness: Brightness.light,

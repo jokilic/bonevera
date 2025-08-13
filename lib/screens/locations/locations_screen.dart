@@ -105,9 +105,11 @@ class _LocationsScreenState extends State<LocationsScreen> {
                   width: 100,
                   color: Colors.red,
                 ),
-                Success() => LocationSearchSuccess(
-                  locations: (locationSearchState as Success).data,
-                  onPressLocation: getIt.get<LocationSearchController>().locationPressed,
+                Success() => Expanded(
+                  child: LocationSearchSuccess(
+                    locations: (locationSearchState as Success).data,
+                    onPressLocation: getIt.get<LocationSearchController>().locationPressed,
+                  ),
                 ),
               },
 

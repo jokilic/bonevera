@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:watch_it/watch_it.dart';
@@ -124,12 +125,14 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
             ///
             /// DRAWER
             ///
-            AnimatedPositioned(
-              duration: BoneveraDurations.fadeAnimation,
-              curve: Curves.fastOutSlowIn,
-              height: double.maxFinite,
-              width: drawerWidth,
-              left: isSideMenuOpened ? 0 : -drawerWidth,
+            AnimatedBuilder(
+              animation: animationController,
+              builder: (_, child) => Positioned(
+                height: double.maxFinite,
+                width: drawerWidth,
+                left: lerpDouble(-drawerWidth, 0, animation.value),
+                child: child ?? const SizedBox.shrink(),
+              ),
               child: LocationsScreen(
                 drawerButtonPressed: drawerButtonPressed,
                 locations: locationsState.locations,
@@ -153,33 +156,36 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
                   child: Transform.scale(
                     scale: scaleAnimation.value,
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(24),
-                      child: AnimatedSwitcher(
-                        duration: BoneveraDurations.fadeAnimation,
-                        switchInCurve: Curves.fastOutSlowIn,
-                        switchOutCurve: Curves.fastOutSlowIn,
-                        child: locationExists
-                            ? WeatherScreen(
-                                location: location,
-                                key: ValueKey(location),
-                              )
-                            : Container(
-                                color: Colors.greenAccent,
-                              ),
-                      ),
+                      borderRadius: BorderRadius.circular(animation.value * 24),
+                      child: child,
                     ),
                   ),
                 ),
+              ),
+              child: AnimatedSwitcher(
+                duration: BoneveraDurations.fadeAnimation,
+                switchInCurve: Curves.fastOutSlowIn,
+                switchOutCurve: Curves.fastOutSlowIn,
+                child: locationExists
+                    ? WeatherScreen(
+                        location: location,
+                        key: ValueKey(location),
+                      )
+                    : Container(
+                        color: Colors.greenAccent,
+                      ),
               ),
             ),
 
             ///
             /// DRAWER BUTTON
             ///
-            AnimatedPositioned(
-              duration: BoneveraDurations.fadeAnimation,
-              curve: Curves.fastOutSlowIn,
-              left: isSideMenuOpened ? 184 : 0,
+            AnimatedBuilder(
+              animation: animationController,
+              builder: (_, child) => Positioned(
+                left: animation.value * 184,
+                child: child ?? const SizedBox.shrink(),
+              ),
               child: SafeArea(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(

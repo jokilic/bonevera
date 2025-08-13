@@ -11,7 +11,7 @@ class ThemeService extends ValueNotifier<ThemeData?> {
   ThemeService({
     required this.logger,
     required this.hive,
-  }) : super(BoneveraTheme.dark);
+  }) : super(BoneveraTheme.lightBlue);
 
   ///
   /// METHODS

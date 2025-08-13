@@ -15,7 +15,6 @@ class LocationSearchSuccess extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ListView.separated(
     padding: const EdgeInsets.symmetric(vertical: 12),
-    shrinkWrap: true,
     physics: const BouncingScrollPhysics(),
     itemCount: locations.length,
     itemBuilder: (_, index) {

@@ -55,7 +55,7 @@ class WeatherSuccess extends WatchingWidget {
         /// WEATHER ICON
         ///
         Expanded(
-          flex: 7,
+          flex: 6,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 56),
             child: PressableDough(
@@ -77,7 +77,7 @@ class WeatherSuccess extends WatchingWidget {
         ),
 
         Expanded(
-          flex: 8,
+          flex: 9,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -238,6 +238,8 @@ class WeatherSuccess extends WatchingWidget {
                   ),
                 ),
               ),
+
+              const SizedBox(height: 16),
             ],
           ),
         ),

@@ -34,6 +34,13 @@ abstract class BoneveraTextStyles {
     height: 1.25,
   );
 
+  static const dayTemperatureHighLow = TextStyle(
+    fontFamily: 'ProductSans',
+    fontSize: 50,
+    fontWeight: FontWeight.w700,
+    height: 0.75,
+  );
+
   static const dayTitle = TextStyle(
     fontFamily: 'ProductSans',
     fontSize: 14,
@@ -131,6 +138,7 @@ class BoneveraTextThemesExtension extends ThemeExtension<BoneveraTextThemesExten
   final TextStyle currentTemperature;
   final TextStyle currentCondition;
   final TextStyle currentHighLowTemperature;
+  final TextStyle dayTemperatureHighLow;
   final TextStyle dayTitle;
   final TextStyle dayHighLowTemperature;
   final TextStyle dayCondition;
@@ -153,6 +161,7 @@ class BoneveraTextThemesExtension extends ThemeExtension<BoneveraTextThemesExten
     required this.currentTemperature,
     required this.currentCondition,
     required this.currentHighLowTemperature,
+    required this.dayTemperatureHighLow,
     required this.dayTitle,
     required this.dayHighLowTemperature,
     required this.dayCondition,
@@ -177,6 +186,7 @@ class BoneveraTextThemesExtension extends ThemeExtension<BoneveraTextThemesExten
     TextStyle? currentTemperature,
     TextStyle? currentCondition,
     TextStyle? currentHighLowTemperature,
+    TextStyle? dayTemperatureHighLow,
     TextStyle? dayTitle,
     TextStyle? dayHighLowTemperature,
     TextStyle? dayCondition,
@@ -198,6 +208,7 @@ class BoneveraTextThemesExtension extends ThemeExtension<BoneveraTextThemesExten
     currentTemperature: currentTemperature ?? this.currentTemperature,
     currentCondition: currentCondition ?? this.currentCondition,
     currentHighLowTemperature: currentHighLowTemperature ?? this.currentHighLowTemperature,
+    dayTemperatureHighLow: dayTemperatureHighLow ?? this.dayTemperatureHighLow,
     dayTitle: dayTitle ?? this.dayTitle,
     dayHighLowTemperature: dayHighLowTemperature ?? this.dayHighLowTemperature,
     dayCondition: dayCondition ?? this.dayCondition,
@@ -230,6 +241,7 @@ class BoneveraTextThemesExtension extends ThemeExtension<BoneveraTextThemesExten
       currentTemperature: TextStyle.lerp(currentTemperature, other.currentTemperature, t)!,
       currentCondition: TextStyle.lerp(currentCondition, other.currentCondition, t)!,
       currentHighLowTemperature: TextStyle.lerp(currentHighLowTemperature, other.currentHighLowTemperature, t)!,
+      dayTemperatureHighLow: TextStyle.lerp(dayTemperatureHighLow, other.dayTemperatureHighLow, t)!,
       dayTitle: TextStyle.lerp(dayTitle, other.dayTitle, t)!,
       dayHighLowTemperature: TextStyle.lerp(dayHighLowTemperature, other.dayHighLowTemperature, t)!,
       dayCondition: TextStyle.lerp(dayCondition, other.dayCondition, t)!,

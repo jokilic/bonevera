@@ -51,6 +51,9 @@ class _LocationsScreenState extends State<LocationsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final locationsController = getIt.get<LocationsController>();
+    final locationSearchController = getIt.get<LocationSearchController>();
+
     final locationSearchState = watchIt<LocationSearchController>().value;
 
     return Scaffold(
@@ -73,8 +76,8 @@ class _LocationsScreenState extends State<LocationsScreen> {
                 children: [
                   Expanded(
                     child: LocationSearchField(
-                      textEditingController: getIt.get<LocationSearchController>().textEditingController,
-                      onSubmitted: (address) => getIt.get<LocationSearchController>().onLocationSearch(address: address.trim()),
+                      textEditingController: locationSearchController.textEditingController,
+                      onSubmitted: (address) => locationSearchController.onLocationSearch(address: address.trim()),
                     ),
                   ),
                   AnimatedContainer(
@@ -105,11 +108,9 @@ class _LocationsScreenState extends State<LocationsScreen> {
                   width: 100,
                   color: Colors.red,
                 ),
-                Success() => Expanded(
-                  child: LocationSearchSuccess(
-                    locations: (locationSearchState as Success).data,
-                    onPressLocation: getIt.get<LocationSearchController>().locationPressed,
-                  ),
+                Success() => LocationSearchSuccess(
+                  location: (locationSearchState as Success).data,
+                  onPressLocation: locationSearchController.locationPressed,
                 ),
               },
 
@@ -122,16 +123,16 @@ class _LocationsScreenState extends State<LocationsScreen> {
                     ? LocationsList(
                         locations: widget.locations,
                         locationPressed: (location) {
-                          getIt.get<LocationsController>().updateCurrentLocation(
+                          locationsController.updateCurrentLocation(
                             newCurrentLocation: location,
                           );
 
                           widget.drawerButtonPressed();
                         },
-                        onReorder: getIt.get<LocationsController>().reorderLocations,
+                        onReorder: locationsController.reorderLocations,
                         onTapDelete: (handler, location) {
                           handler(false);
-                          getIt.get<LocationsController>().deleteLocation(location);
+                          locationsController.deleteLocation(location);
                         },
                       )
                     :

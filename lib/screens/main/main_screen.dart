@@ -59,7 +59,9 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
       ),
     );
 
-    final locationExists = getIt.get<LocationsController>().value.locations.isNotEmpty && getIt.get<LocationsController>().value.currentLocation != null;
+    final locationsController = getIt.get<LocationsController>();
+
+    final locationExists = locationsController.value.locations.isNotEmpty && locationsController.value.currentLocation != null;
 
     if (!locationExists) {
       drawerButtonPressed();

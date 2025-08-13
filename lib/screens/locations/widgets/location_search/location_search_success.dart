@@ -4,41 +4,34 @@ import '../../../../theme/theme.dart';
 import '../../../../widgets/bonevera_button.dart';
 
 class LocationSearchSuccess extends StatelessWidget {
-  final List<bonevera_location.Location> locations;
+  final bonevera_location.Location location;
   final Function(bonevera_location.Location location) onPressLocation;
 
   const LocationSearchSuccess({
-    required this.locations,
+    required this.location,
     required this.onPressLocation,
   });
 
   @override
-  Widget build(BuildContext context) => ListView.separated(
+  Widget build(BuildContext context) => Padding(
     padding: const EdgeInsets.symmetric(vertical: 12),
-    physics: const BouncingScrollPhysics(),
-    itemCount: locations.length,
-    itemBuilder: (_, index) {
-      final location = locations[index];
-
-      return BoneveraButton(
-        onPressed: () => onPressLocation(location),
-        child: ListTile(
-          title: Text(
-            location.locality ?? '--',
-            style: context.textStyles.locationsName,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-          ),
-          subtitle: Text(
-            location.country ?? '--',
-            style: context.textStyles.locationsCountry,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-          contentPadding: const EdgeInsets.symmetric(horizontal: 4),
+    child: BoneveraButton(
+      onPressed: () => onPressLocation(location),
+      child: ListTile(
+        title: Text(
+          location.locality ?? '--',
+          style: context.textStyles.locationsName,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
         ),
-      );
-    },
-    separatorBuilder: (_, __) => const SizedBox(height: 24),
+        subtitle: Text(
+          location.country ?? '--',
+          style: context.textStyles.locationsCountry,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 4),
+      ),
+    ),
   );
 }

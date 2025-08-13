@@ -8,7 +8,7 @@ import '../../util/dependencies.dart';
 import '../../util/state.dart';
 import '../main/locations_controller.dart';
 
-class LocationSearchController extends ValueNotifier<BoneveraState<List<bonevera_location.Location>>> implements Disposable {
+class LocationSearchController extends ValueNotifier<BoneveraState<bonevera_location.Location>> implements Disposable {
   ///
   /// CONSTRUCTOR
   ///
@@ -42,8 +42,12 @@ class LocationSearchController extends ValueNotifier<BoneveraState<List<bonevera
 
   /// Triggered when user presses location
   void locationPressed(bonevera_location.Location location) {
+    final locationsController = getIt.get<LocationsController>();
+
     /// Add new location to [Hive]
-    final locationAdded = getIt.get<LocationsController>().addLocationToHive(passedLocation: location);
+    final locationAdded = locationsController.addLocationToHive(
+      passedLocation: location,
+    );
 
     /// Location successfully added, clear the [TextField] & update `state`
     if (locationAdded) {
@@ -52,11 +56,11 @@ class LocationSearchController extends ValueNotifier<BoneveraState<List<bonevera
       value = Initial();
 
       /// Get `locations`
-      final locations = getIt.get<LocationsController>().value.locations;
+      final locations = locationsController.value.locations;
 
       /// If only one location, set it as `currentLocation`
       if (locations.length == 1) {
-        getIt.get<LocationsController>().updateCurrentLocation(newCurrentLocation: location);
+        locationsController.updateCurrentLocation(newCurrentLocation: location);
       }
     }
   }
@@ -100,8 +104,9 @@ class LocationSearchController extends ValueNotifier<BoneveraState<List<bonevera
               )
               .toList();
 
+          /// Return first `bonevera_location.Location`
           value = Success(
-            data: locations,
+            data: locations.first,
           );
         }
         /// No [Placemarks] found

@@ -3,6 +3,8 @@ class BoneveraIcons {
   static const close = 'assets/close.png';
   static const delete = 'assets/delete.png';
   static const drawer = 'assets/drawer.png';
+  static const appIcon = 'assets/icon.png';
+  static const splashIcon = 'assets/splash_icon.png';
 
   ///
   /// WEATHER ICONS

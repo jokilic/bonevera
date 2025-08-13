@@ -18,11 +18,11 @@ class BoneveraVersionLogo extends StatelessWidget {
               color: context.colors.locationsText,
               width: 2,
             ),
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(12),
           ),
           child: ClipOval(
             child: Image.asset(
-              BoneveraIcons.sun,
+              BoneveraIcons.splashIcon,
               height: 48,
               width: 48,
             ),

@@ -127,6 +127,9 @@ BoneveraTextThemesExtension getTextThemesExtension({
   currentHighLowTemperature: BoneveraTextStyles.currentHighLowTemperature.copyWith(
     color: colorsExtension.mainWeatherText,
   ),
+  dayTemperatureHighLow: BoneveraTextStyles.dayTemperatureHighLow.copyWith(
+    color: colorsExtension.mainWeatherText,
+  ),
   dayTitle: BoneveraTextStyles.dayTitle.copyWith(
     color: colorsExtension.daysWidgetText,
   ),

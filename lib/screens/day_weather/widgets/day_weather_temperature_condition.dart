@@ -3,16 +3,14 @@ import 'package:flutter/material.dart';
 import '../../../theme/theme.dart';
 
 class DayWeatherTemperatureCondition extends StatelessWidget {
-  final String currentTemperature;
   final String conditionText;
-  final String currentHighTemperature;
-  final String currentLowTemperature;
+  final String highTemperature;
+  final String lowTemperature;
 
   const DayWeatherTemperatureCondition({
-    required this.currentTemperature,
     required this.conditionText,
-    required this.currentHighTemperature,
-    required this.currentLowTemperature,
+    required this.highTemperature,
+    required this.lowTemperature,
   });
 
   @override
@@ -22,22 +20,59 @@ class DayWeatherTemperatureCondition extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         ///
-        /// TEMPERATURE
+        /// TEMPERATURES
         ///
-        Text.rich(
-          TextSpan(
-            text: currentTemperature,
+        SizedBox(
+          width: 112,
+          child: Column(
             children: [
-              TextSpan(
-                text: '°',
-                style: context.textStyles.currentTemperature,
+              ///
+              /// HIGH TEMPERATURE
+              ///
+              Align(
+                alignment: Alignment.topLeft,
+                child: Text.rich(
+                  TextSpan(
+                    text: highTemperature,
+                    children: [
+                      TextSpan(
+                        text: '°',
+                        style: context.textStyles.dayTemperatureHighLow,
+                      ),
+                    ],
+                  ),
+                  textAlign: TextAlign.center,
+                  style: context.textStyles.dayTemperatureHighLow,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+
+              const SizedBox(height: 8),
+
+              ///
+              /// LOW TEMPERATURE
+              ///
+              Align(
+                alignment: Alignment.bottomRight,
+                child: Text.rich(
+                  TextSpan(
+                    text: lowTemperature,
+                    children: [
+                      TextSpan(
+                        text: '°',
+                        style: context.textStyles.dayTemperatureHighLow,
+                      ),
+                    ],
+                  ),
+                  textAlign: TextAlign.center,
+                  style: context.textStyles.dayTemperatureHighLow,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
             ],
           ),
-          textAlign: TextAlign.center,
-          style: context.textStyles.currentTemperature,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
         ),
 
         const SizedBox(width: 8),
@@ -64,12 +99,13 @@ class DayWeatherTemperatureCondition extends StatelessWidget {
               ///
               /// HIGH / LOW TEMPERATURES
               ///
+              // TODO: Something else here
               Text.rich(
                 TextSpan(
                   text: 'H: ',
                   children: [
                     TextSpan(
-                      text: '$currentHighTemperature°',
+                      text: '$highTemperature°',
                       style: context.textStyles.currentHighLowTemperature.copyWith(
                         fontWeight: FontWeight.w700,
                       ),
@@ -78,7 +114,7 @@ class DayWeatherTemperatureCondition extends StatelessWidget {
                       text: ' | L: ',
                     ),
                     TextSpan(
-                      text: '$currentLowTemperature°',
+                      text: '$lowTemperature°',
                       style: context.textStyles.currentHighLowTemperature.copyWith(
                         fontWeight: FontWeight.w700,
                       ),

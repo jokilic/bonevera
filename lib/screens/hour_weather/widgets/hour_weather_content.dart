@@ -58,7 +58,7 @@ class _HourWeatherContentState extends State<HourWeatherContent> {
       /// WEATHER ICON
       ///
       Expanded(
-        flex: 7,
+        flex: 6,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 56),
           child: PressableDough(
@@ -175,6 +175,11 @@ class _HourWeatherContentState extends State<HourWeatherContent> {
                 ),
               ),
             ),
+
+            ///
+            /// BOTTOM SPACING
+            ///
+            const SizedBox(height: 16),
           ],
         ),
       ),

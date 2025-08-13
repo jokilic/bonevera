@@ -77,7 +77,7 @@ class WeatherSuccess extends WatchingWidget {
         ),
 
         Expanded(
-          flex: 9,
+          flex: 8,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -239,6 +239,9 @@ class WeatherSuccess extends WatchingWidget {
                 ),
               ),
 
+              ///
+              /// BOTTOM SPACING
+              ///
               const SizedBox(height: 16),
             ],
           ),

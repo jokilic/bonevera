@@ -1,5 +1,5 @@
 name: bonevera
-description: "A new Flutter project."
+description: 'A new Flutter project.'
 publish_to: 'none'
 version: 1.0.0
 
@@ -22,7 +22,7 @@ version: 1.0.0
 #
 
 environment:
-  sdk: 3.8.1
+  sdk: 3.9.0
 
 dependencies:
   flutter:
@@ -49,13 +49,10 @@ dependencies:
   watch_it: 1.6.5
 
 dev_dependencies:
-  build_runner: 2.6.1
+  build_runner: 2.7.0
   envied_generator: 1.2.0
   flutter_launcher_icons: 0.14.4
   hive_ce_generator: 1.9.3
-
-dependency_overrides:
-  meta: 1.17.0
 
 flutter:
   uses-material-design: true
@@ -69,6 +66,7 @@ flutter:
     - assets/icon.png
     - assets/splash_icon.png
     - assets/splash.png
+    - assets/splash_dark.png
     - assets/weather/
 
   fonts:
@@ -88,13 +86,13 @@ flutter_icons:
   ios: true
   image_path: 'assets/icon.png'
   min_sdk_android: 21
-  adaptive_icon_background: '#342464'
+  adaptive_icon_background: '#DFECFB'
   adaptive_icon_foreground: 'assets/icon.png'
   web:
     generate: true
     image_path: 'assets/icon.png'
-    background_color: '#342464'
-    theme_color: '#342464'
+    background_color: '#DFECFB'
+    theme_color: '#DFECFB'
   windows:
     generate: true
     image_path: 'assets/icon.png'
@@ -107,9 +105,7 @@ flutter_icons:
 # Run splash screen generation with 'dart run flutter_native_splash:create'
 flutter_native_splash:
   background_image: 'assets/splash.png'
-  background_image_dark: 'assets/splash.png'
+  background_image_dark: 'assets/splash_dark.png'
   android_12:
     image: 'assets/splash_icon.png'
-    color: '#342464'
-    image_dark: 'assets/splash_icon.png'
-    color_dark: '#342464'
+    color: '#DFECFB'
